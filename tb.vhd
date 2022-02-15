@@ -159,6 +159,7 @@ begin
          pal_clk_o  => pal1_clk
       ); -- i_tb_clk
 
+   reset_na <= '0', '1' after 1 us;
 
    --------------------------------------------------------
    -- Generate input video
