@@ -57,8 +57,6 @@ architecture synthesis of top is
    signal i_vs               : std_logic; -- v sync
    signal i_fl               : std_logic; -- interlaced field
    signal i_de               : std_logic; -- display enable
-   signal i_ce               : std_logic; -- clock enable
-   signal i_clk              : std_logic; -- input clock
 
    ------------------------------------
    -- output video
@@ -69,7 +67,6 @@ architecture synthesis of top is
    signal o_vs               : std_logic; -- v sync
    signal o_de               : std_logic; -- display enable
    signal o_vbl              : std_logic; -- v blank
-   signal o_ce               : std_logic; -- clock enable
 
    -- border colour r g b
    signal o_border           : unsigned(23 downto 0) := x"000000";
@@ -151,7 +148,6 @@ architecture synthesis of top is
 
    ------------------------------------
    -- avalon
-   signal avl_clk            : std_logic; -- avalon clock
    signal avl_waitrequest    : std_logic;
    signal avl_readdata       : std_logic_vector(N_DW-1 downto 0);
    signal avl_readdatavalid  : std_logic;
@@ -222,114 +218,114 @@ begin
       )
       port map (
          clk_i => video_clk,
-         r_o   => o_r,
-         g_o   => o_g,
-         b_o   => o_b,
-         hs_o  => o_hs,
-         vs_o  => o_vs,
-         de_o  => o_de
+         r_o   => i_r,
+         g_o   => i_g,
+         b_o   => i_b,
+         hs_o  => i_hs,
+         vs_o  => i_vs,
+         de_o  => i_de
       ); -- i_gen_video
 
 
---   --------------------------------------------------------
---   -- Instantiate video rescaler
---   --------------------------------------------------------
---
---   i_ascal : entity work.ascal
---      generic map (
---         MASK      => MASK,
---         RAMBASE   => RAMBASE,
---         RAMSIZE   => RAMSIZE,
---         INTER     => INTER,
---         HEADER    => HEADER,
---         DOWNSCALE => DOWNSCALE,
---         BYTESWAP  => BYTESWAP,
---         PALETTE   => PALETTE,
---         PALETTE2  => PALETTE2,
---         FRAC      => FRAC,
---         OHRES     => OHRES,
---         IHRES     => IHRES,
---         N_DW      => N_DW,
---         N_AW      => N_AW,
---         N_BURST   => N_BURST
---      )
---      port map (
---         i_r               => i_r,
---         i_g               => i_g,
---         i_b               => i_b,
---         i_hs              => i_hs,
---         i_vs              => i_vs,
---         i_fl              => i_fl,
---         i_de              => i_de,
---         i_ce              => i_ce,
---         i_clk             => i_clk,
---         o_r               => o_r,
---         o_g               => o_g,
---         o_b               => o_b,
---         o_hs              => o_hs,
---         o_vs              => o_vs,
---         o_de              => o_de,
---         o_vbl             => o_vbl,
---         o_ce              => o_ce,
---         o_clk             => video_clk,
---         o_border          => o_border,
---         o_fb_ena          => o_fb_ena,
---         o_fb_hsize        => o_fb_hsize,
---         o_fb_vsize        => o_fb_vsize,
---         o_fb_format       => o_fb_format,
---         o_fb_base         => o_fb_base,
---         o_fb_stride       => o_fb_stride,
---         pal1_clk          => pal1_clk,
---         pal1_dw           => pal1_dw,
---         pal1_dr           => pal1_dr,
---         pal1_a            => pal1_a,
---         pal1_wr           => pal1_wr,
---         pal_n             => pal_n,
---         pal2_clk          => pal2_clk,
---         pal2_dw           => pal2_dw,
---         pal2_dr           => pal2_dr,
---         pal2_a            => pal2_a,
---         pal2_wr           => pal2_wr,
---         o_lltune          => o_lltune,
---         iauto             => iauto,
---         himin             => himin,
---         himax             => himax,
---         vimin             => vimin,
---         vimax             => vimax,
---         i_hdmax           => i_hdmax,
---         i_vdmax           => i_vdmax,
---         run               => run,
---         freeze            => freeze,
---         mode              => mode,
---         htotal            => htotal,
---         hsstart           => hsstart,
---         hsend             => hsend,
---         hdisp             => hdisp,
---         hmin              => hmin,
---         hmax              => hmax,
---         vtotal            => vtotal,
---         vsstart           => vsstart,
---         vsend             => vsend,
---         vdisp             => vdisp,
---         vmin              => vmin,
---         vmax              => vmax,
---         format            => format,
---         poly_clk          => poly_clk,
---         poly_dw           => poly_dw,
---         poly_a            => poly_a,
---         poly_wr           => poly_wr,
---         avl_clk           => avl_clk,
---         avl_waitrequest   => avl_waitrequest,
---         avl_readdata      => avl_readdata,
---         avl_readdatavalid => avl_readdatavalid,
---         avl_burstcount    => avl_burstcount,
---         avl_writedata     => avl_writedata,
---         avl_address       => avl_address,
---         avl_write         => avl_write,
---         avl_read          => avl_read,
---         avl_byteenable    => avl_byteenable,
---         reset_na          => reset_na
---      ); -- i_ascal
+   --------------------------------------------------------
+   -- Instantiate video rescaler
+   --------------------------------------------------------
+
+   i_ascal : entity work.ascal
+      generic map (
+         MASK      => MASK,
+         RAMBASE   => RAMBASE,
+         RAMSIZE   => RAMSIZE,
+         INTER     => INTER,
+         HEADER    => HEADER,
+         DOWNSCALE => DOWNSCALE,
+         BYTESWAP  => BYTESWAP,
+         PALETTE   => PALETTE,
+         PALETTE2  => PALETTE2,
+         FRAC      => FRAC,
+         OHRES     => OHRES,
+         IHRES     => IHRES,
+         N_DW      => N_DW,
+         N_AW      => N_AW,
+         N_BURST   => N_BURST
+      )
+      port map (
+         i_r               => i_r,                    -- input
+         i_g               => i_g,                    -- input
+         i_b               => i_b,                    -- input
+         i_hs              => i_hs,                   -- input
+         i_vs              => i_vs,                   -- input
+         i_fl              => i_fl,                   -- input
+         i_de              => i_de,                   -- input
+         i_ce              => '1',                    -- input
+         i_clk             => video_clk,              -- input
+         o_r               => o_r,                    -- output
+         o_g               => o_g,                    -- output
+         o_b               => o_b,                    -- output
+         o_hs              => o_hs,                   -- output
+         o_vs              => o_vs,                   -- output
+         o_de              => o_de,                   -- output
+         o_vbl             => o_vbl,                  -- output
+         o_ce              => '1',                    -- input
+         o_clk             => video_clk,              -- input
+         o_border          => X"886644",              -- input
+         o_fb_ena          => '0',                    -- input
+         o_fb_hsize        => o_fb_hsize,             -- input
+         o_fb_vsize        => o_fb_vsize,             -- input
+         o_fb_format       => o_fb_format,            -- input
+         o_fb_base         => o_fb_base,              -- input
+         o_fb_stride       => o_fb_stride,            -- input
+         pal1_clk          => pal1_clk,               -- input
+         pal1_dw           => pal1_dw,                -- input
+         pal1_dr           => pal1_dr,                -- output
+         pal1_a            => pal1_a,                 -- input
+         pal1_wr           => pal1_wr,                -- input
+         pal_n             => pal_n,                  -- input
+         pal2_clk          => pal2_clk,               -- input
+         pal2_dw           => pal2_dw,                -- input
+         pal2_dr           => pal2_dr,                -- output
+         pal2_a            => pal2_a,                 -- input
+         pal2_wr           => pal2_wr,                -- input
+         o_lltune          => o_lltune,               -- output
+         iauto             => '1',                    -- input
+         himin             => 0,                      -- input
+         himax             => 0,                      -- input
+         vimin             => 0,                      -- input
+         vimax             => 0,                      -- input
+         i_hdmax           => i_hdmax,                -- output
+         i_vdmax           => i_vdmax,                -- output
+         run               => '1',                    -- input
+         freeze            => '0',                    -- input
+         mode              => "00000",                -- input
+         htotal            => 1920 + 88 + 148 + 48,   -- input
+         hsstart           => 1920 + 88,              -- input
+         hsend             => 1920 + 88 + 48,         -- input
+         hdisp             => 1920,                   -- input
+         hmin              => 0,                      -- input
+         hmax              => 1919,                   -- input
+         vtotal            => 1080 + 4 + 36 + 5,      -- input
+         vsstart           => 1080 + 4,               -- input
+         vsend             => 1080 + 4 + 5,           -- input
+         vdisp             => 1080,                   -- input
+         vmin              => 0,                      -- input
+         vmax              => 1079,                   -- input
+         format            => "01",                   -- input
+         poly_clk          => poly_clk,               -- input
+         poly_dw           => poly_dw,                -- input
+         poly_a            => poly_a,                 -- input
+         poly_wr           => poly_wr,                -- input
+         avl_clk           => clk_x1,                 -- input
+         avl_waitrequest   => avl_waitrequest,        -- input
+         avl_readdata      => avl_readdata,           -- input
+         avl_readdatavalid => avl_readdatavalid,      -- input
+         avl_burstcount    => avl_burstcount,         -- output
+         avl_writedata     => avl_writedata,          -- output
+         avl_address       => avl_address,            -- output
+         avl_write         => avl_write,              -- output
+         avl_read          => avl_read,               -- output
+         avl_byteenable    => avl_byteenable,         -- output
+         reset_na          => reset_na                -- input
+      ); -- i_ascal
 
 
    --------------------------------------------------------
