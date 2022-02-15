@@ -2,6 +2,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library work;
+use work.types_pkg.all;
+
 entity top is
    port (
       clk         : in    std_logic;                  -- 100 MHz clock
@@ -42,7 +45,7 @@ architecture synthesis of top is
    constant OHRES     : natural range 1 to 4096 := 2048;
    constant IHRES     : natural range 1 to 2048 := 2048;
    constant N_DW      : natural range 64 to 128 := 128;
-   constant N_AW      : natural range 8 to 32 := 32;
+   constant N_AW      : natural range 8 to 32 := 22;
    constant N_BURST   : natural := 256; -- 256 bytes per burst
 
    ------------------------------------
@@ -163,20 +166,56 @@ architecture synthesis of top is
    ------------------------------------
    signal reset_na           : std_logic;
 
+   -- HDMI output
+   signal video_clk          : std_logic;
+   signal video_rst          : std_logic;
+   signal hdmi_clk           : std_logic;
+   signal video_data         : slv_9_0_t(0 to 2);              -- parallel HDMI symbol stream x 3 channels
 
    -- HyperRAM
-   signal clk_x1           : std_logic; -- Main clock
-   signal clk_x2           : std_logic; -- Physical I/O only
-   signal clk_x2_del       : std_logic; -- Double frequency, phase shifted
-   signal rst              : std_logic; -- Synchronous reset
-   signal hr_rwds_in       : std_logic;
-   signal hr_rwds_out      : std_logic;
-   signal hr_rwds_oe       : std_logic;   -- Output enable for RWDS
-   signal hr_dq_in         : std_logic_vector(7 downto 0);
-   signal hr_dq_out        : std_logic_vector(7 downto 0);
-   signal hr_dq_oe         : std_logic;    -- Output enable for DQ
+   signal avm_write          : std_logic;
+   signal avm_read           : std_logic;
+   signal avm_address        : std_logic_vector(21 downto 0);
+   signal avm_writedata      : std_logic_vector(15 downto 0);
+   signal avm_byteenable     : std_logic_vector(1 downto 0);
+   signal avm_burstcount     : std_logic_vector(7 downto 0);
+   signal avm_readdata       : std_logic_vector(15 downto 0);
+   signal avm_readdatavalid  : std_logic;
+   signal avm_waitrequest    : std_logic;
+
+   signal clk_x1             : std_logic; -- Main clock
+   signal clk_x2             : std_logic; -- Physical I/O only
+   signal clk_x2_del         : std_logic; -- Double frequency, phase shifted
+   signal rst                : std_logic; -- Synchronous reset
+   signal hr_rwds_in         : std_logic;
+   signal hr_rwds_out        : std_logic;
+   signal hr_rwds_oe         : std_logic;   -- Output enable for RWDS
+   signal hr_dq_in           : std_logic_vector(7 downto 0);
+   signal hr_dq_out          : std_logic_vector(7 downto 0);
+   signal hr_dq_oe           : std_logic;    -- Output enable for DQ
 
 begin
+
+
+   --------------------------------------------------------
+   -- Generate input video
+   --------------------------------------------------------
+
+   i_gen_video : entity work.gen_video
+      port map (
+         clk_i => i_clk,
+         r_o   => i_r,
+         g_o   => i_g,
+         b_o   => i_b,
+         hs_o  => i_hs,
+         vs_o  => i_vs,
+         de_o  => i_de
+      ); -- i_gen_video
+
+
+   --------------------------------------------------------
+   -- Instantiate video rescaler
+   --------------------------------------------------------
 
    i_ascal : entity work.ascal
       generic map (
@@ -276,14 +315,92 @@ begin
 
 
    --------------------------------------------------------
+   -- Output HDMI generation
+   --------------------------------------------------------
+
+   i_clk_hdmi : entity work.clk_hdmi
+      port map (
+         sys_clk_i    => clk,
+         sys_rstn_i   => reset_n,
+         pixel_clk_o  => video_clk,
+         pixel_rst_o  => video_rst,
+         pixel_clk5_o => hdmi_clk
+      ); -- i_clk_hdmi
+
+
+   i_audio_video_to_hdmi : entity work.audio_video_to_hdmi
+      port map (
+         select_44100 => '0',
+         dvi          => '0',
+         vic          => std_logic_vector(to_unsigned(4,8)),  -- CEA/CTA VIC 4=720p @ 60 Hz
+         aspect       => "10",                                -- 01=4:3, 10=16:9
+         pix_rep      => '0',                                 -- no pixel repetition
+         vs_pol       => '1',                                 -- horizontal polarity: positive
+         hs_pol       => '1',                                 -- vertaical polarity: positive
+
+         vga_rst      => video_rst,                           -- active high reset
+         vga_clk      => video_clk,                           -- video pixel clock
+         vga_vs       => o_vs,
+         vga_hs       => o_hs,
+         vga_de       => o_de,
+         vga_r        => std_logic_vector(o_r),
+         vga_g        => std_logic_vector(o_g),
+         vga_b        => std_logic_vector(o_b),
+
+         -- PCM audio
+         pcm_rst      => '0',
+         pcm_clk      => '0',
+         pcm_clken    => '0',
+
+         -- PCM audio is signed
+         pcm_l        => X"0000",
+         pcm_r        => X"0000",
+
+         pcm_acr      => '0',
+         pcm_n        => X"00000",
+         pcm_cts      => X"00000",
+
+         -- TMDS output (parallel)
+         tmds         => video_data
+      ); -- i_audio_video_to_hdmi
+
+
+   -- serialiser: in this design we use HDMI SelectIO outputs
+   gen_hdmi_data: for i in 0 to 2 generate
+   begin
+      i_serialiser_10to1_selectio_data: entity work.serialiser_10to1_selectio
+         port map (
+            rst_i    => video_rst,
+            clk_i    => video_clk,
+            d_i      => video_data(i),
+            clk_x5_i => hdmi_clk,
+            out_p_o  => hdmi_data_p(i),
+            out_n_o  => hdmi_data_n(i)
+         ); -- i_serialiser_10to1_selectio_data
+   end generate gen_hdmi_data;
+
+
+   i_serialiser_10to1_selectio_clk : entity work.serialiser_10to1_selectio
+   port map (
+         rst_i    => video_rst,
+         clk_i    => video_clk,
+         clk_x5_i => hdmi_clk,
+         d_i      => "0000011111",
+         out_p_o  => hdmi_clk_p,
+         out_n_o  => hdmi_clk_n
+      ); -- i_serialiser_10to1_selectio_clk
+
+
+
+   --------------------------------------------------------
    -- Generate clocks for HyperRAM controller
    --------------------------------------------------------
 
-   i_hr_clk : entity work.hr_clk
+   i_clk_hr : entity work.clk_hr
       generic map
       (
-         G_HYPERRAM_FREQ_MHZ => C_HYPERRAM_FREQ_MHZ,
-         G_HYPERRAM_PHASE    => C_HYPERRAM_PHASE
+         G_HYPERRAM_FREQ_MHZ => 100,
+         G_HYPERRAM_PHASE    => 162.0
       )
       port map
       (
@@ -293,7 +410,7 @@ begin
          clk_x2_o     => clk_x2,
          clk_x2_del_o => clk_x2_del,
          rst_o        => rst
-      ); -- i_hr_clk
+      ); -- i_clk_hr
 
 
    --------------------------------------------------------
@@ -304,7 +421,7 @@ begin
       generic map (
          G_ADDRESS_SIZE     => 22,
          G_SLAVE_DATA_SIZE  => 128,
-         G_MASTER_DATA_SIZE => 16,
+         G_MASTER_DATA_SIZE => 16
       )
       port map (
          clk_i                 => clk_x1,
@@ -342,7 +459,7 @@ begin
          rst_i               => rst,
          avm_write_i         => avm_write,
          avm_read_i          => avm_read,
-         avm_address_i       => avm_address,
+         avm_address_i       => "0000000000" & avm_address,
          avm_writedata_i     => avm_writedata,
          avm_byteenable_i    => avm_byteenable,
          avm_burstcount_i    => avm_burstcount,
