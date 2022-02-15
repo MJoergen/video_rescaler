@@ -70,7 +70,6 @@ architecture synthesis of top is
    signal o_de               : std_logic; -- display enable
    signal o_vbl              : std_logic; -- v blank
    signal o_ce               : std_logic; -- clock enable
-   signal o_clk              : std_logic; -- output clock
 
    -- border colour r g b
    signal o_border           : unsigned(23 downto 0) := x"000000";
@@ -194,6 +193,9 @@ architecture synthesis of top is
    signal hr_dq_out          : std_logic_vector(7 downto 0);
    signal hr_dq_oe           : std_logic;    -- Output enable for DQ
 
+   -- Keyboard
+   signal kbd_clk            : std_logic;
+
 begin
 
 
@@ -202,116 +204,132 @@ begin
    --------------------------------------------------------
 
    i_gen_video : entity work.gen_video
+      generic map (
+         CLK_KHZ   => 74250,     -- 74.25 MHz
+         PIX_SIZE  => 11,
+         H_PIXELS  => 1280,      -- horizontal display width in pixels
+         V_PIXELS  =>  720,      -- vertical display width in rows
+         H_FP      =>  110,      -- horizontal front porch width in pixels
+         H_PULSE   =>   40,      -- horizontal sync pulse width in pixels
+         H_BP      =>  220,      -- horizontal back porch width in pixels
+         V_FP      =>    5,      -- vertical front porch width in rows
+         V_PULSE   =>    5,      -- vertical sync pulse width in rows
+         V_BP      =>   20,      -- vertical back porch width in rows
+         H_MAX     => 1650,
+         V_MAX     => 750,
+         H_POL     => '1',       -- horizontal sync pulse polarity (1 = positive, 0 = negative)
+         V_POL     => '1'        -- vertical sync pulse polarity (1 = positive, 0 = negative)
+      )
       port map (
-         clk_i => i_clk,
-         r_o   => i_r,
-         g_o   => i_g,
-         b_o   => i_b,
-         hs_o  => i_hs,
-         vs_o  => i_vs,
-         de_o  => i_de
+         clk_i => video_clk,
+         r_o   => o_r,
+         g_o   => o_g,
+         b_o   => o_b,
+         hs_o  => o_hs,
+         vs_o  => o_vs,
+         de_o  => o_de
       ); -- i_gen_video
 
 
-   --------------------------------------------------------
-   -- Instantiate video rescaler
-   --------------------------------------------------------
-
-   i_ascal : entity work.ascal
-      generic map (
-         MASK      => MASK,
-         RAMBASE   => RAMBASE,
-         RAMSIZE   => RAMSIZE,
-         INTER     => INTER,
-         HEADER    => HEADER,
-         DOWNSCALE => DOWNSCALE,
-         BYTESWAP  => BYTESWAP,
-         PALETTE   => PALETTE,
-         PALETTE2  => PALETTE2,
-         FRAC      => FRAC,
-         OHRES     => OHRES,
-         IHRES     => IHRES,
-         N_DW      => N_DW,
-         N_AW      => N_AW,
-         N_BURST   => N_BURST
-      )
-      port map (
-         i_r               => i_r,
-         i_g               => i_g,
-         i_b               => i_b,
-         i_hs              => i_hs,
-         i_vs              => i_vs,
-         i_fl              => i_fl,
-         i_de              => i_de,
-         i_ce              => i_ce,
-         i_clk             => i_clk,
-         o_r               => o_r,
-         o_g               => o_g,
-         o_b               => o_b,
-         o_hs              => o_hs,
-         o_vs              => o_vs,
-         o_de              => o_de,
-         o_vbl             => o_vbl,
-         o_ce              => o_ce,
-         o_clk             => o_clk,
-         o_border          => o_border,
-         o_fb_ena          => o_fb_ena,
-         o_fb_hsize        => o_fb_hsize,
-         o_fb_vsize        => o_fb_vsize,
-         o_fb_format       => o_fb_format,
-         o_fb_base         => o_fb_base,
-         o_fb_stride       => o_fb_stride,
-         pal1_clk          => pal1_clk,
-         pal1_dw           => pal1_dw,
-         pal1_dr           => pal1_dr,
-         pal1_a            => pal1_a,
-         pal1_wr           => pal1_wr,
-         pal_n             => pal_n,
-         pal2_clk          => pal2_clk,
-         pal2_dw           => pal2_dw,
-         pal2_dr           => pal2_dr,
-         pal2_a            => pal2_a,
-         pal2_wr           => pal2_wr,
-         o_lltune          => o_lltune,
-         iauto             => iauto,
-         himin             => himin,
-         himax             => himax,
-         vimin             => vimin,
-         vimax             => vimax,
-         i_hdmax           => i_hdmax,
-         i_vdmax           => i_vdmax,
-         run               => run,
-         freeze            => freeze,
-         mode              => mode,
-         htotal            => htotal,
-         hsstart           => hsstart,
-         hsend             => hsend,
-         hdisp             => hdisp,
-         hmin              => hmin,
-         hmax              => hmax,
-         vtotal            => vtotal,
-         vsstart           => vsstart,
-         vsend             => vsend,
-         vdisp             => vdisp,
-         vmin              => vmin,
-         vmax              => vmax,
-         format            => format,
-         poly_clk          => poly_clk,
-         poly_dw           => poly_dw,
-         poly_a            => poly_a,
-         poly_wr           => poly_wr,
-         avl_clk           => avl_clk,
-         avl_waitrequest   => avl_waitrequest,
-         avl_readdata      => avl_readdata,
-         avl_readdatavalid => avl_readdatavalid,
-         avl_burstcount    => avl_burstcount,
-         avl_writedata     => avl_writedata,
-         avl_address       => avl_address,
-         avl_write         => avl_write,
-         avl_read          => avl_read,
-         avl_byteenable    => avl_byteenable,
-         reset_na          => reset_na
-      ); -- i_ascal
+--   --------------------------------------------------------
+--   -- Instantiate video rescaler
+--   --------------------------------------------------------
+--
+--   i_ascal : entity work.ascal
+--      generic map (
+--         MASK      => MASK,
+--         RAMBASE   => RAMBASE,
+--         RAMSIZE   => RAMSIZE,
+--         INTER     => INTER,
+--         HEADER    => HEADER,
+--         DOWNSCALE => DOWNSCALE,
+--         BYTESWAP  => BYTESWAP,
+--         PALETTE   => PALETTE,
+--         PALETTE2  => PALETTE2,
+--         FRAC      => FRAC,
+--         OHRES     => OHRES,
+--         IHRES     => IHRES,
+--         N_DW      => N_DW,
+--         N_AW      => N_AW,
+--         N_BURST   => N_BURST
+--      )
+--      port map (
+--         i_r               => i_r,
+--         i_g               => i_g,
+--         i_b               => i_b,
+--         i_hs              => i_hs,
+--         i_vs              => i_vs,
+--         i_fl              => i_fl,
+--         i_de              => i_de,
+--         i_ce              => i_ce,
+--         i_clk             => i_clk,
+--         o_r               => o_r,
+--         o_g               => o_g,
+--         o_b               => o_b,
+--         o_hs              => o_hs,
+--         o_vs              => o_vs,
+--         o_de              => o_de,
+--         o_vbl             => o_vbl,
+--         o_ce              => o_ce,
+--         o_clk             => video_clk,
+--         o_border          => o_border,
+--         o_fb_ena          => o_fb_ena,
+--         o_fb_hsize        => o_fb_hsize,
+--         o_fb_vsize        => o_fb_vsize,
+--         o_fb_format       => o_fb_format,
+--         o_fb_base         => o_fb_base,
+--         o_fb_stride       => o_fb_stride,
+--         pal1_clk          => pal1_clk,
+--         pal1_dw           => pal1_dw,
+--         pal1_dr           => pal1_dr,
+--         pal1_a            => pal1_a,
+--         pal1_wr           => pal1_wr,
+--         pal_n             => pal_n,
+--         pal2_clk          => pal2_clk,
+--         pal2_dw           => pal2_dw,
+--         pal2_dr           => pal2_dr,
+--         pal2_a            => pal2_a,
+--         pal2_wr           => pal2_wr,
+--         o_lltune          => o_lltune,
+--         iauto             => iauto,
+--         himin             => himin,
+--         himax             => himax,
+--         vimin             => vimin,
+--         vimax             => vimax,
+--         i_hdmax           => i_hdmax,
+--         i_vdmax           => i_vdmax,
+--         run               => run,
+--         freeze            => freeze,
+--         mode              => mode,
+--         htotal            => htotal,
+--         hsstart           => hsstart,
+--         hsend             => hsend,
+--         hdisp             => hdisp,
+--         hmin              => hmin,
+--         hmax              => hmax,
+--         vtotal            => vtotal,
+--         vsstart           => vsstart,
+--         vsend             => vsend,
+--         vdisp             => vdisp,
+--         vmin              => vmin,
+--         vmax              => vmax,
+--         format            => format,
+--         poly_clk          => poly_clk,
+--         poly_dw           => poly_dw,
+--         poly_a            => poly_a,
+--         poly_wr           => poly_wr,
+--         avl_clk           => avl_clk,
+--         avl_waitrequest   => avl_waitrequest,
+--         avl_readdata      => avl_readdata,
+--         avl_readdatavalid => avl_readdatavalid,
+--         avl_burstcount    => avl_burstcount,
+--         avl_writedata     => avl_writedata,
+--         avl_address       => avl_address,
+--         avl_write         => avl_write,
+--         avl_read          => avl_read,
+--         avl_byteenable    => avl_byteenable,
+--         reset_na          => reset_na
+--      ); -- i_ascal
 
 
    --------------------------------------------------------
@@ -486,6 +504,32 @@ begin
    hr_dq      <= hr_dq_out   when hr_dq_oe   = '1' else (others => 'Z');
    hr_rwds_in <= hr_rwds;
    hr_dq_in   <= hr_dq;
+
+
+   ----------------------------------
+   -- Keyboard
+   ----------------------------------
+
+   i_clk_kbd : entity work.clk_kbd
+      port map (
+         sys_clk_i  => clk,
+         sys_rstn_i => reset_n,
+         kbd_clk_o  => kbd_clk
+      ); -- i_clk_kbd
+
+
+   i_keyboard : entity work.keyboard
+      port map (
+         cpuclock    => kbd_clk,
+         flopled     => '0',
+         powerled    => '1',
+         kio8        => kb_io0,
+         kio9        => kb_io1,
+         kio10       => kb_io2,
+         delete_out  => open,
+         return_out  => open,
+         fastkey_out => open
+      ); -- i_keyboard
 
 end architecture synthesis;
 

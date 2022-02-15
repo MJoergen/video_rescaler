@@ -3,6 +3,22 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity gen_video is
+   generic (
+      CLK_KHZ   : integer := 74250;     -- 74.25 MHz
+      PIX_SIZE  : integer := 11;
+      H_PIXELS  : integer := 1280;      -- horizontal display width in pixels
+      V_PIXELS  : integer :=  720;      -- vertical display width in rows
+      H_FP      : integer :=  110;      -- horizontal front porch width in pixels
+      H_PULSE   : integer :=   40;      -- horizontal sync pulse width in pixels
+      H_BP      : integer :=  220;      -- horizontal back porch width in pixels
+      V_FP      : integer :=    5;      -- vertical front porch width in rows
+      V_PULSE   : integer :=    5;      -- vertical sync pulse width in rows
+      V_BP      : integer :=   20;      -- vertical back porch width in rows
+      H_MAX     : integer := 1650;
+      V_MAX     : integer := 750;
+      H_POL     : std_logic := '1';       -- horizontal sync pulse polarity (1 = positive, 0 = negative)
+      V_POL     : std_logic := '1'        -- vertical sync pulse polarity (1 = positive, 0 = negative)
+   );
    port (
       clk_i : in  std_logic;
       r_o   : out unsigned(7 downto 0);
@@ -14,120 +30,95 @@ entity gen_video is
    );
 end gen_video;
 
-architecture structural of gen_video is
+architecture synthesis of gen_video is
 
-   -- Define constants used for 640x480 @ 60 Hz.
-   -- Requires a clock of 25.175 MHz.
-   -- See page 17 in "VESA MONITOR TIMING STANDARD"
-   -- http://caxapa.ru/thumbs/361638/DMTv1r11.pdf
-   constant H_PIXELS : integer := 640;
-   constant V_PIXELS : integer := 480;
+   signal pixel_x : std_logic_vector(PIX_SIZE-1 downto 0) := (others => '0');
+   signal pixel_y : std_logic_vector(PIX_SIZE-1 downto 0) := (others => '0');
 
-   constant H_TOTAL  : integer := 800;
-   constant HS_START : integer := 656;
-   constant HS_TIME  : integer := 96;
-
-   constant V_TOTAL  : integer := 525;
-   constant VS_START : integer := 490;
-   constant VS_TIME  : integer := 2;
-
-   -- Pixel counters
-   signal pix_x : integer range 0 to H_TOTAL;
-   signal pix_y : integer range 0 to V_TOTAL;
+   constant C_HS_START : integer := H_PIXELS + H_FP;
+   constant C_VS_START : integer := V_PIXELS + V_FP;
 
 begin
 
-   --------------------------------------------------
-   -- Generate horizontal and vertical pixel counters
-   --------------------------------------------------
+   -------------------------------------
+   -- Generate horizontal pixel counter
+   -------------------------------------
 
-   p_pix_x : process (clk_i)
+   p_pixel_x : process (clk_i)
    begin
       if rising_edge(clk_i) then
-         if pix_x = H_TOTAL-1 then
-            pix_x <= 0;
+         if unsigned(pixel_x) = H_MAX-1 then
+            pixel_x <= (others => '0');
          else
-            pix_x <= pix_x + 1;
+            pixel_x <= std_logic_vector(unsigned(pixel_x) + 1);
          end if;
       end if;
-   end process p_pix_x;
+   end process p_pixel_x;
 
-   p_pix_y : process (clk_i)
+
+   -----------------------------------
+   -- Generate vertical pixel counter
+   -----------------------------------
+
+   p_pixel_y : process (clk_i)
    begin
       if rising_edge(clk_i) then
-         if pix_x = H_TOTAL-1  then
-            if pix_y = V_TOTAL-1 then
-               pix_y <= 0;
+         if unsigned(pixel_x) = H_MAX-1 then
+            if unsigned(pixel_y) = V_MAX-1 then
+               pixel_y <= (others => '0');
             else
-               pix_y <= pix_y + 1;
+               pixel_y <= std_logic_vector(unsigned(pixel_y) + 1);
             end if;
          end if;
       end if;
-   end process p_pix_y;
+   end process p_pixel_y;
 
 
-   --------------------------------------------------
-   -- Generate horizontal sync signal
-   --------------------------------------------------
+   -----------------------------------
+   -- Generate sync pulses
+   -----------------------------------
 
-   p_hs : process (clk_i)
+   p_sync : process (clk_i)
    begin
       if rising_edge(clk_i) then
-         if pix_x >= HS_START and pix_x < HS_START+HS_TIME then
-            hs_o <= '0';
+         -- Generate horizontal sync signal
+         if unsigned(pixel_x) >= C_HS_START and
+            unsigned(pixel_x) < C_HS_START+H_PULSE then
+
+            hs_o <= H_POL;
          else
-            hs_o <= '1';
+            hs_o <= not H_POL;
+         end if;
+
+         -- Generate vertical sync signal
+         if unsigned(pixel_y) >= C_VS_START and
+            unsigned(pixel_y) < C_VS_START+V_PULSE then
+
+            vs_o <= V_POL;
+         else
+            vs_o <= not V_POL;
+         end if;
+
+         -- Default is black
+         de_o <= '0';
+
+         -- Only show color when inside visible screen area
+         if unsigned(pixel_x) < H_PIXELS and
+            unsigned(pixel_y) < V_PIXELS then
+
+            de_o <= '1';
          end if;
       end if;
-   end process p_hs;
-
-
-   --------------------------------------------------
-   -- Generate vertical sync signal
-   --------------------------------------------------
-
-   p_vs : process (clk_i)
-   begin
-      if rising_edge(clk_i) then
-         if pix_y >= VS_START and pix_y < VS_START+VS_TIME then
-            vs_o <= '0';
-         else
-            vs_o <= '1';
-         end if;
-      end if;
-   end process p_vs;
-
-
-   --------------------------------------------------
-   -- Generate pixel colour
-   --------------------------------------------------
+   end process p_sync;
 
    p_rgb : process (clk_i)
    begin
       if rising_edge(clk_i) then
-
-         -- Generate checker board pattern
-         if ((pix_x + pix_y) mod 7) = 1 then
-            r_o <= X"FF";
-            g_o <= X"FF";
-            b_o <= X"FF";
-         else
-            r_o <= X"00";
-            g_o <= X"00";
-            b_o <= X"00";
-         end if;
-
-         -- Make sure colour is black outside the visible area.
-         if pix_x >= H_PIXELS or pix_y >= V_PIXELS then
-            r_o <= X"00";
-            g_o <= X"00";
-            b_o <= X"00";
-            de_o <= '0';
-         else
-            de_o <= '1';
-         end if;
+         r_o <= to_unsigned(to_integer(unsigned(pixel_x)) mod 256, 8);
+         g_o <= to_unsigned(to_integer(unsigned(pixel_y)) mod 256, 8);
+         b_o <= to_unsigned(to_integer(unsigned(pixel_x)) + to_integer(unsigned(pixel_y)) mod 256, 8);
       end if;
    end process p_rgb;
 
-end architecture structural;
+end architecture synthesis;
 
