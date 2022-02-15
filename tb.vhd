@@ -5,11 +5,7 @@ use ieee.numeric_std.all;
 entity tb is
 end entity tb;
 
-architecture simulation of tb is
-   constant I_CLK_PERIOD    : time := 40 ns;
-   constant AVL_CLK_PERIOD  : time := 10 ns;
-   constant POLY_CLK_PERIOD : time := 10 ns;
-   constant PAL_CLK_PERIOD  : time := 10 ns;
+architecture synthesis of tb is
 
    constant MASK      : unsigned(7 downto 0) := x"ff";
    constant RAMBASE   : unsigned(31 downto 0) := (others => '0');
@@ -19,7 +15,7 @@ architecture simulation of tb is
    constant DOWNSCALE : boolean := true;
    constant BYTESWAP  : boolean := true;
    constant PALETTE   : boolean := true;
-   constant PALETTE2  : boolean := false;
+   constant PALETTE2  : boolean := true;
    constant FRAC      : natural range 4 to 6 := 4;
    constant OHRES     : natural range 1 to 4096 := 2048;
    constant IHRES     : natural range 1 to 2048 := 2048;
@@ -34,10 +30,8 @@ architecture simulation of tb is
    signal i_b                : unsigned(7 downto 0);
    signal i_hs               : std_logic; -- h sync
    signal i_vs               : std_logic; -- v sync
-   signal i_fl               : std_logic; -- interlaced field
    signal i_de               : std_logic; -- display enable
-   signal i_ce               : std_logic; -- clock enable
-   signal i_clk              : std_logic; -- input clock
+   signal i_clk              : std_logic;
 
    ------------------------------------
    -- output video
@@ -48,35 +42,34 @@ architecture simulation of tb is
    signal o_vs               : std_logic; -- v sync
    signal o_de               : std_logic; -- display enable
    signal o_vbl              : std_logic; -- v blank
-   signal o_ce               : std_logic; -- clock enable
-   signal o_clk              : std_logic; -- output clock
+   signal o_clk              : std_logic;
 
    -- border colour r g b
    signal o_border           : unsigned(23 downto 0) := x"000000";
 
    ------------------------------------
    -- framebuffer mode
-   signal o_fb_ena           : std_logic := '0'; -- enable framebuffer mode
-   signal o_fb_hsize         : natural range 0 to 4095 := 0;
-   signal o_fb_vsize         : natural range 0 to 4095 := 0;
-   signal o_fb_format        : unsigned(5 downto 0) := "000100";
-   signal o_fb_base          : unsigned(31 downto 0) := x"0000_0000";
-   signal o_fb_stride        : unsigned(13 downto 0) := (others =>'0');
+   signal o_fb_ena           : std_logic :='0'; -- enable framebuffer mode
+   signal o_fb_hsize         : natural range 0 to 4095 :=0;
+   signal o_fb_vsize         : natural range 0 to 4095 :=0;
+   signal o_fb_format        : unsigned(5 downto 0) :="000100";
+   signal o_fb_base          : unsigned(31 downto 0) :=x"0000_0000";
+   signal o_fb_stride        : unsigned(13 downto 0) :=(others =>'0');
 
    -- framebuffer palette in 8bpp mode
-   signal pal1_clk           : std_logic := '0';
-   signal pal1_dw            : unsigned(47 downto 0) := x"000000000000"; -- r1 g1 b1 r0 g0 b0
-   signal pal1_dr            : unsigned(47 downto 0) := x"000000000000";
-   signal pal1_a             : unsigned(6 downto 0)  := "0000000"; -- colour index/2
-   signal pal1_wr            : std_logic := '0';
+   signal pal1_clk           : std_logic :='0';
+   signal pal1_dw            : unsigned(47 downto 0) :=x"000000000000"; -- r1 g1 b1 r0 g0 b0
+   signal pal1_dr            : unsigned(47 downto 0) :=x"000000000000";
+   signal pal1_a             : unsigned(6 downto 0)  :="0000000"; -- colour index/2
+   signal pal1_wr            : std_logic :='0';
 
-   signal pal_n              : std_logic := '0';
+   signal pal_n              : std_logic :='0';
 
-   signal pal2_clk           : std_logic := '0';
-   signal pal2_dw            : unsigned(23 downto 0) := x"000000"; -- r g b
-   signal pal2_dr            : unsigned(23 downto 0) := x"000000";
-   signal pal2_a             : unsigned(7 downto 0)  := "00000000"; -- colour index
-   signal pal2_wr            : std_logic := '0';
+   signal pal2_clk           : std_logic :='0';
+   signal pal2_dw            : unsigned(23 downto 0) :=x"000000"; -- r g b
+   signal pal2_dr            : unsigned(23 downto 0) :=x"000000";
+   signal pal2_a             : unsigned(7 downto 0)  :="00000000"; -- colour index
+   signal pal2_wr            : std_logic :='0';
 
    ------------------------------------
    -- low lag pll tuning
@@ -84,19 +77,19 @@ architecture simulation of tb is
 
    ------------------------------------
    -- input video parameters
-   signal iauto              : std_logic := '1'; -- 1=autodetect image size 0=choose window
-   signal himin              : natural range 0 to 4095 := 0; -- min < max, min >=0, max < disp
-   signal himax              : natural range 0 to 4095 := 0;
-   signal vimin              : natural range 0 to 4095 := 0;
-   signal vimax              : natural range 0 to 4095 := 0;
+   signal iauto              : std_logic :='1'; -- 1=autodetect image size 0=choose window
+   signal himin              : natural range 0 to 4095 :=0; -- min < max, min >=0, max < disp
+   signal himax              : natural range 0 to 4095 :=0;
+   signal vimin              : natural range 0 to 4095 :=0;
+   signal vimax              : natural range 0 to 4095 :=0;
 
    -- detected input image size
    signal i_hdmax            : natural range 0 to 4095;
    signal i_vdmax            : natural range 0 to 4095;
 
    -- output video parameters
-   signal run                : std_logic := '1'; -- 1=enable output image. 0=no image
-   signal freeze             : std_logic := '0'; -- 1=disable framebuffer writes
+   signal run                : std_logic :='1'; -- 1=enable output image. 0=no image
+   signal freeze             : std_logic :='0'; -- 1=disable framebuffer writes
    signal mode               : unsigned(4 downto 0);
    -- sync  |_________________________/"""""""""\_______|
    -- de    |""""""""""""""""""\________________________|
@@ -116,7 +109,7 @@ architecture simulation of tb is
    signal vmax               : natural range 0 to 4095; -- 0 <= vmin < vmax < vdisp
 
    -- scaler format. 00=16bpp 565, 01=24bpp 10=32bpp
-   signal format             : unsigned(1 downto 0) := "01";
+   signal format             : unsigned(1 downto 0) :="01";
 
    ------------------------------------
    -- polyphase filter coefficients
@@ -131,7 +124,6 @@ architecture simulation of tb is
 
    ------------------------------------
    -- avalon
-   signal avl_clk            : std_logic; -- avalon clock
    signal avl_waitrequest    : std_logic;
    signal avl_readdata       : std_logic_vector(N_DW-1 downto 0);
    signal avl_readdatavalid  : std_logic;
@@ -141,11 +133,12 @@ architecture simulation of tb is
    signal avl_write          : std_logic;
    signal avl_read           : std_logic;
    signal avl_byteenable     : std_logic_vector(N_DW/8-1 downto 0);
+   signal avl_clk            : std_logic;
 
-   ------------------------------------
    signal reset_na           : std_logic;
 
 begin
+
 
    --------------------------------------------------------
    -- Generate clocks
@@ -154,6 +147,7 @@ begin
    i_tb_clk : entity work.tb_clk
       port map (
          i_clk_o    => i_clk,
+         o_clk_o    => o_clk,
          avl_clk_o  => avl_clk,
          poly_clk_o => poly_clk,
          pal_clk_o  => pal1_clk
@@ -161,11 +155,28 @@ begin
 
    reset_na <= '0', '1' after 1 us;
 
+
    --------------------------------------------------------
    -- Generate input video
    --------------------------------------------------------
 
    i_gen_video : entity work.gen_video
+      generic map (
+         CLK_KHZ   => 74250,     -- 74.25 MHz
+         PIX_SIZE  => 11,
+         H_PIXELS  => 1280,      -- horizontal display width in pixels
+         V_PIXELS  =>  720,      -- vertical display width in rows
+         H_FP      =>  110,      -- horizontal front porch width in pixels
+         H_PULSE   =>   40,      -- horizontal sync pulse width in pixels
+         H_BP      =>  220,      -- horizontal back porch width in pixels
+         V_FP      =>    5,      -- vertical front porch width in rows
+         V_PULSE   =>    5,      -- vertical sync pulse width in rows
+         V_BP      =>   20,      -- vertical back porch width in rows
+         H_MAX     => 1650,
+         V_MAX     => 750,
+         H_POL     => '1',       -- horizontal sync pulse polarity (1 = positive, 0 = negative)
+         V_POL     => '1'        -- vertical sync pulse polarity (1 = positive, 0 = negative)
+      )
       port map (
          clk_i => i_clk,
          r_o   => i_r,
@@ -200,81 +211,81 @@ begin
          N_BURST   => N_BURST
       )
       port map (
-         i_r               => i_r,                 -- input
-         i_g               => i_g,                 -- input
-         i_b               => i_b,                 -- input
-         i_hs              => i_hs,                -- input
-         i_vs              => i_vs,                -- input
-         i_fl              => '0',                 -- input
-         i_de              => i_de,                -- input
-         i_ce              => '1',                 -- input
-         i_clk             => i_clk,               -- input
-         o_r               => o_r,                 -- output
-         o_g               => o_g,                 -- output
-         o_b               => o_b,                 -- output
-         o_hs              => o_hs,                -- output
-         o_vs              => o_vs,                -- output
-         o_de              => o_de,                -- output
-         o_vbl             => o_vbl,               -- output
-         o_ce              => o_ce,                -- output
-         o_clk             => o_clk,               -- output
-         o_border          => o_border,            -- input
-         o_fb_ena          => o_fb_ena,            -- input
-         o_fb_hsize        => o_fb_hsize,          -- input
-         o_fb_vsize        => o_fb_vsize,          -- input
-         o_fb_format       => o_fb_format,         -- input
-         o_fb_base         => o_fb_base,           -- input
-         o_fb_stride       => o_fb_stride,         -- input
-         pal1_clk          => pal1_clk,            -- input
-         pal1_dw           => pal1_dw,             -- input
-         pal1_dr           => open,                -- output
-         pal1_a            => pal1_a,              -- input
-         pal1_wr           => pal1_wr,             -- input
-         pal_n             => open,                -- input
-         pal2_clk          => open,                -- input
-         pal2_dw           => open,                -- input
-         pal2_dr           => open,                -- output
-         pal2_a            => open,                -- input
-         pal2_wr           => open,                -- input
-         o_lltune          => o_lltune,            -- output
-         iauto             => '1',                 -- input
-         himin             => 0,                   -- input
-         himax             => 0,                   -- input
-         vimin             => 0,                   -- input
-         vimax             => 0,                   -- input
-         i_hdmax           => i_hdmax,             -- output
-         i_vdmax           => i_vdmax,             -- output
-         run               => '1',                 -- input
-         freeze            => freeze,              -- input
-         mode              => mode,                -- input
-         htotal            => htotal,              -- input
-         hsstart           => hsstart,             -- input
-         hsend             => hsend,               -- input
-         hdisp             => hdisp,               -- input
-         hmin              => hmin,                -- input
-         hmax              => hmax,                -- input
-         vtotal            => vtotal,              -- input
-         vsstart           => vsstart,             -- input
-         vsend             => vsend,               -- input
-         vdisp             => vdisp,               -- input
-         vmin              => vmin,                -- input
-         vmax              => vmax,                -- input
-         format            => format,              -- input
-         poly_clk          => poly_clk,            -- input
-         poly_dw           => poly_dw,             -- input
-         poly_a            => poly_a,              -- input
-         poly_wr           => poly_wr,             -- input
-         avl_clk           => avl_clk,             -- input
-         avl_waitrequest   => avl_waitrequest,     -- input
-         avl_readdata      => avl_readdata,        -- input
-         avl_readdatavalid => avl_readdatavalid,   -- input
-         avl_burstcount    => avl_burstcount,      -- output
-         avl_writedata     => avl_writedata,       -- output
-         avl_address       => avl_address,         -- output
-         avl_write         => avl_write,           -- output
-         avl_read          => avl_read,            -- output
-         avl_byteenable    => avl_byteenable,      -- output
-         reset_na          => reset_na             -- input
+         i_r               => i_r,                    -- input
+         i_g               => i_g,                    -- input
+         i_b               => i_b,                    -- input
+         i_hs              => i_hs,                   -- input
+         i_vs              => i_vs,                   -- input
+         i_fl              => '0',                    -- input
+         i_de              => i_de,                   -- input
+         i_ce              => '1',                    -- input
+         i_clk             => i_clk,                  -- input
+         o_r               => o_r,                    -- output
+         o_g               => o_g,                    -- output
+         o_b               => o_b,                    -- output
+         o_hs              => o_hs,                   -- output
+         o_vs              => o_vs,                   -- output
+         o_de              => o_de,                   -- output
+         o_vbl             => o_vbl,                  -- output
+         o_ce              => '1',                    -- input
+         o_clk             => o_clk,                  -- input
+         o_border          => X"886644",              -- input
+         o_fb_ena          => '0',                    -- input
+         o_fb_hsize        => o_fb_hsize,             -- input
+         o_fb_vsize        => o_fb_vsize,             -- input
+         o_fb_format       => o_fb_format,            -- input
+         o_fb_base         => o_fb_base,              -- input
+         o_fb_stride       => o_fb_stride,            -- input
+         pal1_clk          => pal1_clk,               -- input
+         pal1_dw           => pal1_dw,                -- input
+         pal1_dr           => pal1_dr,                -- output
+         pal1_a            => pal1_a,                 -- input
+         pal1_wr           => pal1_wr,                -- input
+         pal_n             => pal_n,                  -- input
+         pal2_clk          => pal2_clk,               -- input
+         pal2_dw           => pal2_dw,                -- input
+         pal2_dr           => pal2_dr,                -- output
+         pal2_a            => pal2_a,                 -- input
+         pal2_wr           => pal2_wr,                -- input
+         o_lltune          => o_lltune,               -- output
+         iauto             => '1',                    -- input
+         himin             => 0,                      -- input
+         himax             => 0,                      -- input
+         vimin             => 0,                      -- input
+         vimax             => 0,                      -- input
+         i_hdmax           => i_hdmax,                -- output
+         i_vdmax           => i_vdmax,                -- output
+         run               => '1',                    -- input
+         freeze            => '0',                    -- input
+         mode              => "00000",                -- input
+         htotal            => 1920 + 88 + 148 + 48,   -- input
+         hsstart           => 1920 + 88,              -- input
+         hsend             => 1920 + 88 + 48,         -- input
+         hdisp             => 1920,                   -- input
+         hmin              => 0,                      -- input
+         hmax              => 1919,                   -- input
+         vtotal            => 1080 + 4 + 36 + 5,      -- input
+         vsstart           => 1080 + 4,               -- input
+         vsend             => 1080 + 4 + 5,           -- input
+         vdisp             => 1080,                   -- input
+         vmin              => 0,                      -- input
+         vmax              => 1079,                   -- input
+         format            => "01",                   -- input
+         poly_clk          => poly_clk,               -- input
+         poly_dw           => poly_dw,                -- input
+         poly_a            => poly_a,                 -- input
+         poly_wr           => poly_wr,                -- input
+         avl_clk           => avl_clk,                -- input
+         avl_waitrequest   => avl_waitrequest,        -- input
+         avl_readdata      => avl_readdata,           -- input
+         avl_readdatavalid => avl_readdatavalid,      -- input
+         avl_burstcount    => avl_burstcount,         -- output
+         avl_writedata     => avl_writedata,          -- output
+         avl_address       => avl_address,            -- output
+         avl_write         => avl_write,              -- output
+         avl_read          => avl_read,               -- output
+         avl_byteenable    => avl_byteenable,         -- output
+         reset_na          => reset_na                -- input
       ); -- i_ascal
 
 
@@ -301,5 +312,6 @@ begin
          avm_waitrequest_o   => avl_waitrequest
       ); -- i_avm_memory
 
-end architecture simulation;
+
+end architecture synthesis;
 
