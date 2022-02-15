@@ -55,7 +55,6 @@ architecture synthesis of top is
    signal i_b                : unsigned(7 downto 0);
    signal i_hs               : std_logic; -- h sync
    signal i_vs               : std_logic; -- v sync
-   signal i_fl               : std_logic; -- interlaced field
    signal i_de               : std_logic; -- display enable
 
    ------------------------------------
@@ -158,8 +157,7 @@ architecture synthesis of top is
    signal avl_read           : std_logic;
    signal avl_byteenable     : std_logic_vector(N_DW/8-1 downto 0);
 
-   ------------------------------------
-   signal reset_na           : std_logic;
+   ------------------------------------------------------------------------
 
    -- HDMI output
    signal video_clk          : std_logic;
@@ -255,7 +253,7 @@ begin
          i_b               => i_b,                    -- input
          i_hs              => i_hs,                   -- input
          i_vs              => i_vs,                   -- input
-         i_fl              => i_fl,                   -- input
+         i_fl              => '0',                    -- input
          i_de              => i_de,                   -- input
          i_ce              => '1',                    -- input
          i_clk             => video_clk,              -- input
@@ -324,7 +322,7 @@ begin
          avl_write         => avl_write,              -- output
          avl_read          => avl_read,               -- output
          avl_byteenable    => avl_byteenable,         -- output
-         reset_na          => reset_na                -- input
+         reset_na          => not rst                 -- input
       ); -- i_ascal
 
 

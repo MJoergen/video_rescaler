@@ -72,6 +72,10 @@ set_false_path   -to [get_ports kb_io0]
 set_false_path   -to [get_ports kb_io1]
 set_false_path -from [get_ports kb_io2]
 
+# Timing between ascal and HyperRAM is asynchronous
+set_false_path -from [get_clocks clk_x1]   -to [get_clocks pixel_clk]
+set_false_path   -to [get_clocks clk_x1] -from [get_clocks pixel_clk]
+
 
 #############################################################################################################
 # Configuration and Bitstream properties
