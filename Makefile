@@ -1,5 +1,7 @@
 SRC += ascal.vhd
 SRC += avm_memory.vhd
+SRC += tb_clk.vhd
+SRC += gen_video.vhd
 SRC += tb.vhd
 
 TB = tb

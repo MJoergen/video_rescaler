@@ -6,6 +6,10 @@ entity tb is
 end entity tb;
 
 architecture simulation of tb is
+   constant I_CLK_PERIOD    : time := 40 ns;
+   constant AVL_CLK_PERIOD  : time := 10 ns;
+   constant POLY_CLK_PERIOD : time := 10 ns;
+   constant PAL_CLK_PERIOD  : time := 10 ns;
 
    constant MASK      : unsigned(7 downto 0) := x"ff";
    constant RAMBASE   : unsigned(31 downto 0) := (others => '0');
@@ -143,6 +147,39 @@ architecture simulation of tb is
 
 begin
 
+   --------------------------------------------------------
+   -- Generate clocks
+   --------------------------------------------------------
+
+   i_tb_clk : entity work.tb_clk
+      port map (
+         i_clk_o    => i_clk,
+         avl_clk_o  => avl_clk,
+         poly_clk_o => poly_clk,
+         pal_clk_o  => pal1_clk
+      ); -- i_tb_clk
+
+
+   --------------------------------------------------------
+   -- Generate input video
+   --------------------------------------------------------
+
+   i_gen_video : entity work.gen_video
+      port map (
+         clk_i => i_clk,
+         r_o   => i_r,
+         g_o   => i_g,
+         b_o   => i_b,
+         hs_o  => i_hs,
+         vs_o  => i_vs,
+         de_o  => i_de
+      ); -- i_gen_video
+
+
+   --------------------------------------------------------
+   -- Instantiate video rescaler
+   --------------------------------------------------------
+
    i_ascal : entity work.ascal
       generic map (
          MASK      => MASK,
@@ -162,81 +199,81 @@ begin
          N_BURST   => N_BURST
       )
       port map (
-         i_r               => i_r,
-         i_g               => i_g,
-         i_b               => i_b,
-         i_hs              => i_hs,
-         i_vs              => i_vs,
-         i_fl              => i_fl,
-         i_de              => i_de,
-         i_ce              => i_ce,
-         i_clk             => i_clk,
-         o_r               => o_r,
-         o_g               => o_g,
-         o_b               => o_b,
-         o_hs              => o_hs,
-         o_vs              => o_vs,
-         o_de              => o_de,
-         o_vbl             => o_vbl,
-         o_ce              => o_ce,
-         o_clk             => o_clk,
-         o_border          => o_border,
-         o_fb_ena          => o_fb_ena,
-         o_fb_hsize        => o_fb_hsize,
-         o_fb_vsize        => o_fb_vsize,
-         o_fb_format       => o_fb_format,
-         o_fb_base         => o_fb_base,
-         o_fb_stride       => o_fb_stride,
-         pal1_clk          => pal1_clk,
-         pal1_dw           => pal1_dw,
-         pal1_dr           => pal1_dr,
-         pal1_a            => pal1_a,
-         pal1_wr           => pal1_wr,
-         pal_n             => open,
-         pal2_clk          => open,
-         pal2_dw           => open,
-         pal2_dr           => open,
-         pal2_a            => open,
-         pal2_wr           => open,
-         o_lltune          => o_lltune,
-         iauto             => '1',
-         himin             => 0,
-         himax             => 0,
-         vimin             => 0,
-         vimax             => 0,
-         i_hdmax           => i_hdmax,
-         i_vdmax           => i_vdmax,
-         run               => '1',
-         freeze            => freeze,
-         mode              => mode,
-         htotal            => htotal,
-         hsstart           => hsstart,
-         hsend             => hsend,
-         hdisp             => hdisp,
-         hmin              => hmin,
-         hmax              => hmax,
-         vtotal            => vtotal,
-         vsstart           => vsstart,
-         vsend             => vsend,
-         vdisp             => vdisp,
-         vmin              => vmin,
-         vmax              => vmax,
-         format            => format,
-         poly_clk          => poly_clk,
-         poly_dw           => poly_dw,
-         poly_a            => poly_a,
-         poly_wr           => poly_wr,
-         avl_clk           => avl_clk,
-         avl_waitrequest   => avl_waitrequest,
-         avl_readdata      => avl_readdata,
-         avl_readdatavalid => avl_readdatavalid,
-         avl_burstcount    => avl_burstcount,
-         avl_writedata     => avl_writedata,
-         avl_address       => avl_address,
-         avl_write         => avl_write,
-         avl_read          => avl_read,
-         avl_byteenable    => avl_byteenable,
-         reset_na          => reset_na
+         i_r               => i_r,                 -- input
+         i_g               => i_g,                 -- input
+         i_b               => i_b,                 -- input
+         i_hs              => i_hs,                -- input
+         i_vs              => i_vs,                -- input
+         i_fl              => '0',                 -- input
+         i_de              => i_de,                -- input
+         i_ce              => '1',                 -- input
+         i_clk             => i_clk,               -- input
+         o_r               => o_r,                 -- output
+         o_g               => o_g,                 -- output
+         o_b               => o_b,                 -- output
+         o_hs              => o_hs,                -- output
+         o_vs              => o_vs,                -- output
+         o_de              => o_de,                -- output
+         o_vbl             => o_vbl,               -- output
+         o_ce              => o_ce,                -- output
+         o_clk             => o_clk,               -- output
+         o_border          => o_border,            -- input
+         o_fb_ena          => o_fb_ena,            -- input
+         o_fb_hsize        => o_fb_hsize,          -- input
+         o_fb_vsize        => o_fb_vsize,          -- input
+         o_fb_format       => o_fb_format,         -- input
+         o_fb_base         => o_fb_base,           -- input
+         o_fb_stride       => o_fb_stride,         -- input
+         pal1_clk          => pal1_clk,            -- input
+         pal1_dw           => pal1_dw,             -- input
+         pal1_dr           => open,                -- output
+         pal1_a            => pal1_a,              -- input
+         pal1_wr           => pal1_wr,             -- input
+         pal_n             => open,                -- input
+         pal2_clk          => open,                -- input
+         pal2_dw           => open,                -- input
+         pal2_dr           => open,                -- output
+         pal2_a            => open,                -- input
+         pal2_wr           => open,                -- input
+         o_lltune          => o_lltune,            -- output
+         iauto             => '1',                 -- input
+         himin             => 0,                   -- input
+         himax             => 0,                   -- input
+         vimin             => 0,                   -- input
+         vimax             => 0,                   -- input
+         i_hdmax           => i_hdmax,             -- output
+         i_vdmax           => i_vdmax,             -- output
+         run               => '1',                 -- input
+         freeze            => freeze,              -- input
+         mode              => mode,                -- input
+         htotal            => htotal,              -- input
+         hsstart           => hsstart,             -- input
+         hsend             => hsend,               -- input
+         hdisp             => hdisp,               -- input
+         hmin              => hmin,                -- input
+         hmax              => hmax,                -- input
+         vtotal            => vtotal,              -- input
+         vsstart           => vsstart,             -- input
+         vsend             => vsend,               -- input
+         vdisp             => vdisp,               -- input
+         vmin              => vmin,                -- input
+         vmax              => vmax,                -- input
+         format            => format,              -- input
+         poly_clk          => poly_clk,            -- input
+         poly_dw           => poly_dw,             -- input
+         poly_a            => poly_a,              -- input
+         poly_wr           => poly_wr,             -- input
+         avl_clk           => avl_clk,             -- input
+         avl_waitrequest   => avl_waitrequest,     -- input
+         avl_readdata      => avl_readdata,        -- input
+         avl_readdatavalid => avl_readdatavalid,   -- input
+         avl_burstcount    => avl_burstcount,      -- output
+         avl_writedata     => avl_writedata,       -- output
+         avl_address       => avl_address,         -- output
+         avl_write         => avl_write,           -- output
+         avl_read          => avl_read,            -- output
+         avl_byteenable    => avl_byteenable,      -- output
+         reset_na          => reset_na             -- input
       ); -- i_ascal
 
 
