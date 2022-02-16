@@ -1,0 +1,1783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="1628500fs"></ZoomStartTime>
+      <ZoomEndTime time="1811001fs"></ZoomEndTime>
+      <Cursor1Time time="1770000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="290"></NameColumnWidth>
+      <ValueColumnWidth column_width="95"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="1" />
+   <wvobject type="group" fp_name="group965">
+      <obj_property name="label">ascal</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_r">
+         <obj_property name="ElementShortName">i_r[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i_r[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_g">
+         <obj_property name="ElementShortName">i_g[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i_g[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_b">
+         <obj_property name="ElementShortName">i_b[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i_b[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hs">
+         <obj_property name="ElementShortName">i_hs</obj_property>
+         <obj_property name="ObjectShortName">i_hs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_vs">
+         <obj_property name="ElementShortName">i_vs</obj_property>
+         <obj_property name="ObjectShortName">i_vs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_fl">
+         <obj_property name="ElementShortName">i_fl</obj_property>
+         <obj_property name="ObjectShortName">i_fl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_de">
+         <obj_property name="ElementShortName">i_de</obj_property>
+         <obj_property name="ObjectShortName">i_de</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ce">
+         <obj_property name="ElementShortName">i_ce</obj_property>
+         <obj_property name="ObjectShortName">i_ce</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_clk">
+         <obj_property name="ElementShortName">i_clk</obj_property>
+         <obj_property name="ObjectShortName">i_clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_r">
+         <obj_property name="ElementShortName">o_r[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_r[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_g">
+         <obj_property name="ElementShortName">o_g[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_g[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_b">
+         <obj_property name="ElementShortName">o_b[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_b[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_hs">
+         <obj_property name="ElementShortName">o_hs</obj_property>
+         <obj_property name="ObjectShortName">o_hs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_vs">
+         <obj_property name="ElementShortName">o_vs</obj_property>
+         <obj_property name="ObjectShortName">o_vs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_de">
+         <obj_property name="ElementShortName">o_de</obj_property>
+         <obj_property name="ObjectShortName">o_de</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_vbl">
+         <obj_property name="ElementShortName">o_vbl</obj_property>
+         <obj_property name="ObjectShortName">o_vbl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_ce">
+         <obj_property name="ElementShortName">o_ce</obj_property>
+         <obj_property name="ObjectShortName">o_ce</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_clk">
+         <obj_property name="ElementShortName">o_clk</obj_property>
+         <obj_property name="ObjectShortName">o_clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_border">
+         <obj_property name="ElementShortName">o_border[23:0]</obj_property>
+         <obj_property name="ObjectShortName">o_border[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_fb_ena">
+         <obj_property name="ElementShortName">o_fb_ena</obj_property>
+         <obj_property name="ObjectShortName">o_fb_ena</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_fb_hsize">
+         <obj_property name="ElementShortName">o_fb_hsize</obj_property>
+         <obj_property name="ObjectShortName">o_fb_hsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_fb_vsize">
+         <obj_property name="ElementShortName">o_fb_vsize</obj_property>
+         <obj_property name="ObjectShortName">o_fb_vsize</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_fb_format">
+         <obj_property name="ElementShortName">o_fb_format[5:0]</obj_property>
+         <obj_property name="ObjectShortName">o_fb_format[5:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_fb_base">
+         <obj_property name="ElementShortName">o_fb_base[31:0]</obj_property>
+         <obj_property name="ObjectShortName">o_fb_base[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_fb_stride">
+         <obj_property name="ElementShortName">o_fb_stride[13:0]</obj_property>
+         <obj_property name="ObjectShortName">o_fb_stride[13:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/pal1_clk">
+         <obj_property name="ElementShortName">pal1_clk</obj_property>
+         <obj_property name="ObjectShortName">pal1_clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal1_dw">
+         <obj_property name="ElementShortName">pal1_dw[47:0]</obj_property>
+         <obj_property name="ObjectShortName">pal1_dw[47:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal1_dr">
+         <obj_property name="ElementShortName">pal1_dr[47:0]</obj_property>
+         <obj_property name="ObjectShortName">pal1_dr[47:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal1_a">
+         <obj_property name="ElementShortName">pal1_a[6:0]</obj_property>
+         <obj_property name="ObjectShortName">pal1_a[6:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/pal1_wr">
+         <obj_property name="ElementShortName">pal1_wr</obj_property>
+         <obj_property name="ObjectShortName">pal1_wr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/pal_n">
+         <obj_property name="ElementShortName">pal_n</obj_property>
+         <obj_property name="ObjectShortName">pal_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/pal2_clk">
+         <obj_property name="ElementShortName">pal2_clk</obj_property>
+         <obj_property name="ObjectShortName">pal2_clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal2_dw">
+         <obj_property name="ElementShortName">pal2_dw[23:0]</obj_property>
+         <obj_property name="ObjectShortName">pal2_dw[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal2_dr">
+         <obj_property name="ElementShortName">pal2_dr[23:0]</obj_property>
+         <obj_property name="ObjectShortName">pal2_dr[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal2_a">
+         <obj_property name="ElementShortName">pal2_a[7:0]</obj_property>
+         <obj_property name="ObjectShortName">pal2_a[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/pal2_wr">
+         <obj_property name="ElementShortName">pal2_wr</obj_property>
+         <obj_property name="ObjectShortName">pal2_wr</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_lltune">
+         <obj_property name="ElementShortName">o_lltune[15:0]</obj_property>
+         <obj_property name="ObjectShortName">o_lltune[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/iauto">
+         <obj_property name="ElementShortName">iauto</obj_property>
+         <obj_property name="ObjectShortName">iauto</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/himin">
+         <obj_property name="ElementShortName">himin</obj_property>
+         <obj_property name="ObjectShortName">himin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/himax">
+         <obj_property name="ElementShortName">himax</obj_property>
+         <obj_property name="ObjectShortName">himax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vimin">
+         <obj_property name="ElementShortName">vimin</obj_property>
+         <obj_property name="ObjectShortName">vimin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vimax">
+         <obj_property name="ElementShortName">vimax</obj_property>
+         <obj_property name="ObjectShortName">vimax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hdmax">
+         <obj_property name="ElementShortName">i_hdmax</obj_property>
+         <obj_property name="ObjectShortName">i_hdmax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vdmax">
+         <obj_property name="ElementShortName">i_vdmax</obj_property>
+         <obj_property name="ObjectShortName">i_vdmax</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/run">
+         <obj_property name="ElementShortName">run</obj_property>
+         <obj_property name="ObjectShortName">run</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/freeze">
+         <obj_property name="ElementShortName">freeze</obj_property>
+         <obj_property name="ObjectShortName">freeze</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/mode">
+         <obj_property name="ElementShortName">mode[4:0]</obj_property>
+         <obj_property name="ObjectShortName">mode[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/htotal">
+         <obj_property name="ElementShortName">htotal</obj_property>
+         <obj_property name="ObjectShortName">htotal</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/hsstart">
+         <obj_property name="ElementShortName">hsstart</obj_property>
+         <obj_property name="ObjectShortName">hsstart</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/hsend">
+         <obj_property name="ElementShortName">hsend</obj_property>
+         <obj_property name="ObjectShortName">hsend</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/hdisp">
+         <obj_property name="ElementShortName">hdisp</obj_property>
+         <obj_property name="ObjectShortName">hdisp</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/hmin">
+         <obj_property name="ElementShortName">hmin</obj_property>
+         <obj_property name="ObjectShortName">hmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/hmax">
+         <obj_property name="ElementShortName">hmax</obj_property>
+         <obj_property name="ObjectShortName">hmax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vtotal">
+         <obj_property name="ElementShortName">vtotal</obj_property>
+         <obj_property name="ObjectShortName">vtotal</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vsstart">
+         <obj_property name="ElementShortName">vsstart</obj_property>
+         <obj_property name="ObjectShortName">vsstart</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vsend">
+         <obj_property name="ElementShortName">vsend</obj_property>
+         <obj_property name="ObjectShortName">vsend</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vdisp">
+         <obj_property name="ElementShortName">vdisp</obj_property>
+         <obj_property name="ObjectShortName">vdisp</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vmin">
+         <obj_property name="ElementShortName">vmin</obj_property>
+         <obj_property name="ObjectShortName">vmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/vmax">
+         <obj_property name="ElementShortName">vmax</obj_property>
+         <obj_property name="ObjectShortName">vmax</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/format">
+         <obj_property name="ElementShortName">format[1:0]</obj_property>
+         <obj_property name="ObjectShortName">format[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/poly_clk">
+         <obj_property name="ElementShortName">poly_clk</obj_property>
+         <obj_property name="ObjectShortName">poly_clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/poly_dw">
+         <obj_property name="ElementShortName">poly_dw[8:0]</obj_property>
+         <obj_property name="ObjectShortName">poly_dw[8:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/poly_a">
+         <obj_property name="ElementShortName">poly_a[6:0]</obj_property>
+         <obj_property name="ObjectShortName">poly_a[6:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/poly_wr">
+         <obj_property name="ElementShortName">poly_wr</obj_property>
+         <obj_property name="ObjectShortName">poly_wr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_clk">
+         <obj_property name="ElementShortName">avl_clk</obj_property>
+         <obj_property name="ObjectShortName">avl_clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_waitrequest">
+         <obj_property name="ElementShortName">avl_waitrequest</obj_property>
+         <obj_property name="ObjectShortName">avl_waitrequest</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_readdata">
+         <obj_property name="ElementShortName">avl_readdata[127:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_readdata[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_readdatavalid">
+         <obj_property name="ElementShortName">avl_readdatavalid</obj_property>
+         <obj_property name="ObjectShortName">avl_readdatavalid</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_burstcount">
+         <obj_property name="ElementShortName">avl_burstcount[7:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_burstcount[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_writedata">
+         <obj_property name="ElementShortName">avl_writedata[127:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_writedata[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_address">
+         <obj_property name="ElementShortName">avl_address[21:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_address[21:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write">
+         <obj_property name="ElementShortName">avl_write</obj_property>
+         <obj_property name="ObjectShortName">avl_write</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read">
+         <obj_property name="ElementShortName">avl_read</obj_property>
+         <obj_property name="ObjectShortName">avl_read</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_byteenable">
+         <obj_property name="ElementShortName">avl_byteenable[15:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_byteenable[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/reset_na">
+         <obj_property name="ElementShortName">reset_na</obj_property>
+         <obj_property name="ObjectShortName">reset_na</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pvs">
+         <obj_property name="ElementShortName">i_pvs</obj_property>
+         <obj_property name="ObjectShortName">i_pvs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pfl">
+         <obj_property name="ElementShortName">i_pfl</obj_property>
+         <obj_property name="ObjectShortName">i_pfl</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pde">
+         <obj_property name="ElementShortName">i_pde</obj_property>
+         <obj_property name="ObjectShortName">i_pde</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pce">
+         <obj_property name="ElementShortName">i_pce</obj_property>
+         <obj_property name="ObjectShortName">i_pce</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_ppix">
+         <obj_property name="ElementShortName">i_ppix</obj_property>
+         <obj_property name="ObjectShortName">i_ppix</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_freeze">
+         <obj_property name="ElementShortName">i_freeze</obj_property>
+         <obj_property name="ObjectShortName">i_freeze</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_count">
+         <obj_property name="ElementShortName">i_count[2:0]</obj_property>
+         <obj_property name="ObjectShortName">i_count[2:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hsize">
+         <obj_property name="ElementShortName">i_hsize</obj_property>
+         <obj_property name="ObjectShortName">i_hsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hmin">
+         <obj_property name="ElementShortName">i_hmin</obj_property>
+         <obj_property name="ObjectShortName">i_hmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hmax">
+         <obj_property name="ElementShortName">i_hmax</obj_property>
+         <obj_property name="ObjectShortName">i_hmax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hcpt">
+         <obj_property name="ElementShortName">i_hcpt</obj_property>
+         <obj_property name="ObjectShortName">i_hcpt</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hrsize">
+         <obj_property name="ElementShortName">i_hrsize</obj_property>
+         <obj_property name="ObjectShortName">i_hrsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vrsize">
+         <obj_property name="ElementShortName">i_vrsize</obj_property>
+         <obj_property name="ObjectShortName">i_vrsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_himax">
+         <obj_property name="ElementShortName">i_himax</obj_property>
+         <obj_property name="ObjectShortName">i_himax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vimax">
+         <obj_property name="ElementShortName">i_vimax</obj_property>
+         <obj_property name="ObjectShortName">i_vimax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vsize">
+         <obj_property name="ElementShortName">i_vsize</obj_property>
+         <obj_property name="ObjectShortName">i_vsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vmaxmin">
+         <obj_property name="ElementShortName">i_vmaxmin</obj_property>
+         <obj_property name="ObjectShortName">i_vmaxmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vmin">
+         <obj_property name="ElementShortName">i_vmin</obj_property>
+         <obj_property name="ObjectShortName">i_vmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vmax">
+         <obj_property name="ElementShortName">i_vmax</obj_property>
+         <obj_property name="ObjectShortName">i_vmax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vcpt">
+         <obj_property name="ElementShortName">i_vcpt</obj_property>
+         <obj_property name="ObjectShortName">i_vcpt</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_iauto">
+         <obj_property name="ElementShortName">i_iauto</obj_property>
+         <obj_property name="ObjectShortName">i_iauto</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_mode">
+         <obj_property name="ElementShortName">i_mode[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_mode[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_format">
+         <obj_property name="ElementShortName">i_format[1:0]</obj_property>
+         <obj_property name="ObjectShortName">i_format[1:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven">
+         <obj_property name="ElementShortName">i_ven</obj_property>
+         <obj_property name="ObjectShortName">i_ven</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_sof">
+         <obj_property name="ElementShortName">i_sof</obj_property>
+         <obj_property name="ObjectShortName">i_sof</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_wr">
+         <obj_property name="ElementShortName">i_wr</obj_property>
+         <obj_property name="ObjectShortName">i_wr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_divstart">
+         <obj_property name="ElementShortName">i_divstart</obj_property>
+         <obj_property name="ObjectShortName">i_divstart</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_divrun">
+         <obj_property name="ElementShortName">i_divrun</obj_property>
+         <obj_property name="ObjectShortName">i_divrun</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_de_pre">
+         <obj_property name="ElementShortName">i_de_pre</obj_property>
+         <obj_property name="ObjectShortName">i_de_pre</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_vs_pre">
+         <obj_property name="ElementShortName">i_vs_pre</obj_property>
+         <obj_property name="ObjectShortName">i_vs_pre</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_fl_pre">
+         <obj_property name="ElementShortName">i_fl_pre</obj_property>
+         <obj_property name="ObjectShortName">i_fl_pre</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_de_delay">
+         <obj_property name="ElementShortName">i_de_delay</obj_property>
+         <obj_property name="ObjectShortName">i_de_delay</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_intercnt">
+         <obj_property name="ElementShortName">i_intercnt</obj_property>
+         <obj_property name="ObjectShortName">i_intercnt</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_inter">
+         <obj_property name="ElementShortName">i_inter</obj_property>
+         <obj_property name="ObjectShortName">i_inter</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_half">
+         <obj_property name="ElementShortName">i_half</obj_property>
+         <obj_property name="ObjectShortName">i_half</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_flm">
+         <obj_property name="ElementShortName">i_flm</obj_property>
+         <obj_property name="ObjectShortName">i_flm</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_write">
+         <obj_property name="ElementShortName">i_write</obj_property>
+         <obj_property name="ObjectShortName">i_write</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_wreq">
+         <obj_property name="ElementShortName">i_wreq</obj_property>
+         <obj_property name="ObjectShortName">i_wreq</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_alt">
+         <obj_property name="ElementShortName">i_alt</obj_property>
+         <obj_property name="ObjectShortName">i_alt</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_line">
+         <obj_property name="ElementShortName">i_line</obj_property>
+         <obj_property name="ObjectShortName">i_line</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_wline">
+         <obj_property name="ElementShortName">i_wline</obj_property>
+         <obj_property name="ObjectShortName">i_wline</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_wline_mem">
+         <obj_property name="ElementShortName">i_wline_mem</obj_property>
+         <obj_property name="ObjectShortName">i_wline_mem</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_walt">
+         <obj_property name="ElementShortName">i_walt</obj_property>
+         <obj_property name="ObjectShortName">i_walt</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_walt_mem">
+         <obj_property name="ElementShortName">i_walt_mem</obj_property>
+         <obj_property name="ObjectShortName">i_walt_mem</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_wreq_mem">
+         <obj_property name="ElementShortName">i_wreq_mem</obj_property>
+         <obj_property name="ObjectShortName">i_wreq_mem</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_wdelay">
+         <obj_property name="ElementShortName">i_wdelay</obj_property>
+         <obj_property name="ObjectShortName">i_wdelay</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_push">
+         <obj_property name="ElementShortName">i_push</obj_property>
+         <obj_property name="ObjectShortName">i_push</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pushend">
+         <obj_property name="ElementShortName">i_pushend</obj_property>
+         <obj_property name="ObjectShortName">i_pushend</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pushend2">
+         <obj_property name="ElementShortName">i_pushend2</obj_property>
+         <obj_property name="ObjectShortName">i_pushend2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_eol">
+         <obj_property name="ElementShortName">i_eol</obj_property>
+         <obj_property name="ObjectShortName">i_eol</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pushhead">
+         <obj_property name="ElementShortName">i_pushhead</obj_property>
+         <obj_property name="ObjectShortName">i_pushhead</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pushhead2">
+         <obj_property name="ElementShortName">i_pushhead2</obj_property>
+         <obj_property name="ObjectShortName">i_pushhead2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_pushhead3">
+         <obj_property name="ElementShortName">i_pushhead3</obj_property>
+         <obj_property name="ObjectShortName">i_pushhead3</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hburst">
+         <obj_property name="ElementShortName">i_hburst</obj_property>
+         <obj_property name="ObjectShortName">i_hburst</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hbcpt">
+         <obj_property name="ElementShortName">i_hbcpt</obj_property>
+         <obj_property name="ObjectShortName">i_hbcpt</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_shift">
+         <obj_property name="ElementShortName">i_shift[0:119]</obj_property>
+         <obj_property name="ObjectShortName">i_shift[0:119]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_head">
+         <obj_property name="ElementShortName">i_head[127:0]</obj_property>
+         <obj_property name="ObjectShortName">i_head[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_acpt">
+         <obj_property name="ElementShortName">i_acpt</obj_property>
+         <obj_property name="ObjectShortName">i_acpt</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_dpram">
+         <obj_property name="ElementShortName">i_dpram[0:31][127:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dpram[0:31][127:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_endframe0">
+         <obj_property name="ElementShortName">i_endframe0</obj_property>
+         <obj_property name="ObjectShortName">i_endframe0</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_endframe1">
+         <obj_property name="ElementShortName">i_endframe1</obj_property>
+         <obj_property name="ObjectShortName">i_endframe1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_vss">
+         <obj_property name="ElementShortName">i_vss</obj_property>
+         <obj_property name="ObjectShortName">i_vss</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_wad">
+         <obj_property name="ElementShortName">i_wad</obj_property>
+         <obj_property name="ObjectShortName">i_wad</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_dw">
+         <obj_property name="ElementShortName">i_dw[127:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dw[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_adrs">
+         <obj_property name="ElementShortName">i_adrs[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_adrs[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_adrsi">
+         <obj_property name="ElementShortName">i_adrsi[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_adrsi[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_wadrs">
+         <obj_property name="ElementShortName">i_wadrs[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_wadrs[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_wadrs_mem">
+         <obj_property name="ElementShortName">i_wadrs_mem[31:0]</obj_property>
+         <obj_property name="ObjectShortName">i_wadrs_mem[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_reset_na">
+         <obj_property name="ElementShortName">i_reset_na</obj_property>
+         <obj_property name="ObjectShortName">i_reset_na</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hnp">
+         <obj_property name="ElementShortName">i_hnp</obj_property>
+         <obj_property name="ObjectShortName">i_hnp</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_vnp">
+         <obj_property name="ElementShortName">i_vnp</obj_property>
+         <obj_property name="ObjectShortName">i_vnp</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_mem">
+         <obj_property name="ElementShortName">i_mem[0:2047]</obj_property>
+         <obj_property name="ObjectShortName">i_mem[0:2047]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_ohsize">
+         <obj_property name="ElementShortName">i_ohsize</obj_property>
+         <obj_property name="ObjectShortName">i_ohsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_ovsize">
+         <obj_property name="ElementShortName">i_ovsize</obj_property>
+         <obj_property name="ObjectShortName">i_ovsize</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_vdivi">
+         <obj_property name="ElementShortName">i_vdivi[12:0]</obj_property>
+         <obj_property name="ObjectShortName">i_vdivi[12:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_vdivr">
+         <obj_property name="ElementShortName">i_vdivr[24:0]</obj_property>
+         <obj_property name="ObjectShortName">i_vdivr[24:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_div">
+         <obj_property name="ElementShortName">i_div[16:0]</obj_property>
+         <obj_property name="ObjectShortName">i_div[16:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_dir">
+         <obj_property name="ElementShortName">i_dir[11:0]</obj_property>
+         <obj_property name="ObjectShortName">i_dir[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_h_frac">
+         <obj_property name="ElementShortName">i_h_frac[11:0]</obj_property>
+         <obj_property name="ObjectShortName">i_h_frac[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_v_frac">
+         <obj_property name="ElementShortName">i_v_frac[11:0]</obj_property>
+         <obj_property name="ObjectShortName">i_v_frac[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_hacc">
+         <obj_property name="ElementShortName">i_hacc</obj_property>
+         <obj_property name="ObjectShortName">i_hacc</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_vacc">
+         <obj_property name="ElementShortName">i_vacc</obj_property>
+         <obj_property name="ObjectShortName">i_vacc</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hdown">
+         <obj_property name="ElementShortName">i_hdown</obj_property>
+         <obj_property name="ObjectShortName">i_hdown</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_vdown">
+         <obj_property name="ElementShortName">i_vdown</obj_property>
+         <obj_property name="ObjectShortName">i_vdown</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_divcpt">
+         <obj_property name="ElementShortName">i_divcpt</obj_property>
+         <obj_property name="ObjectShortName">i_divcpt</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_lwad">
+         <obj_property name="ElementShortName">i_lwad</obj_property>
+         <obj_property name="ObjectShortName">i_lwad</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/i_lrad">
+         <obj_property name="ElementShortName">i_lrad</obj_property>
+         <obj_property name="ObjectShortName">i_lrad</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_lwr">
+         <obj_property name="ElementShortName">i_lwr</obj_property>
+         <obj_property name="ObjectShortName">i_lwr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_bil">
+         <obj_property name="ElementShortName">i_bil</obj_property>
+         <obj_property name="ObjectShortName">i_bil</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_ldw">
+         <obj_property name="ElementShortName">i_ldw</obj_property>
+         <obj_property name="ObjectShortName">i_ldw</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_ldrm">
+         <obj_property name="ElementShortName">i_ldrm</obj_property>
+         <obj_property name="ObjectShortName">i_ldrm</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpixp">
+         <obj_property name="ElementShortName">i_hpixp</obj_property>
+         <obj_property name="ObjectShortName">i_hpixp</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpix0">
+         <obj_property name="ElementShortName">i_hpix0</obj_property>
+         <obj_property name="ObjectShortName">i_hpix0</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpix1">
+         <obj_property name="ElementShortName">i_hpix1</obj_property>
+         <obj_property name="ObjectShortName">i_hpix1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpix2">
+         <obj_property name="ElementShortName">i_hpix2</obj_property>
+         <obj_property name="ObjectShortName">i_hpix2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpix3">
+         <obj_property name="ElementShortName">i_hpix3</obj_property>
+         <obj_property name="ObjectShortName">i_hpix3</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpix4">
+         <obj_property name="ElementShortName">i_hpix4</obj_property>
+         <obj_property name="ObjectShortName">i_hpix4</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_hpix">
+         <obj_property name="ElementShortName">i_hpix</obj_property>
+         <obj_property name="ObjectShortName">i_hpix</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_pix">
+         <obj_property name="ElementShortName">i_pix</obj_property>
+         <obj_property name="ObjectShortName">i_pix</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hnp1">
+         <obj_property name="ElementShortName">i_hnp1</obj_property>
+         <obj_property name="ObjectShortName">i_hnp1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hnp2">
+         <obj_property name="ElementShortName">i_hnp2</obj_property>
+         <obj_property name="ObjectShortName">i_hnp2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hnp3">
+         <obj_property name="ElementShortName">i_hnp3</obj_property>
+         <obj_property name="ObjectShortName">i_hnp3</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_hnp4">
+         <obj_property name="ElementShortName">i_hnp4</obj_property>
+         <obj_property name="ObjectShortName">i_hnp4</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven1">
+         <obj_property name="ElementShortName">i_ven1</obj_property>
+         <obj_property name="ObjectShortName">i_ven1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven2">
+         <obj_property name="ElementShortName">i_ven2</obj_property>
+         <obj_property name="ObjectShortName">i_ven2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven3">
+         <obj_property name="ElementShortName">i_ven3</obj_property>
+         <obj_property name="ObjectShortName">i_ven3</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven4">
+         <obj_property name="ElementShortName">i_ven4</obj_property>
+         <obj_property name="ObjectShortName">i_ven4</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven5">
+         <obj_property name="ElementShortName">i_ven5</obj_property>
+         <obj_property name="ObjectShortName">i_ven5</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/i_ven6">
+         <obj_property name="ElementShortName">i_ven6</obj_property>
+         <obj_property name="ObjectShortName">i_ven6</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/avl_state">
+         <obj_property name="ElementShortName">avl_state</obj_property>
+         <obj_property name="ObjectShortName">avl_state</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write_i">
+         <obj_property name="ElementShortName">avl_write_i</obj_property>
+         <obj_property name="ObjectShortName">avl_write_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write_sync">
+         <obj_property name="ElementShortName">avl_write_sync</obj_property>
+         <obj_property name="ObjectShortName">avl_write_sync</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write_sync2">
+         <obj_property name="ElementShortName">avl_write_sync2</obj_property>
+         <obj_property name="ObjectShortName">avl_write_sync2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read_i">
+         <obj_property name="ElementShortName">avl_read_i</obj_property>
+         <obj_property name="ObjectShortName">avl_read_i</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read_sync">
+         <obj_property name="ElementShortName">avl_read_sync</obj_property>
+         <obj_property name="ObjectShortName">avl_read_sync</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read_sync2">
+         <obj_property name="ElementShortName">avl_read_sync2</obj_property>
+         <obj_property name="ObjectShortName">avl_read_sync2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read_pulse">
+         <obj_property name="ElementShortName">avl_read_pulse</obj_property>
+         <obj_property name="ObjectShortName">avl_read_pulse</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write_pulse">
+         <obj_property name="ElementShortName">avl_write_pulse</obj_property>
+         <obj_property name="ObjectShortName">avl_write_pulse</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read_sr">
+         <obj_property name="ElementShortName">avl_read_sr</obj_property>
+         <obj_property name="ObjectShortName">avl_read_sr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write_sr">
+         <obj_property name="ElementShortName">avl_write_sr</obj_property>
+         <obj_property name="ObjectShortName">avl_write_sr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_read_clr">
+         <obj_property name="ElementShortName">avl_read_clr</obj_property>
+         <obj_property name="ObjectShortName">avl_read_clr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_write_clr">
+         <obj_property name="ElementShortName">avl_write_clr</obj_property>
+         <obj_property name="ObjectShortName">avl_write_clr</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/avl_rad">
+         <obj_property name="ElementShortName">avl_rad</obj_property>
+         <obj_property name="ObjectShortName">avl_rad</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/avl_rad_c">
+         <obj_property name="ElementShortName">avl_rad_c</obj_property>
+         <obj_property name="ObjectShortName">avl_rad_c</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/avl_wad">
+         <obj_property name="ElementShortName">avl_wad</obj_property>
+         <obj_property name="ObjectShortName">avl_wad</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_walt">
+         <obj_property name="ElementShortName">avl_walt</obj_property>
+         <obj_property name="ObjectShortName">avl_walt</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_wline">
+         <obj_property name="ElementShortName">avl_wline</obj_property>
+         <obj_property name="ObjectShortName">avl_wline</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_rline">
+         <obj_property name="ElementShortName">avl_rline</obj_property>
+         <obj_property name="ObjectShortName">avl_rline</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_dw">
+         <obj_property name="ElementShortName">avl_dw[127:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_dw[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_dr">
+         <obj_property name="ElementShortName">avl_dr[127:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_dr[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_wr">
+         <obj_property name="ElementShortName">avl_wr</obj_property>
+         <obj_property name="ObjectShortName">avl_wr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_readdataack">
+         <obj_property name="ElementShortName">avl_readdataack</obj_property>
+         <obj_property name="ObjectShortName">avl_readdataack</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_readack">
+         <obj_property name="ElementShortName">avl_readack</obj_property>
+         <obj_property name="ObjectShortName">avl_readack</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_radrs">
+         <obj_property name="ElementShortName">avl_radrs[31:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_radrs[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_wadrs">
+         <obj_property name="ElementShortName">avl_wadrs[31:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_wadrs[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_i_offset0">
+         <obj_property name="ElementShortName">avl_i_offset0[31:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_i_offset0[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_o_offset0">
+         <obj_property name="ElementShortName">avl_o_offset0[31:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_o_offset0[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_i_offset1">
+         <obj_property name="ElementShortName">avl_i_offset1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_i_offset1[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/avl_o_offset1">
+         <obj_property name="ElementShortName">avl_o_offset1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">avl_o_offset1[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_reset_na">
+         <obj_property name="ElementShortName">avl_reset_na</obj_property>
+         <obj_property name="ObjectShortName">avl_reset_na</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_o_vs_sync">
+         <obj_property name="ElementShortName">avl_o_vs_sync</obj_property>
+         <obj_property name="ObjectShortName">avl_o_vs_sync</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_o_vs">
+         <obj_property name="ElementShortName">avl_o_vs</obj_property>
+         <obj_property name="ObjectShortName">avl_o_vs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/avl_fb_ena">
+         <obj_property name="ElementShortName">avl_fb_ena</obj_property>
+         <obj_property name="ObjectShortName">avl_fb_ena</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_run">
+         <obj_property name="ElementShortName">o_run</obj_property>
+         <obj_property name="ObjectShortName">o_run</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_freeze">
+         <obj_property name="ElementShortName">o_freeze</obj_property>
+         <obj_property name="ObjectShortName">o_freeze</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_mode">
+         <obj_property name="ElementShortName">o_mode[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_mode[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hmode">
+         <obj_property name="ElementShortName">o_hmode[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hmode[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vmode">
+         <obj_property name="ElementShortName">o_vmode[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_vmode[4:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_format">
+         <obj_property name="ElementShortName">o_format[5:0]</obj_property>
+         <obj_property name="ObjectShortName">o_format[5:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_fb_pal_dr">
+         <obj_property name="ElementShortName">o_fb_pal_dr[23:0]</obj_property>
+         <obj_property name="ObjectShortName">o_fb_pal_dr[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_fb_pal_dr2">
+         <obj_property name="ElementShortName">o_fb_pal_dr2[23:0]</obj_property>
+         <obj_property name="ObjectShortName">o_fb_pal_dr2[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_fb_pal_dr_x2">
+         <obj_property name="ElementShortName">o_fb_pal_dr_x2[47:0]</obj_property>
+         <obj_property name="ObjectShortName">o_fb_pal_dr_x2[47:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal_idx">
+         <obj_property name="ElementShortName">pal_idx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">pal_idx[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/pal_idx_lsb">
+         <obj_property name="ElementShortName">pal_idx_lsb</obj_property>
+         <obj_property name="ObjectShortName">pal_idx_lsb</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal1_mem">
+         <obj_property name="ElementShortName">pal1_mem[0:127][47:0]</obj_property>
+         <obj_property name="ObjectShortName">pal1_mem[0:127][47:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/pal2_mem">
+         <obj_property name="ElementShortName">pal2_mem[0:255][23:0]</obj_property>
+         <obj_property name="ObjectShortName">pal2_mem[0:255][23:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_htotal">
+         <obj_property name="ElementShortName">o_htotal</obj_property>
+         <obj_property name="ObjectShortName">o_htotal</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hsstart">
+         <obj_property name="ElementShortName">o_hsstart</obj_property>
+         <obj_property name="ObjectShortName">o_hsstart</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hsend">
+         <obj_property name="ElementShortName">o_hsend</obj_property>
+         <obj_property name="ObjectShortName">o_hsend</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hmin">
+         <obj_property name="ElementShortName">o_hmin</obj_property>
+         <obj_property name="ObjectShortName">o_hmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hmax">
+         <obj_property name="ElementShortName">o_hmax</obj_property>
+         <obj_property name="ObjectShortName">o_hmax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hdisp">
+         <obj_property name="ElementShortName">o_hdisp</obj_property>
+         <obj_property name="ObjectShortName">o_hdisp</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hsize">
+         <obj_property name="ElementShortName">o_hsize</obj_property>
+         <obj_property name="ObjectShortName">o_hsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vsize">
+         <obj_property name="ElementShortName">o_vsize</obj_property>
+         <obj_property name="ObjectShortName">o_vsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vtotal">
+         <obj_property name="ElementShortName">o_vtotal</obj_property>
+         <obj_property name="ObjectShortName">o_vtotal</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vsstart">
+         <obj_property name="ElementShortName">o_vsstart</obj_property>
+         <obj_property name="ObjectShortName">o_vsstart</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vsend">
+         <obj_property name="ElementShortName">o_vsend</obj_property>
+         <obj_property name="ObjectShortName">o_vsend</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vmin">
+         <obj_property name="ElementShortName">o_vmin</obj_property>
+         <obj_property name="ObjectShortName">o_vmin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vmax">
+         <obj_property name="ElementShortName">o_vmax</obj_property>
+         <obj_property name="ObjectShortName">o_vmax</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vdisp">
+         <obj_property name="ElementShortName">o_vdisp</obj_property>
+         <obj_property name="ObjectShortName">o_vdisp</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_divcpt">
+         <obj_property name="ElementShortName">o_divcpt</obj_property>
+         <obj_property name="ObjectShortName">o_divcpt</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_iendframe0">
+         <obj_property name="ElementShortName">o_iendframe0</obj_property>
+         <obj_property name="ObjectShortName">o_iendframe0</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_iendframe02">
+         <obj_property name="ElementShortName">o_iendframe02</obj_property>
+         <obj_property name="ObjectShortName">o_iendframe02</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_iendframe1">
+         <obj_property name="ElementShortName">o_iendframe1</obj_property>
+         <obj_property name="ObjectShortName">o_iendframe1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_iendframe12">
+         <obj_property name="ElementShortName">o_iendframe12</obj_property>
+         <obj_property name="ObjectShortName">o_iendframe12</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_bufup0">
+         <obj_property name="ElementShortName">o_bufup0</obj_property>
+         <obj_property name="ObjectShortName">o_bufup0</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_bufup1">
+         <obj_property name="ElementShortName">o_bufup1</obj_property>
+         <obj_property name="ObjectShortName">o_bufup1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_inter">
+         <obj_property name="ElementShortName">o_inter</obj_property>
+         <obj_property name="ObjectShortName">o_inter</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ibuf0">
+         <obj_property name="ElementShortName">o_ibuf0</obj_property>
+         <obj_property name="ObjectShortName">o_ibuf0</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ibuf1">
+         <obj_property name="ElementShortName">o_ibuf1</obj_property>
+         <obj_property name="ObjectShortName">o_ibuf1</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_obuf0">
+         <obj_property name="ElementShortName">o_obuf0</obj_property>
+         <obj_property name="ObjectShortName">o_obuf0</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_obuf1">
+         <obj_property name="ElementShortName">o_obuf1</obj_property>
+         <obj_property name="ObjectShortName">o_obuf1</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_state">
+         <obj_property name="ElementShortName">o_state</obj_property>
+         <obj_property name="ObjectShortName">o_state</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_copy">
+         <obj_property name="ElementShortName">o_copy</obj_property>
+         <obj_property name="ObjectShortName">o_copy</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_pshift">
+         <obj_property name="ElementShortName">o_pshift</obj_property>
+         <obj_property name="ObjectShortName">o_pshift</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_readack">
+         <obj_property name="ElementShortName">o_readack</obj_property>
+         <obj_property name="ObjectShortName">o_readack</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_readack_sync">
+         <obj_property name="ElementShortName">o_readack_sync</obj_property>
+         <obj_property name="ObjectShortName">o_readack_sync</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_readack_sync2">
+         <obj_property name="ElementShortName">o_readack_sync2</obj_property>
+         <obj_property name="ObjectShortName">o_readack_sync2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_readdataack">
+         <obj_property name="ElementShortName">o_readdataack</obj_property>
+         <obj_property name="ObjectShortName">o_readdataack</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_readdataack_sync">
+         <obj_property name="ElementShortName">o_readdataack_sync</obj_property>
+         <obj_property name="ObjectShortName">o_readdataack_sync</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_readdataack_sync2">
+         <obj_property name="ElementShortName">o_readdataack_sync2</obj_property>
+         <obj_property name="ObjectShortName">o_readdataack_sync2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_copyv">
+         <obj_property name="ElementShortName">o_copyv[0:8]</obj_property>
+         <obj_property name="ObjectShortName">o_copyv[0:8]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_adrs">
+         <obj_property name="ElementShortName">o_adrs[31:0]</obj_property>
+         <obj_property name="ObjectShortName">o_adrs[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_adrs_pre">
+         <obj_property name="ElementShortName">o_adrs_pre</obj_property>
+         <obj_property name="ObjectShortName">o_adrs_pre</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_stride">
+         <obj_property name="ElementShortName">o_stride[13:0]</obj_property>
+         <obj_property name="ObjectShortName">o_stride[13:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_adrsa">
+         <obj_property name="ElementShortName">o_adrsa</obj_property>
+         <obj_property name="ObjectShortName">o_adrsa</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_adrsb">
+         <obj_property name="ElementShortName">o_adrsb</obj_property>
+         <obj_property name="ObjectShortName">o_adrsb</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_rline">
+         <obj_property name="ElementShortName">o_rline</obj_property>
+         <obj_property name="ObjectShortName">o_rline</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ad">
+         <obj_property name="ElementShortName">o_ad</obj_property>
+         <obj_property name="ObjectShortName">o_ad</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ad1">
+         <obj_property name="ElementShortName">o_ad1</obj_property>
+         <obj_property name="ObjectShortName">o_ad1</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ad2">
+         <obj_property name="ElementShortName">o_ad2</obj_property>
+         <obj_property name="ObjectShortName">o_ad2</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ad3">
+         <obj_property name="ElementShortName">o_ad3</obj_property>
+         <obj_property name="ObjectShortName">o_ad3</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_adturn">
+         <obj_property name="ElementShortName">o_adturn</obj_property>
+         <obj_property name="ObjectShortName">o_adturn</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_dr">
+         <obj_property name="ElementShortName">o_dr[127:0]</obj_property>
+         <obj_property name="ObjectShortName">o_dr[127:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_shift">
+         <obj_property name="ElementShortName">o_shift[0:143]</obj_property>
+         <obj_property name="ObjectShortName">o_shift[0:143]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_sh">
+         <obj_property name="ElementShortName">o_sh</obj_property>
+         <obj_property name="ObjectShortName">o_sh</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_sh1">
+         <obj_property name="ElementShortName">o_sh1</obj_property>
+         <obj_property name="ObjectShortName">o_sh1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_sh2">
+         <obj_property name="ElementShortName">o_sh2</obj_property>
+         <obj_property name="ObjectShortName">o_sh2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_sh3">
+         <obj_property name="ElementShortName">o_sh3</obj_property>
+         <obj_property name="ObjectShortName">o_sh3</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_sh4">
+         <obj_property name="ElementShortName">o_sh4</obj_property>
+         <obj_property name="ObjectShortName">o_sh4</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_reset_na">
+         <obj_property name="ElementShortName">o_reset_na</obj_property>
+         <obj_property name="ObjectShortName">o_reset_na</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_dpram">
+         <obj_property name="ElementShortName">o_dpram[0:31][127:0]</obj_property>
+         <obj_property name="ObjectShortName">o_dpram[0:31][127:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_line0">
+         <obj_property name="ElementShortName">o_line0[0:2047]</obj_property>
+         <obj_property name="ObjectShortName">o_line0[0:2047]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_line1">
+         <obj_property name="ElementShortName">o_line1[0:2047]</obj_property>
+         <obj_property name="ObjectShortName">o_line1[0:2047]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_line2">
+         <obj_property name="ElementShortName">o_line2[0:2047]</obj_property>
+         <obj_property name="ObjectShortName">o_line2[0:2047]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_line3">
+         <obj_property name="ElementShortName">o_line3[0:2047]</obj_property>
+         <obj_property name="ObjectShortName">o_line3[0:2047]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_wadl">
+         <obj_property name="ElementShortName">o_wadl</obj_property>
+         <obj_property name="ObjectShortName">o_wadl</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_radl">
+         <obj_property name="ElementShortName">o_radl</obj_property>
+         <obj_property name="ObjectShortName">o_radl</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_ldw">
+         <obj_property name="ElementShortName">o_ldw</obj_property>
+         <obj_property name="ObjectShortName">o_ldw</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_ldr0">
+         <obj_property name="ElementShortName">o_ldr0</obj_property>
+         <obj_property name="ObjectShortName">o_ldr0</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_ldr1">
+         <obj_property name="ElementShortName">o_ldr1</obj_property>
+         <obj_property name="ObjectShortName">o_ldr1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_ldr2">
+         <obj_property name="ElementShortName">o_ldr2</obj_property>
+         <obj_property name="ObjectShortName">o_ldr2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_ldr3">
+         <obj_property name="ElementShortName">o_ldr3</obj_property>
+         <obj_property name="ObjectShortName">o_ldr3</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_wr">
+         <obj_property name="ElementShortName">o_wr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_wr[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hcpt">
+         <obj_property name="ElementShortName">o_hcpt</obj_property>
+         <obj_property name="ObjectShortName">o_hcpt</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vcpt">
+         <obj_property name="ElementShortName">o_vcpt</obj_property>
+         <obj_property name="ObjectShortName">o_vcpt</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vcpt_pre">
+         <obj_property name="ElementShortName">o_vcpt_pre</obj_property>
+         <obj_property name="ObjectShortName">o_vcpt_pre</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vcpt_pre2">
+         <obj_property name="ElementShortName">o_vcpt_pre2</obj_property>
+         <obj_property name="ObjectShortName">o_vcpt_pre2</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vcpt_pre3">
+         <obj_property name="ElementShortName">o_vcpt_pre3</obj_property>
+         <obj_property name="ObjectShortName">o_vcpt_pre3</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ihsize">
+         <obj_property name="ElementShortName">o_ihsize</obj_property>
+         <obj_property name="ObjectShortName">o_ihsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ihsizem">
+         <obj_property name="ElementShortName">o_ihsizem</obj_property>
+         <obj_property name="ObjectShortName">o_ihsizem</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ivsize">
+         <obj_property name="ElementShortName">o_ivsize</obj_property>
+         <obj_property name="ObjectShortName">o_ivsize</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ihsize_temp">
+         <obj_property name="ElementShortName">o_ihsize_temp</obj_property>
+         <obj_property name="ObjectShortName">o_ihsize_temp</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_ihsize_temp2">
+         <obj_property name="ElementShortName">o_ihsize_temp2</obj_property>
+         <obj_property name="ObjectShortName">o_ihsize_temp2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vfrac">
+         <obj_property name="ElementShortName">o_vfrac[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_vfrac[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hfrac">
+         <obj_property name="ElementShortName">o_hfrac[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hfrac[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hfrac1">
+         <obj_property name="ElementShortName">o_hfrac1[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hfrac1[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hfrac2">
+         <obj_property name="ElementShortName">o_hfrac2[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hfrac2[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hfrac3">
+         <obj_property name="ElementShortName">o_hfrac3[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hfrac3[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hfrac4">
+         <obj_property name="ElementShortName">o_hfrac4[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hfrac4[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hacc">
+         <obj_property name="ElementShortName">o_hacc</obj_property>
+         <obj_property name="ObjectShortName">o_hacc</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hacc_ini">
+         <obj_property name="ElementShortName">o_hacc_ini</obj_property>
+         <obj_property name="ObjectShortName">o_hacc_ini</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hacc_next">
+         <obj_property name="ElementShortName">o_hacc_next</obj_property>
+         <obj_property name="ObjectShortName">o_hacc_next</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vacc">
+         <obj_property name="ElementShortName">o_vacc</obj_property>
+         <obj_property name="ObjectShortName">o_vacc</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vacc_next">
+         <obj_property name="ElementShortName">o_vacc_next</obj_property>
+         <obj_property name="ObjectShortName">o_vacc_next</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_vacc_ini">
+         <obj_property name="ElementShortName">o_vacc_ini</obj_property>
+         <obj_property name="ObjectShortName">o_vacc_ini</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hsv">
+         <obj_property name="ElementShortName">o_hsv[0:5]</obj_property>
+         <obj_property name="ObjectShortName">o_hsv[0:5]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vsv">
+         <obj_property name="ElementShortName">o_vsv[0:5]</obj_property>
+         <obj_property name="ObjectShortName">o_vsv[0:5]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_dev">
+         <obj_property name="ElementShortName">o_dev[0:5]</obj_property>
+         <obj_property name="ObjectShortName">o_dev[0:5]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_pev">
+         <obj_property name="ElementShortName">o_pev[0:5]</obj_property>
+         <obj_property name="ObjectShortName">o_pev[0:5]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_end">
+         <obj_property name="ElementShortName">o_end[0:5]</obj_property>
+         <obj_property name="ObjectShortName">o_end[0:5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_hsp">
+         <obj_property name="ElementShortName">o_hsp</obj_property>
+         <obj_property name="ObjectShortName">o_hsp</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_vss">
+         <obj_property name="ElementShortName">o_vss</obj_property>
+         <obj_property name="ObjectShortName">o_vss</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_read">
+         <obj_property name="ElementShortName">o_read</obj_property>
+         <obj_property name="ObjectShortName">o_read</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_read_pre">
+         <obj_property name="ElementShortName">o_read_pre</obj_property>
+         <obj_property name="ObjectShortName">o_read_pre</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_readlev">
+         <obj_property name="ElementShortName">o_readlev</obj_property>
+         <obj_property name="ObjectShortName">o_readlev</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_copylev">
+         <obj_property name="ElementShortName">o_copylev</obj_property>
+         <obj_property name="ObjectShortName">o_copylev</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hburst">
+         <obj_property name="ElementShortName">o_hburst</obj_property>
+         <obj_property name="ObjectShortName">o_hburst</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_hbcpt">
+         <obj_property name="ElementShortName">o_hbcpt</obj_property>
+         <obj_property name="ObjectShortName">o_hbcpt</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_fload">
+         <obj_property name="ElementShortName">o_fload</obj_property>
+         <obj_property name="ObjectShortName">o_fload</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_acpt">
+         <obj_property name="ElementShortName">o_acpt</obj_property>
+         <obj_property name="ObjectShortName">o_acpt</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_acpt1">
+         <obj_property name="ElementShortName">o_acpt1</obj_property>
+         <obj_property name="ObjectShortName">o_acpt1</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_acpt2">
+         <obj_property name="ElementShortName">o_acpt2</obj_property>
+         <obj_property name="ObjectShortName">o_acpt2</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_acpt3">
+         <obj_property name="ElementShortName">o_acpt3</obj_property>
+         <obj_property name="ObjectShortName">o_acpt3</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_acpt4">
+         <obj_property name="ElementShortName">o_acpt4</obj_property>
+         <obj_property name="ObjectShortName">o_acpt4</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_dshi">
+         <obj_property name="ElementShortName">o_dshi</obj_property>
+         <obj_property name="ObjectShortName">o_dshi</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_first">
+         <obj_property name="ElementShortName">o_first</obj_property>
+         <obj_property name="ObjectShortName">o_first</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_last">
+         <obj_property name="ElementShortName">o_last</obj_property>
+         <obj_property name="ObjectShortName">o_last</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_last1">
+         <obj_property name="ElementShortName">o_last1</obj_property>
+         <obj_property name="ObjectShortName">o_last1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_last2">
+         <obj_property name="ElementShortName">o_last2</obj_property>
+         <obj_property name="ObjectShortName">o_last2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_lastt1">
+         <obj_property name="ElementShortName">o_lastt1</obj_property>
+         <obj_property name="ObjectShortName">o_lastt1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_lastt2">
+         <obj_property name="ElementShortName">o_lastt2</obj_property>
+         <obj_property name="ObjectShortName">o_lastt2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_lastt3">
+         <obj_property name="ElementShortName">o_lastt3</obj_property>
+         <obj_property name="ObjectShortName">o_lastt3</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_lastt4">
+         <obj_property name="ElementShortName">o_lastt4</obj_property>
+         <obj_property name="ObjectShortName">o_lastt4</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_alt">
+         <obj_property name="ElementShortName">o_alt[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_alt[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_altx">
+         <obj_property name="ElementShortName">o_altx[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_altx[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_hdown">
+         <obj_property name="ElementShortName">o_hdown</obj_property>
+         <obj_property name="ObjectShortName">o_hdown</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_vdown">
+         <obj_property name="ElementShortName">o_vdown</obj_property>
+         <obj_property name="ObjectShortName">o_vdown</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_primv">
+         <obj_property name="ElementShortName">o_primv[0:2]</obj_property>
+         <obj_property name="ObjectShortName">o_primv[0:2]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_lastv">
+         <obj_property name="ElementShortName">o_lastv[0:2]</obj_property>
+         <obj_property name="ObjectShortName">o_lastv[0:2]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_bibv">
+         <obj_property name="ElementShortName">o_bibv[0:2]</obj_property>
+         <obj_property name="ObjectShortName">o_bibv[0:2]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_off">
+         <obj_property name="ElementShortName">o_off[0:2]</obj_property>
+         <obj_property name="ObjectShortName">o_off[0:2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_bibu">
+         <obj_property name="ElementShortName">o_bibu</obj_property>
+         <obj_property name="ObjectShortName">o_bibu</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_dcptv">
+         <obj_property name="ElementShortName">o_dcptv[1:8]</obj_property>
+         <obj_property name="ObjectShortName">o_dcptv[1:8]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_dcpt">
+         <obj_property name="ElementShortName">o_dcpt</obj_property>
+         <obj_property name="ObjectShortName">o_dcpt</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hpixs">
+         <obj_property name="ElementShortName">o_hpixs</obj_property>
+         <obj_property name="ObjectShortName">o_hpixs</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hpix0">
+         <obj_property name="ElementShortName">o_hpix0</obj_property>
+         <obj_property name="ObjectShortName">o_hpix0</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hpix1">
+         <obj_property name="ElementShortName">o_hpix1</obj_property>
+         <obj_property name="ObjectShortName">o_hpix1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hpix2">
+         <obj_property name="ElementShortName">o_hpix2</obj_property>
+         <obj_property name="ObjectShortName">o_hpix2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hpix3">
+         <obj_property name="ElementShortName">o_hpix3</obj_property>
+         <obj_property name="ObjectShortName">o_hpix3</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hpixq">
+         <obj_property name="ElementShortName">o_hpixq[0:3]</obj_property>
+         <obj_property name="ObjectShortName">o_hpixq[0:3]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vpixq">
+         <obj_property name="ElementShortName">o_vpixq[0:3]</obj_property>
+         <obj_property name="ObjectShortName">o_vpixq[0:3]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vpixq1">
+         <obj_property name="ElementShortName">o_vpixq1[0:3]</obj_property>
+         <obj_property name="ObjectShortName">o_vpixq1[0:3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_vpe">
+         <obj_property name="ElementShortName">o_vpe</obj_property>
+         <obj_property name="ObjectShortName">o_vpe</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_div">
+         <obj_property name="ElementShortName">o_div[18:0]</obj_property>
+         <obj_property name="ObjectShortName">o_div[18:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_div2">
+         <obj_property name="ElementShortName">o_div2[18:0]</obj_property>
+         <obj_property name="ObjectShortName">o_div2[18:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_dir">
+         <obj_property name="ElementShortName">o_dir[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_dir[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_dir2">
+         <obj_property name="ElementShortName">o_dir2[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_dir2[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vdivi">
+         <obj_property name="ElementShortName">o_vdivi[12:0]</obj_property>
+         <obj_property name="ObjectShortName">o_vdivi[12:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vdivr">
+         <obj_property name="ElementShortName">o_vdivr[24:0]</obj_property>
+         <obj_property name="ObjectShortName">o_vdivr[24:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_divstart">
+         <obj_property name="ElementShortName">o_divstart</obj_property>
+         <obj_property name="ObjectShortName">o_divstart</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/o_divrun">
+         <obj_property name="ElementShortName">o_divrun</obj_property>
+         <obj_property name="ObjectShortName">o_divrun</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_hacpt">
+         <obj_property name="ElementShortName">o_hacpt[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_hacpt[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_vacpt">
+         <obj_property name="ElementShortName">o_vacpt[11:0]</obj_property>
+         <obj_property name="ObjectShortName">o_vacpt[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_frac2">
+         <obj_property name="ElementShortName">o_h_frac2[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_h_frac2[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_frac">
+         <obj_property name="ElementShortName">o_v_frac[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_v_frac[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bil_pix">
+         <obj_property name="ElementShortName">o_h_bil_pix</obj_property>
+         <obj_property name="ObjectShortName">o_h_bil_pix</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bil_pix">
+         <obj_property name="ElementShortName">o_v_bil_pix</obj_property>
+         <obj_property name="ObjectShortName">o_v_bil_pix</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bil_t">
+         <obj_property name="ElementShortName">o_h_bil_t</obj_property>
+         <obj_property name="ObjectShortName">o_h_bil_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bil_t">
+         <obj_property name="ElementShortName">o_v_bil_t</obj_property>
+         <obj_property name="ObjectShortName">o_v_bil_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/i_h_bil_t">
+         <obj_property name="ElementShortName">i_h_bil_t</obj_property>
+         <obj_property name="ObjectShortName">i_h_bil_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_sbil_t">
+         <obj_property name="ElementShortName">o_h_sbil_t</obj_property>
+         <obj_property name="ObjectShortName">o_h_sbil_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_sbil_t">
+         <obj_property name="ElementShortName">o_v_sbil_t</obj_property>
+         <obj_property name="ObjectShortName">o_v_sbil_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bic_pix">
+         <obj_property name="ElementShortName">o_h_bic_pix</obj_property>
+         <obj_property name="ObjectShortName">o_h_bic_pix</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bic_pix">
+         <obj_property name="ElementShortName">o_v_bic_pix</obj_property>
+         <obj_property name="ObjectShortName">o_v_bic_pix</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bic_abcd1">
+         <obj_property name="ElementShortName">o_h_bic_abcd1</obj_property>
+         <obj_property name="ObjectShortName">o_h_bic_abcd1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bic_abcd2">
+         <obj_property name="ElementShortName">o_h_bic_abcd2</obj_property>
+         <obj_property name="ObjectShortName">o_h_bic_abcd2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bic_abcd1">
+         <obj_property name="ElementShortName">o_v_bic_abcd1</obj_property>
+         <obj_property name="ObjectShortName">o_v_bic_abcd1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bic_abcd2">
+         <obj_property name="ElementShortName">o_v_bic_abcd2</obj_property>
+         <obj_property name="ObjectShortName">o_v_bic_abcd2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bic_tt1">
+         <obj_property name="ElementShortName">o_h_bic_tt1</obj_property>
+         <obj_property name="ObjectShortName">o_h_bic_tt1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bic_tt1">
+         <obj_property name="ElementShortName">o_v_bic_tt1</obj_property>
+         <obj_property name="ObjectShortName">o_v_bic_tt1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_bic_tt2">
+         <obj_property name="ElementShortName">o_h_bic_tt2</obj_property>
+         <obj_property name="ObjectShortName">o_h_bic_tt2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_bic_tt2">
+         <obj_property name="ElementShortName">o_v_bic_tt2</obj_property>
+         <obj_property name="ObjectShortName">o_v_bic_tt2</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_poly">
+         <obj_property name="ElementShortName">o_h_poly[0:15][35:0]</obj_property>
+         <obj_property name="ObjectShortName">o_h_poly[0:15][35:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_poly">
+         <obj_property name="ElementShortName">o_v_poly[0:15][35:0]</obj_property>
+         <obj_property name="ObjectShortName">o_v_poly[0:15][35:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_h_poly_a">
+         <obj_property name="ElementShortName">o_h_poly_a</obj_property>
+         <obj_property name="ObjectShortName">o_h_poly_a</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/o_v_poly_a">
+         <obj_property name="ElementShortName">o_v_poly_a</obj_property>
+         <obj_property name="ObjectShortName">o_v_poly_a</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_poly_dr">
+         <obj_property name="ElementShortName">o_h_poly_dr[35:0]</obj_property>
+         <obj_property name="ObjectShortName">o_h_poly_dr[35:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_poly_dr2">
+         <obj_property name="ElementShortName">o_h_poly_dr2[35:0]</obj_property>
+         <obj_property name="ObjectShortName">o_h_poly_dr2[35:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_poly_dr">
+         <obj_property name="ElementShortName">o_v_poly_dr[35:0]</obj_property>
+         <obj_property name="ObjectShortName">o_v_poly_dr[35:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_poly_dr2">
+         <obj_property name="ElementShortName">o_v_poly_dr2[35:0]</obj_property>
+         <obj_property name="ObjectShortName">o_v_poly_dr2[35:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_poly_pix">
+         <obj_property name="ElementShortName">o_h_poly_pix</obj_property>
+         <obj_property name="ObjectShortName">o_h_poly_pix</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_poly_pix">
+         <obj_property name="ElementShortName">o_v_poly_pix</obj_property>
+         <obj_property name="ObjectShortName">o_v_poly_pix</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/poly_h_wr">
+         <obj_property name="ElementShortName">poly_h_wr</obj_property>
+         <obj_property name="ObjectShortName">poly_h_wr</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb/i_sys/i_ascal/poly_v_wr">
+         <obj_property name="ElementShortName">poly_v_wr</obj_property>
+         <obj_property name="ObjectShortName">poly_v_wr</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/poly_tdw">
+         <obj_property name="ElementShortName">poly_tdw[35:0]</obj_property>
+         <obj_property name="ObjectShortName">poly_tdw[35:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/poly_a2">
+         <obj_property name="ElementShortName">poly_a2[3:0]</obj_property>
+         <obj_property name="ObjectShortName">poly_a2[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_h_poly_t">
+         <obj_property name="ElementShortName">o_h_poly_t</obj_property>
+         <obj_property name="ObjectShortName">o_h_poly_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/o_v_poly_t">
+         <obj_property name="ElementShortName">o_v_poly_t</obj_property>
+         <obj_property name="ObjectShortName">o_v_poly_t</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/MASK">
+         <obj_property name="ElementShortName">MASK[7:0]</obj_property>
+         <obj_property name="ObjectShortName">MASK[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/RAMBASE">
+         <obj_property name="ElementShortName">RAMBASE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">RAMBASE[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/RAMSIZE">
+         <obj_property name="ElementShortName">RAMSIZE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">RAMSIZE[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/INTER">
+         <obj_property name="ElementShortName">INTER</obj_property>
+         <obj_property name="ObjectShortName">INTER</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/HEADER">
+         <obj_property name="ElementShortName">HEADER</obj_property>
+         <obj_property name="ObjectShortName">HEADER</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/DOWNSCALE">
+         <obj_property name="ElementShortName">DOWNSCALE</obj_property>
+         <obj_property name="ObjectShortName">DOWNSCALE</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/BYTESWAP">
+         <obj_property name="ElementShortName">BYTESWAP</obj_property>
+         <obj_property name="ObjectShortName">BYTESWAP</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/PALETTE">
+         <obj_property name="ElementShortName">PALETTE</obj_property>
+         <obj_property name="ObjectShortName">PALETTE</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/PALETTE2">
+         <obj_property name="ElementShortName">PALETTE2</obj_property>
+         <obj_property name="ObjectShortName">PALETTE2</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/FRAC">
+         <obj_property name="ElementShortName">FRAC</obj_property>
+         <obj_property name="ObjectShortName">FRAC</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/OHRES">
+         <obj_property name="ElementShortName">OHRES</obj_property>
+         <obj_property name="ObjectShortName">OHRES</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/IHRES">
+         <obj_property name="ElementShortName">IHRES</obj_property>
+         <obj_property name="ObjectShortName">IHRES</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/N_DW">
+         <obj_property name="ElementShortName">N_DW</obj_property>
+         <obj_property name="ObjectShortName">N_DW</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/N_AW">
+         <obj_property name="ElementShortName">N_AW</obj_property>
+         <obj_property name="ObjectShortName">N_AW</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/N_BURST">
+         <obj_property name="ElementShortName">N_BURST</obj_property>
+         <obj_property name="ObjectShortName">N_BURST</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/MASK_NEAREST">
+         <obj_property name="ElementShortName">MASK_NEAREST</obj_property>
+         <obj_property name="ObjectShortName">MASK_NEAREST</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/MASK_BILINEAR">
+         <obj_property name="ElementShortName">MASK_BILINEAR</obj_property>
+         <obj_property name="ObjectShortName">MASK_BILINEAR</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/MASK_SHARP_BILINEAR">
+         <obj_property name="ElementShortName">MASK_SHARP_BILINEAR</obj_property>
+         <obj_property name="ObjectShortName">MASK_SHARP_BILINEAR</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/MASK_BICUBIC">
+         <obj_property name="ElementShortName">MASK_BICUBIC</obj_property>
+         <obj_property name="ObjectShortName">MASK_BICUBIC</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/MASK_POLY">
+         <obj_property name="ElementShortName">MASK_POLY</obj_property>
+         <obj_property name="ObjectShortName">MASK_POLY</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/NB_BURST">
+         <obj_property name="ElementShortName">NB_BURST</obj_property>
+         <obj_property name="ObjectShortName">NB_BURST</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/NB_LA">
+         <obj_property name="ElementShortName">NB_LA</obj_property>
+         <obj_property name="ObjectShortName">NB_LA</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/tb/i_sys/i_ascal/BLEN">
+         <obj_property name="ElementShortName">BLEN</obj_property>
+         <obj_property name="ObjectShortName">BLEN</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/POLY16">
+         <obj_property name="ElementShortName">POLY16[0:63]</obj_property>
+         <obj_property name="ObjectShortName">POLY16[0:63]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/tb/i_sys/i_ascal/POLY32">
+         <obj_property name="ElementShortName">POLY32[0:127]</obj_property>
+         <obj_property name="ObjectShortName">POLY32[0:127]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

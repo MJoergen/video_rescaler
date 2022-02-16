@@ -46,21 +46,8 @@ begin
       wait for C_AVL_CLK_PERIOD/2;
    end process p_avl_clk;
 
-   p_poly_clk : process
-   begin
-      poly_clk_o <= '1';
-      wait for C_POLY_CLK_PERIOD/2;
-      poly_clk_o <= '0';
-      wait for C_POLY_CLK_PERIOD/2;
-   end process p_poly_clk;
-
-   p_pal_clk : process
-   begin
-      pal_clk_o <= '1';
-      wait for C_PAL_CLK_PERIOD/2;
-      pal_clk_o <= '0';
-      wait for C_PAL_CLK_PERIOD/2;
-   end process p_pal_clk;
+   poly_clk_o <= '0';
+   pal_clk_o  <= '0';
 
 end architecture simulation;
 
