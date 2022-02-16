@@ -57,6 +57,9 @@ create_generated_clock -name clk_x1     [get_pins i_hyperram_wrapper/i_clk_hr/i_
 # Set location (based on closest to I/O pad).
 # This forces the placement of the entire HyperRAM controller.
 set_property LOC SLICE_X0Y205 [get_cells -hier hr_ck_o_reg]
+set_property LOC SLICE_X0Y207 [get_cells -hier hr_rwds_oe_o_reg]
+set_property LOC SLICE_X1Y207 [get_cells -hier rwds_in_x2_reg]
+set_property LOC SLICE_X0Y209 [get_cells -hier hr_dq_oe_o_reg]
 
 
 ########### MEGA65 timing ################

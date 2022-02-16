@@ -4,18 +4,18 @@ use ieee.numeric_std.all;
 
 entity gen_video is
    generic (
-      CLK_KHZ   : integer := 74250;     -- 74.25 MHz
+      CLK_KHZ   : integer := 25000;     -- 25.00 MHz
       PIX_SIZE  : integer := 11;
-      H_PIXELS  : integer := 1280;      -- horizontal display width in pixels
-      V_PIXELS  : integer :=  720;      -- vertical display width in rows
-      H_FP      : integer :=  110;      -- horizontal front porch width in pixels
-      H_PULSE   : integer :=   40;      -- horizontal sync pulse width in pixels
-      H_BP      : integer :=  220;      -- horizontal back porch width in pixels
-      V_FP      : integer :=    5;      -- vertical front porch width in rows
-      V_PULSE   : integer :=    5;      -- vertical sync pulse width in rows
-      V_BP      : integer :=   20;      -- vertical back porch width in rows
-      H_MAX     : integer := 1650;
-      V_MAX     : integer := 750;
+      H_PIXELS  : integer :=  640;      -- horizontal display width in pixels
+      V_PIXELS  : integer :=  480;      -- vertical display width in rows
+      H_FP      : integer :=   16;      -- horizontal front porch width in pixels
+      H_PULSE   : integer :=   96;      -- horizontal sync pulse width in pixels
+      H_BP      : integer :=   48;      -- horizontal back porch width in pixels
+      V_FP      : integer :=   10;      -- vertical front porch width in rows
+      V_PULSE   : integer :=    2;      -- vertical sync pulse width in rows
+      V_BP      : integer :=   33;      -- vertical back porch width in rows
+      H_MAX     : integer :=  800;
+      V_MAX     : integer :=  525;
       H_POL     : std_logic := '1';       -- horizontal sync pulse polarity (1 = positive, 0 = negative)
       V_POL     : std_logic := '1'        -- vertical sync pulse polarity (1 = positive, 0 = negative)
    );

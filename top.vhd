@@ -2,9 +2,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-library work;
-use work.types_pkg.all;
-
 entity top is
    port (
       clk         : in    std_logic;                  -- 100 MHz clock
@@ -58,6 +55,25 @@ architecture synthesis of top is
    signal avl_write         : std_logic;
    signal avl_read          : std_logic;
    signal avl_byteenable    : std_logic_vector(N_DW/8-1 downto 0);
+
+   constant DEBUG_MODE                       : boolean := false;
+   attribute mark_debug                      : boolean;
+   attribute mark_debug of o_r               : signal is DEBUG_MODE;
+   attribute mark_debug of o_g               : signal is DEBUG_MODE;
+   attribute mark_debug of o_b               : signal is DEBUG_MODE;
+   attribute mark_debug of o_hs              : signal is DEBUG_MODE;
+   attribute mark_debug of o_vs              : signal is DEBUG_MODE;
+   attribute mark_debug of o_de              : signal is DEBUG_MODE;
+
+   attribute mark_debug of avl_waitrequest   : signal is DEBUG_MODE;
+   attribute mark_debug of avl_readdata      : signal is DEBUG_MODE;
+   attribute mark_debug of avl_readdatavalid : signal is DEBUG_MODE;
+   attribute mark_debug of avl_burstcount    : signal is DEBUG_MODE;
+   attribute mark_debug of avl_writedata     : signal is DEBUG_MODE;
+   attribute mark_debug of avl_address       : signal is DEBUG_MODE;
+   attribute mark_debug of avl_write         : signal is DEBUG_MODE;
+   attribute mark_debug of avl_read          : signal is DEBUG_MODE;
+   attribute mark_debug of avl_byteenable    : signal is DEBUG_MODE;
 
 begin
 
