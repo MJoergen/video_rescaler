@@ -8,7 +8,7 @@ end entity tb;
 architecture simulation of tb is
 
    constant N_DW : natural range 64 to 128 := 128;
-   constant N_AW : natural range 8 to 32 := 22;
+   constant N_AW : natural range 8 to 32 := 19;
 
    signal i_clk             : std_logic;
    signal o_clk             : std_logic;
@@ -95,12 +95,12 @@ begin
 
    i_avm_memory : entity work.avm_memory
       generic map (
-         G_ADDRESS_SIZE => 22,
+         G_ADDRESS_SIZE => 19,
          G_DATA_SIZE    => 128
       )
       port map (
          clk_i               => avl_clk,
-         rst_i               => '0',
+         rst_i               => not reset_na,
          avm_write_i         => avl_write,
          avm_read_i          => avl_read,
          avm_address_i       => avl_address,

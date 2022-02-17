@@ -144,22 +144,6 @@ begin
    --------------------------------------------------------
 
    i_gen_video : entity work.gen_video
-      generic map (
-         CLK_KHZ   => 74250,     -- 74.25 MHz
-         PIX_SIZE  => 11,
-         H_PIXELS  => 1280,      -- horizontal display width in pixels
-         V_PIXELS  =>  720,      -- vertical display width in rows
-         H_FP      =>  110,      -- horizontal front porch width in pixels
-         H_PULSE   =>   40,      -- horizontal sync pulse width in pixels
-         H_BP      =>  220,      -- horizontal back porch width in pixels
-         V_FP      =>    5,      -- vertical front porch width in rows
-         V_PULSE   =>    5,      -- vertical sync pulse width in rows
-         V_BP      =>   20,      -- vertical back porch width in rows
-         H_MAX     => 1650,
-         V_MAX     => 750,
-         H_POL     => '1',       -- horizontal sync pulse polarity (1 = positive, 0 = negative)
-         V_POL     => '1'        -- vertical sync pulse polarity (1 = positive, 0 = negative)
-      )
       port map (
          clk_i => i_clk,
          r_o   => i_r,

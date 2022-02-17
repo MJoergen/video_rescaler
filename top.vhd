@@ -30,7 +30,7 @@ end entity top;
 architecture synthesis of top is
 
    constant N_DW : natural range 64 to 128 := 128;
-   constant N_AW : natural range 8 to 32 := 22;
+   constant N_AW : natural range 8 to 32 := 19;
 
    signal i_clk             : std_logic;
    signal o_clk             : std_logic;

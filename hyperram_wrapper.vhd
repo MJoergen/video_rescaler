@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity hyperram_wrapper is
    generic (
       N_DW : natural range 64 to 128 := 128;
-      N_AW : natural range 8 to 32 := 22
+      N_AW : natural range 8 to 32 := 19
    );
    port (
       sys_clk_i           : in    std_logic;                  -- 100 MHz clock
@@ -37,7 +37,7 @@ architecture synthesis of hyperram_wrapper is
    -- HyperRAM
    signal avm_write         : std_logic;
    signal avm_read          : std_logic;
-   signal avm_address       : std_logic_vector(21 downto 0);
+   signal avm_address       : std_logic_vector(31 downto 0) := (others => '0');
    signal avm_writedata     : std_logic_vector(15 downto 0);
    signal avm_byteenable    : std_logic_vector(1 downto 0);
    signal avm_burstcount    : std_logic_vector(7 downto 0);
@@ -55,6 +55,18 @@ architecture synthesis of hyperram_wrapper is
    signal hr_dq_in          : std_logic_vector(7 downto 0);
    signal hr_dq_out         : std_logic_vector(7 downto 0);
    signal hr_dq_oe          : std_logic;    -- Output enable for DQ
+
+   constant DEBUG_MODE                       : boolean := false;
+   attribute mark_debug                      : boolean;
+   attribute mark_debug of avm_waitrequest   : signal is DEBUG_MODE;
+   attribute mark_debug of avm_readdata      : signal is DEBUG_MODE;
+   attribute mark_debug of avm_readdatavalid : signal is DEBUG_MODE;
+   attribute mark_debug of avm_burstcount    : signal is DEBUG_MODE;
+   attribute mark_debug of avm_writedata     : signal is DEBUG_MODE;
+   attribute mark_debug of avm_address       : signal is DEBUG_MODE;
+   attribute mark_debug of avm_write         : signal is DEBUG_MODE;
+   attribute mark_debug of avm_read          : signal is DEBUG_MODE;
+   attribute mark_debug of avm_byteenable    : signal is DEBUG_MODE;
 
 begin
 
@@ -85,9 +97,10 @@ begin
 
    i_avm_decrease : entity work.avm_decrease
       generic map (
-         G_ADDRESS_SIZE     => 22,
-         G_SLAVE_DATA_SIZE  => 128,
-         G_MASTER_DATA_SIZE => 16
+         G_SLAVE_ADDRESS_SIZE  => N_AW,
+         G_SLAVE_DATA_SIZE     => N_DW,
+         G_MASTER_ADDRESS_SIZE => 22,  -- HyperRAM size is 4 MWords = 8 MBbytes.
+         G_MASTER_DATA_SIZE    => 16
       )
       port map (
          clk_i                 => clk_x1,
@@ -103,7 +116,7 @@ begin
          s_avm_waitrequest_o   => avl_waitrequest_o,
          m_avm_write_o         => avm_write,
          m_avm_read_o          => avm_read,
-         m_avm_address_o       => avm_address,
+         m_avm_address_o       => avm_address(21 downto 0), -- MSB defaults to zero
          m_avm_writedata_o     => avm_writedata,
          m_avm_byteenable_o    => avm_byteenable,
          m_avm_burstcount_o    => avm_burstcount,
@@ -125,7 +138,7 @@ begin
          rst_i               => rst,
          avm_write_i         => avm_write,
          avm_read_i          => avm_read,
-         avm_address_i       => "0000000000" & avm_address,
+         avm_address_i       => avm_address,
          avm_writedata_i     => avm_writedata,
          avm_byteenable_i    => avm_byteenable,
          avm_burstcount_i    => avm_burstcount,
