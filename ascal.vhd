@@ -983,7 +983,7 @@ ARCHITECTURE rtl OF ascal IS
     RETURN p;
   END FUNCTION;
   
-   constant DEBUG_MODE                       : boolean := false;
+   constant DEBUG_MODE                        : boolean := false;
    attribute mark_debug                       : boolean;
    attribute mark_debug of avl_dr             : signal is DEBUG_MODE;
    attribute mark_debug of avl_dw             : signal is DEBUG_MODE;
