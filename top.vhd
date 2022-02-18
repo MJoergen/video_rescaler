@@ -37,6 +37,7 @@ architecture synthesis of top is
    signal avl_clk           : std_logic;
    signal poly_clk          : std_logic := '0';
    signal pal1_clk          : std_logic := '0';
+   signal kbd_reset_n       : std_logic := '0';
 
    signal o_r               : unsigned(7 downto 0);
    signal o_g               : unsigned(7 downto 0);
@@ -92,7 +93,7 @@ begin
          avl_clk           => avl_clk,
          poly_clk          => poly_clk,
          pal1_clk          => pal1_clk,
-         reset_na          => reset_n,
+         reset_na          => kbd_reset_n and reset_n,
          o_r               => o_r,
          o_g               => o_g,
          o_b               => o_b,
@@ -173,11 +174,12 @@ begin
 
    i_keyboard_wrapper : entity work.keyboard_wrapper
       port map (
-         clk     => clk,
-         reset_n => reset_n,
-         kb_io0  => kb_io0,
-         kb_io1  => kb_io1,
-         kb_io2  => kb_io2
+         clk        => clk,
+         reset_n    => reset_n,
+         kb_io0     => kb_io0,
+         kb_io1     => kb_io1,
+         kb_io2     => kb_io2,
+         return_out => kbd_reset_n
       ); -- i_keyboard_wrapper
 
 end architecture synthesis;

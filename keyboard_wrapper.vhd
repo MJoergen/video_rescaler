@@ -4,13 +4,15 @@ use ieee.numeric_std.all;
 
 entity keyboard_wrapper is
    port (
-      clk     : in    std_logic;                  -- 100 MHz clock
-      reset_n : in    std_logic;                  -- CPU reset button (active low)
+      clk        : in    std_logic;   -- 100 MHz clock
+      reset_n    : in    std_logic;   -- CPU reset button (active low)
+
+      return_out : out std_logic;     -- Active low
 
       -- MEGA65 keyboard
-      kb_io0  : out   std_logic;
-      kb_io1  : out   std_logic;
-      kb_io2  : in    std_logic
+      kb_io0     : out   std_logic;
+      kb_io1     : out   std_logic;
+      kb_io2     : in    std_logic
    );
 end entity keyboard_wrapper;
 
@@ -39,7 +41,7 @@ begin
          kio9        => kb_io1,
          kio10       => kb_io2,
          delete_out  => open,
-         return_out  => open,
+         return_out  => return_out,
          fastkey_out => open
       ); -- i_keyboard
 
