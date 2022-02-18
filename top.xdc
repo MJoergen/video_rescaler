@@ -67,6 +67,7 @@ set_property LOC SLICE_X0Y209 [get_cells -hier hr_dq_oe_o_reg]
 create_generated_clock -name i_clk      [get_pins i_hdmi_wrapper/i_clk_hdmi/i_clk_hdmi/CLKOUT0]
 create_generated_clock -name pixel_clk  [get_pins i_hdmi_wrapper/i_clk_hdmi/i_clk_hdmi/CLKOUT1]
 create_generated_clock -name pixel_clk5 [get_pins i_hdmi_wrapper/i_clk_hdmi/i_clk_hdmi/CLKOUT2]
+create_generated_clock -name kbd_clk    [get_pins i_keyboard_wrapper/i_clk_kbd/i_clk_kbd/CLKOUT1]
 
 # MEGA65 I/O timing is ignored (considered asynchronous)
 set_false_path -from [get_ports reset_n]
@@ -83,6 +84,10 @@ set_false_path -from [get_clocks clk_x1]   -to [get_clocks pixel_clk]
 set_false_path   -to [get_clocks clk_x1] -from [get_clocks pixel_clk]
 set_false_path -from [get_clocks i_clk]    -to [get_clocks pixel_clk]
 set_false_path   -to [get_clocks i_clk]  -from [get_clocks pixel_clk]
+
+# Timing from keyboard to ascal is asynchronous
+set_clock_groups -asynchronous -group [get_clocks kbd_clk] -group [get_clocks i_clk]
+set_clock_groups -asynchronous -group [get_clocks kbd_clk] -group [get_clocks pixel_clk]
 
 
 #############################################################################################################
