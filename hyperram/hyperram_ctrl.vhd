@@ -79,6 +79,28 @@ architecture synthesis of hyperram_ctrl is
    subtype  R_CA_RESERVED is natural range 15 downto  3;
    subtype  R_CA_ADDR_LSB is natural range  2 downto  0;
 
+   constant DEBUG_MODE                         : boolean := false;
+   attribute mark_debug                        : boolean;
+   attribute mark_debug of avm_write_i         : signal is DEBUG_MODE;
+   attribute mark_debug of avm_read_i          : signal is DEBUG_MODE;
+   attribute mark_debug of avm_address_i       : signal is DEBUG_MODE;
+   attribute mark_debug of avm_writedata_i     : signal is DEBUG_MODE;
+   attribute mark_debug of avm_byteenable_i    : signal is DEBUG_MODE;
+   attribute mark_debug of avm_burstcount_i    : signal is DEBUG_MODE;
+   attribute mark_debug of avm_readdata_o      : signal is DEBUG_MODE;
+   attribute mark_debug of avm_readdatavalid_o : signal is DEBUG_MODE;
+   attribute mark_debug of avm_waitrequest_o   : signal is DEBUG_MODE;
+   attribute mark_debug of state               : signal is DEBUG_MODE;
+   attribute mark_debug of burst_count         : signal is DEBUG_MODE;
+   attribute mark_debug of write_clk_count     : signal is DEBUG_MODE;
+   attribute mark_debug of read_clk_count      : signal is DEBUG_MODE;
+   attribute mark_debug of read_return_count   : signal is DEBUG_MODE;
+   attribute mark_debug of hb_csn_o            : signal is DEBUG_MODE;
+   attribute mark_debug of hb_dq_ddr_out_o     : signal is DEBUG_MODE;
+   attribute mark_debug of hb_dq_oe_o          : signal is DEBUG_MODE;
+   attribute mark_debug of hb_rwds_ddr_out_o   : signal is DEBUG_MODE;
+   attribute mark_debug of hb_rwds_oe_o        : signal is DEBUG_MODE;
+
 begin
 
    p_fsm : process (clk_i)
