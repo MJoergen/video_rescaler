@@ -19,6 +19,7 @@ entity hdmi_wrapper is
       o_de        : in  std_logic; -- display enable
       o_vbl       : in  std_logic; -- v blank
       o_clk       : out std_logic;
+      o_rst       : out std_logic;
 
       -- MEGA65 Digital Video (HDMI)
       hdmi_data_p : out std_logic_vector(2 downto 0);
@@ -34,7 +35,7 @@ architecture synthesis of hdmi_wrapper is
    constant N_AW : natural range 8 to 32 := 22;
 
    alias  video_clk  : std_logic is o_clk;
-   signal video_rst  : std_logic;
+   alias  video_rst  : std_logic is o_rst;
    signal hdmi_clk   : std_logic;
    signal video_data : slv_9_0_t(0 to 2);              -- parallel HDMI symbol stream x 3 channels
 

@@ -39,6 +39,10 @@ architecture synthesis of top is
    signal pal1_clk          : std_logic := '0';
    signal kbd_reset_n       : std_logic := '0';
 
+   signal o_rst             : std_logic;
+   signal avl_rst           : std_logic;
+   signal internal_reset    : std_logic;
+
    signal o_r               : unsigned(7 downto 0);
    signal o_g               : unsigned(7 downto 0);
    signal o_b               : unsigned(7 downto 0);
@@ -78,6 +82,9 @@ architecture synthesis of top is
 
 begin
 
+   internal_reset <= avl_rst or o_rst or not kbd_reset_n;
+
+
    --------------------------------------------------------
    -- Instantiate DUT
    --------------------------------------------------------
@@ -93,7 +100,7 @@ begin
          avl_clk           => avl_clk,
          poly_clk          => poly_clk,
          pal1_clk          => pal1_clk,
-         reset_na          => kbd_reset_n and reset_n,
+         reset_na          => not internal_reset,
          o_r               => o_r,
          o_g               => o_g,
          o_b               => o_b,
@@ -130,6 +137,7 @@ begin
          o_de        => o_de,
          o_vbl       => o_vbl,
          o_clk       => o_clk,
+         o_rst       => o_rst,
          hdmi_data_p => hdmi_data_p,
          hdmi_data_n => hdmi_data_n,
          hdmi_clk_p  => hdmi_clk_p,
@@ -150,7 +158,8 @@ begin
          sys_clk_i           => clk,
          sys_reset_n_i       => reset_n,
          avl_clk_o           => avl_clk,  -- output
-         avl_rst_o           => open,
+         avl_rst_o           => avl_rst,  -- output
+         avl_rst_i           => internal_reset,
          avl_burstcount_i    => avl_burstcount,
          avl_writedata_i     => avl_writedata,
          avl_address_i       => avl_address,

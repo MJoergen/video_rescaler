@@ -13,6 +13,7 @@ entity hyperram_wrapper is
 
       avl_clk_o           : out   std_logic;
       avl_rst_o           : out   std_logic;
+      avl_rst_i           : in    std_logic;
       avl_burstcount_i    : in    std_logic_vector(7 downto 0);
       avl_writedata_i     : in    std_logic_vector(N_DW-1 downto 0);
       avl_address_i       : in    std_logic_vector(N_AW-1 downto 0);
@@ -48,7 +49,6 @@ architecture synthesis of hyperram_wrapper is
    alias  clk_x1            : std_logic is avl_clk_o;
    signal clk_x2            : std_logic; -- Physical I/O only
    signal clk_x2_del        : std_logic; -- Double frequency, phase shifted
-   alias  rst               : std_logic is avl_rst_o;
    signal hr_rwds_in        : std_logic;
    signal hr_rwds_out       : std_logic;
    signal hr_rwds_oe        : std_logic;   -- Output enable for RWDS
@@ -87,7 +87,7 @@ begin
          clk_x1_o     => clk_x1,
          clk_x2_o     => clk_x2,
          clk_x2_del_o => clk_x2_del,
-         rst_o        => rst
+         rst_o        => avl_rst_o
       ); -- i_clk_hr
 
 
@@ -104,7 +104,7 @@ begin
       )
       port map (
          clk_i                 => clk_x1,
-         rst_i                 => rst,
+         rst_i                 => avl_rst_i,
          s_avm_write_i         => avl_write_i,
          s_avm_read_i          => avl_read_i,
          s_avm_address_i       => avl_address_i,
@@ -135,7 +135,7 @@ begin
          clk_x1_i            => clk_x1,
          clk_x2_i            => clk_x2,
          clk_x2_del_i        => clk_x2_del,
-         rst_i               => rst,
+         rst_i               => avl_rst_i,
          avm_write_i         => avm_write,
          avm_read_i          => avm_read,
          avm_address_i       => avm_address,

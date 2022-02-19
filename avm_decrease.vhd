@@ -60,8 +60,8 @@ architecture synthesis of avm_decrease is
 
 begin
 
-   assert C_RATIO > 1;
-   assert G_SLAVE_DATA_SIZE = C_RATIO * G_MASTER_DATA_SIZE;
+   assert C_RATIO > 1 severity failure;
+   assert G_SLAVE_DATA_SIZE = C_RATIO * G_MASTER_DATA_SIZE severity failure;
    assert G_SLAVE_DATA_SIZE * (2**G_SLAVE_ADDRESS_SIZE) = G_MASTER_DATA_SIZE * (2**G_MASTER_ADDRESS_SIZE) severity failure;
 
    p_fsm : process (clk_i)
