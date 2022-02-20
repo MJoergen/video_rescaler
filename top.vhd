@@ -32,34 +32,42 @@ architecture synthesis of top is
    constant N_DW : natural range 64 to 128 := 128;
    constant N_AW : natural range 8 to 32 := 19;
 
-   signal i_clk             : std_logic;
-   signal o_clk             : std_logic;
-   signal avl_clk           : std_logic;
-   signal poly_clk          : std_logic := '0';
-   signal pal1_clk          : std_logic := '0';
-   signal kbd_reset_n       : std_logic := '0';
+   signal i_clk               : std_logic;
+   signal o_clk               : std_logic;
+   signal avl_clk             : std_logic;
+   signal kbd_clk             : std_logic;
+   signal poly_clk            : std_logic := '0';
+   signal pal1_clk            : std_logic := '0';
 
-   signal o_rst             : std_logic;
-   signal avl_rst           : std_logic;
-   signal internal_reset    : std_logic;
+   signal video_pll_locked    : std_logic;
+   signal hyperram_pll_locked : std_logic;
+   signal keyboard_pll_locked : std_logic;
+   signal all_locked          : std_logic;
 
-   signal o_r               : unsigned(7 downto 0);
-   signal o_g               : unsigned(7 downto 0);
-   signal o_b               : unsigned(7 downto 0);
-   signal o_hs              : std_logic; -- h sync
-   signal o_vs              : std_logic; -- v sync
-   signal o_de              : std_logic; -- display enable
-   signal o_vbl             : std_logic; -- v blank
+   signal kbd_reset_n         : std_logic := '0';
 
-   signal avl_waitrequest   : std_logic;
-   signal avl_readdata      : std_logic_vector(N_DW-1 downto 0);
-   signal avl_readdatavalid : std_logic;
-   signal avl_burstcount    : std_logic_vector(7 downto 0);
-   signal avl_writedata     : std_logic_vector(N_DW-1 downto 0);
-   signal avl_address       : std_logic_vector(N_AW-1 downto 0);
-   signal avl_write         : std_logic;
-   signal avl_read          : std_logic;
-   signal avl_byteenable    : std_logic_vector(N_DW/8-1 downto 0);
+   signal kbd_rst             : std_logic;
+   signal avl_rst             : std_logic;
+   signal o_rst               : std_logic;
+   signal reset_na            : std_logic;
+
+   signal o_r                 : unsigned(7 downto 0);
+   signal o_g                 : unsigned(7 downto 0);
+   signal o_b                 : unsigned(7 downto 0);
+   signal o_hs                : std_logic; -- h sync
+   signal o_vs                : std_logic; -- v sync
+   signal o_de                : std_logic; -- display enable
+   signal o_vbl               : std_logic; -- v blank
+
+   signal avl_waitrequest     : std_logic;
+   signal avl_readdata        : std_logic_vector(N_DW-1 downto 0);
+   signal avl_readdatavalid   : std_logic;
+   signal avl_burstcount      : std_logic_vector(7 downto 0);
+   signal avl_writedata       : std_logic_vector(N_DW-1 downto 0);
+   signal avl_address         : std_logic_vector(N_AW-1 downto 0);
+   signal avl_write           : std_logic;
+   signal avl_read            : std_logic;
+   signal avl_byteenable      : std_logic_vector(N_DW/8-1 downto 0);
 
    constant DEBUG_MODE                       : boolean := false;
    attribute mark_debug                      : boolean;
@@ -79,11 +87,9 @@ architecture synthesis of top is
    attribute mark_debug of avl_write         : signal is DEBUG_MODE;
    attribute mark_debug of avl_read          : signal is DEBUG_MODE;
    attribute mark_debug of avl_byteenable    : signal is DEBUG_MODE;
+   attribute mark_debug of reset_na          : signal is DEBUG_MODE;
 
 begin
-
-   internal_reset <= avl_rst or o_rst or not kbd_reset_n;
-
 
    --------------------------------------------------------
    -- Instantiate DUT
@@ -100,7 +106,7 @@ begin
          avl_clk           => avl_clk,
          poly_clk          => poly_clk,
          pal1_clk          => pal1_clk,
-         reset_na          => not internal_reset,
+         reset_na          => reset_na,
          o_r               => o_r,
          o_g               => o_g,
          o_b               => o_b,
@@ -126,22 +132,25 @@ begin
 
    i_hdmi_wrapper : entity work.hdmi_wrapper
       port map (
-         clk         => clk,
-         reset_n     => reset_n,
-         i_clk       => i_clk,
-         o_r         => o_r,
-         o_g         => o_g,
-         o_b         => o_b,
-         o_hs        => o_hs,
-         o_vs        => o_vs,
-         o_de        => o_de,
-         o_vbl       => o_vbl,
-         o_clk       => o_clk,
-         o_rst       => o_rst,
-         hdmi_data_p => hdmi_data_p,
-         hdmi_data_n => hdmi_data_n,
-         hdmi_clk_p  => hdmi_clk_p,
-         hdmi_clk_n  => hdmi_clk_n
+         clk_i         => clk,
+         reset_n_i     => reset_n,
+         --
+         i_clk_o       => i_clk,
+         o_clk_o       => o_clk,
+         locked_o      => video_pll_locked,
+         --
+         o_rst_i       => o_rst,
+         o_r_i         => o_r,
+         o_g_i         => o_g,
+         o_b_i         => o_b,
+         o_hs_i        => o_hs,
+         o_vs_i        => o_vs,
+         o_de_i        => o_de,
+         o_vbl_i       => o_vbl,
+         hdmi_data_p_o => hdmi_data_p,
+         hdmi_data_n_o => hdmi_data_n,
+         hdmi_clk_p_o  => hdmi_clk_p,
+         hdmi_clk_n_o  => hdmi_clk_n
       ); -- i_hdmi_wrapper
 
 
@@ -157,9 +166,11 @@ begin
       port map (
          sys_clk_i           => clk,
          sys_reset_n_i       => reset_n,
-         avl_clk_o           => avl_clk,  -- output
-         avl_rst_o           => avl_rst,  -- output
-         avl_rst_i           => internal_reset,
+         --
+         avl_clk_o           => avl_clk,
+         locked_o            => hyperram_pll_locked,
+         --
+         avl_rst_i           => avl_rst,
          avl_burstcount_i    => avl_burstcount,
          avl_writedata_i     => avl_writedata,
          avl_address_i       => avl_address,
@@ -185,11 +196,53 @@ begin
       port map (
          clk        => clk,
          reset_n    => reset_n,
+         kbd_clk_o  => kbd_clk,
+         locked_o   => keyboard_pll_locked,
+         kbd_rst_i  => kbd_rst,
          kb_io0     => kb_io0,
          kb_io1     => kb_io1,
          kb_io2     => kb_io2,
          return_out => kbd_reset_n
       ); -- i_keyboard_wrapper
+
+
+   ----------------------------------
+   -- Reset generation
+   ----------------------------------
+
+   all_locked <= video_pll_locked and hyperram_pll_locked and keyboard_pll_locked;
+   reset_na <= all_locked and kbd_reset_n;   -- Global reset
+
+   i_xpm_cdc_async_rst_kbd : xpm_cdc_async_rst
+      generic map (
+         RST_ACTIVE_HIGH => 1
+      )
+      port map (
+         src_arst  => not reset_na, -- input
+         dest_clk  => kbd_clk,      -- input
+         dest_arst => kbd_rst       -- output
+      ); -- i_xpm_cdc_async_rst_kbd
+
+   i_xpm_cdc_async_rst_avl : xpm_cdc_async_rst
+      generic map (
+         RST_ACTIVE_HIGH => 1
+      )
+      port map (
+         src_arst  => not reset_na, -- input
+         dest_clk  => avl_clk,      -- input
+         dest_arst => avl_rst       -- output
+      ); -- i_xpm_cdc_async_rst_avl
+
+   i_xpm_cdc_async_rst_o : xpm_cdc_async_rst
+      generic map (
+         RST_ACTIVE_HIGH => 1
+      )
+      port map (
+         src_arst  => not all_locked, -- input
+         dest_clk  => o_clk,          -- input
+         dest_arst => o_rst           -- output
+      ); -- i_xpm_cdc_async_rst_o
+
 
 end architecture synthesis;
 

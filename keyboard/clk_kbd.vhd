@@ -11,7 +11,8 @@ entity clk_kbd is
    port (
       sys_clk_i  : in  std_logic;   -- expects 100 MHz
       sys_rstn_i : in  std_logic;   -- Asynchronous, asserted low
-      kbd_clk_o  : out std_logic    -- 40 MHz
+      kbd_clk_o  : out std_logic;   -- 40 MHz
+      locked_o   : out std_logic
    );
 end entity clk_kbd;
 
@@ -20,7 +21,6 @@ architecture synthesis of clk_kbd is
    signal clkfb         : std_logic;
    signal clkfb_mmcm    : std_logic;
    signal kbd_clk_mmcm  : std_logic;
-   signal locked        : std_logic;
 
 begin
 
@@ -68,7 +68,7 @@ begin
          PSINCDEC            => '0',
          PSDONE              => open,
          -- Other control and status signals
-         LOCKED              => locked,
+         LOCKED              => locked_o,
          CLKINSTOPPED        => open,
          CLKFBSTOPPED        => open,
          PWRDWN              => '0',

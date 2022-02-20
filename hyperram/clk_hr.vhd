@@ -8,9 +8,6 @@ use ieee.std_logic_1164.all;
 library unisim;
 use unisim.vcomponents.all;
 
-library xpm;
-use xpm.vcomponents.all;
-
 entity clk_hr is
    generic (
       G_HYPERRAM_FREQ_MHZ : integer;
@@ -22,7 +19,7 @@ entity clk_hr is
       clk_x2_o     : out std_logic;   -- 200 MHz
       clk_x2_del_o : out std_logic;   -- 200 MHz phase shifted
       clk_x1_o     : out std_logic;   -- 100 MHz
-      rst_o        : out std_logic
+      locked_o     : out std_logic
    );
 end entity clk_hr;
 
@@ -33,7 +30,6 @@ architecture synthesis of clk_hr is
    signal clk_x2_mmcm     : std_logic;
    signal clk_x2_del_mmcm : std_logic;
    signal clk_x1_mmcm     : std_logic;
-   signal locked          : std_logic;
 
 begin
 
@@ -91,7 +87,7 @@ begin
          PSINCDEC            => '0',
          PSDONE              => open,
          -- Other control and status signals
-         LOCKED              => locked,
+         LOCKED              => locked_o,
          CLKINSTOPPED        => open,
          CLKFBSTOPPED        => open,
          PWRDWN              => '0',
@@ -126,22 +122,6 @@ begin
          I => clk_x2_del_mmcm,
          O => clk_x2_del_o
       ); -- i_bufg_clk_x2_del
-
-
-   -------------------------------------
-   -- Reset generation
-   -------------------------------------
-
-   i_xpm_cdc_sync_rst_pixel : xpm_cdc_sync_rst
-      generic map (
-         INIT_SYNC_FF => 1  -- Enable simulation init values
-      )
-      port map (
-         src_rst  => not (sys_rstn_i and locked),  -- 1-bit input: Source reset signal.
-         dest_clk => clk_x1_o,                     -- 1-bit input: Destination clock.
-         dest_rst => rst_o                         -- 1-bit output: src_rst synchronized to the destination clock domain.
-                                                   -- This output is registered.
-      ); -- i_xpm_cdc_sync_rst_pixel
 
 end architecture synthesis;
 

@@ -7,25 +7,27 @@ use work.types_pkg.all;
 
 entity hdmi_wrapper is
    port (
-      clk         : in  std_logic;                  -- 100 MHz clock
-      reset_n     : in  std_logic;                  -- CPU reset button (active low)
+      clk_i         : in  std_logic;                  -- 100 MHz clock
+      reset_n_i     : in  std_logic;                  -- CPU reset button (active low)
 
-      i_clk       : out std_logic;
-      o_r         : in  unsigned(7 downto 0);
-      o_g         : in  unsigned(7 downto 0);
-      o_b         : in  unsigned(7 downto 0);
-      o_hs        : in  std_logic; -- h sync
-      o_vs        : in  std_logic; -- v sync
-      o_de        : in  std_logic; -- display enable
-      o_vbl       : in  std_logic; -- v blank
-      o_clk       : out std_logic;
-      o_rst       : out std_logic;
+      i_clk_o       : out std_logic;
+      o_clk_o       : out std_logic;
+      locked_o      : out std_logic;                  -- Asserted asynchronous, when clocks are valid
+
+      o_rst_i       : in  std_logic;
+      o_r_i         : in  unsigned(7 downto 0);
+      o_g_i         : in  unsigned(7 downto 0);
+      o_b_i         : in  unsigned(7 downto 0);
+      o_hs_i        : in  std_logic; -- h sync
+      o_vs_i        : in  std_logic; -- v sync
+      o_de_i        : in  std_logic; -- display enable
+      o_vbl_i       : in  std_logic; -- v blank
 
       -- MEGA65 Digital Video (HDMI)
-      hdmi_data_p : out std_logic_vector(2 downto 0);
-      hdmi_data_n : out std_logic_vector(2 downto 0);
-      hdmi_clk_p  : out std_logic;
-      hdmi_clk_n  : out std_logic
+      hdmi_data_p_o : out std_logic_vector(2 downto 0);
+      hdmi_data_n_o : out std_logic_vector(2 downto 0);
+      hdmi_clk_p_o  : out std_logic;
+      hdmi_clk_n_o  : out std_logic
    );
 end entity hdmi_wrapper;
 
@@ -34,8 +36,6 @@ architecture synthesis of hdmi_wrapper is
    constant N_DW : natural range 64 to 128 := 128;
    constant N_AW : natural range 8 to 32 := 22;
 
-   alias  video_clk  : std_logic is o_clk;
-   alias  video_rst  : std_logic is o_rst;
    signal hdmi_clk   : std_logic;
    signal video_data : slv_9_0_t(0 to 2);              -- parallel HDMI symbol stream x 3 channels
 
@@ -43,12 +43,12 @@ begin
 
    i_clk_hdmi : entity work.clk_hdmi
       port map (
-         sys_clk_i    => clk,
-         sys_rstn_i   => reset_n,
-         i_clk_o      => i_clk,
-         pixel_clk_o  => video_clk,
-         pixel_rst_o  => video_rst,
-         pixel_clk5_o => hdmi_clk
+         sys_clk_i  => clk_i,
+         sys_rstn_i => reset_n_i,
+         i_clk_o    => i_clk_o,
+         o_clk_o    => o_clk_o,
+         hdmi_clk_o => hdmi_clk,
+         locked_o   => locked_o
       ); -- i_clk_hdmi
 
 
@@ -62,14 +62,14 @@ begin
          vs_pol       => '1',                                 -- horizontal polarity: positive
          hs_pol       => '1',                                 -- vertaical polarity: positive
 
-         vga_rst      => video_rst,                           -- active high reset
-         vga_clk      => video_clk,                           -- video pixel clock
-         vga_vs       => o_vs,
-         vga_hs       => o_hs,
-         vga_de       => o_de,
-         vga_r        => std_logic_vector(o_r),
-         vga_g        => std_logic_vector(o_g),
-         vga_b        => std_logic_vector(o_b),
+         vga_rst      => o_rst_i,
+         vga_clk      => o_clk_o,                             -- video pixel clock
+         vga_vs       => o_vs_i,
+         vga_hs       => o_hs_i,
+         vga_de       => o_de_i,
+         vga_r        => std_logic_vector(o_r_i),
+         vga_g        => std_logic_vector(o_g_i),
+         vga_b        => std_logic_vector(o_b_i),
 
          -- PCM audio
          pcm_rst      => '0',
@@ -94,24 +94,24 @@ begin
    begin
       i_serialiser_10to1_selectio_data: entity work.serialiser_10to1_selectio
          port map (
-            rst_i    => video_rst,
-            clk_i    => video_clk,
+            rst_i    => o_rst_i,
+            clk_i    => o_clk_o,
             d_i      => video_data(i),
             clk_x5_i => hdmi_clk,
-            out_p_o  => hdmi_data_p(i),
-            out_n_o  => hdmi_data_n(i)
+            out_p_o  => hdmi_data_p_o(i),
+            out_n_o  => hdmi_data_n_o(i)
          ); -- i_serialiser_10to1_selectio_data
    end generate gen_hdmi_data;
 
 
    i_serialiser_10to1_selectio_clk : entity work.serialiser_10to1_selectio
    port map (
-         rst_i    => video_rst,
-         clk_i    => video_clk,
-         clk_x5_i => hdmi_clk,
+         rst_i    => o_rst_i,
+         clk_i    => o_clk_o,
          d_i      => "0000011111",
-         out_p_o  => hdmi_clk_p,
-         out_n_o  => hdmi_clk_n
+         clk_x5_i => hdmi_clk,
+         out_p_o  => hdmi_clk_p_o,
+         out_n_o  => hdmi_clk_n_o
       ); -- i_serialiser_10to1_selectio_clk
 
 end architecture synthesis;

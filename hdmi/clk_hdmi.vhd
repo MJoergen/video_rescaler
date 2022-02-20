@@ -4,32 +4,27 @@ use ieee.std_logic_1164.all;
 library unisim;
 use unisim.vcomponents.all;
 
-library xpm;
-use xpm.vcomponents.all;
-
 entity clk_hdmi is
    port (
-      sys_clk_i    : in  std_logic;   -- expects 100 MHz
-      sys_rstn_i   : in  std_logic;   -- Asynchronous, asserted low
-      i_clk_o      : out std_logic;   -- 74.25 MHz pixelclock for 720p @ 60 Hz
-      pixel_clk_o  : out std_logic;   -- 74.25 MHz pixelclock for 720p @ 60 Hz
-      pixel_rst_o  : out std_logic;   -- pixelclock reset, synchronized
-      pixel_clk5_o : out std_logic    -- pixelclock (74.25 MHz x 5 = 371.25 MHz) for HDMI
+      sys_clk_i  : in  std_logic;   -- expects 100 MHz
+      sys_rstn_i : in  std_logic;   -- Asynchronous, asserted low
+      i_clk_o    : out std_logic;   -- 25.17 MHz
+      o_clk_o    : out std_logic;   -- 74.25 MHz pixelclock for 720p @ 60 Hz
+      hdmi_clk_o : out std_logic;   -- pixelclock (74.25 MHz x 5 = 371.25 MHz) for HDMI
+      locked_o   : out std_logic
    );
 end entity clk_hdmi;
 
 architecture synthesis of clk_hdmi is
 
-   signal clkfb           : std_logic;
-   signal clkfb_mmcm      : std_logic;
-   signal i_clk_mmcm      : std_logic;
-   signal pixel_clk_mmcm  : std_logic;
-   signal pixel_clk5_mmcm : std_logic;
-   signal locked          : std_logic;
+   signal clkfb         : std_logic;
+   signal clkfb_mmcm    : std_logic;
+   signal i_clk_mmcm    : std_logic;
+   signal o_clk_mmcm    : std_logic;
+   signal hdmi_clk_mmcm : std_logic;
 
 begin
 
-   -- generate 74.25 MHz for 720p @ 60 Hz and 5x74.25 MHz = 371.25 MHz for HDMI
    -- VCO frequency range for Artix 7 speed grade -1 : 600 MHz - 1200 MHz
    -- f_VCO = f_CLKIN * CLKFBOUT_MULT_F / DIVCLK_DIVIDE   
    i_clk_hdmi : MMCME2_ADV
@@ -44,15 +39,15 @@ begin
          CLKFBOUT_MULT_F      => 37.125,     -- f_VCO = (100 MHz / 5) x 37.125 = 742.5 MHz
          CLKFBOUT_PHASE       => 0.000,
          CLKFBOUT_USE_FINE_PS => FALSE,
-         CLKOUT0_DIVIDE_F     => 29.500,     -- 25.17 MHz
+         CLKOUT0_DIVIDE_F     => 29.500,     -- i_clk @ 25.17 MHz
          CLKOUT0_PHASE        => 0.000,
          CLKOUT0_DUTY_CYCLE   => 0.500,
          CLKOUT0_USE_FINE_PS  => FALSE,
-         CLKOUT1_DIVIDE       => 10,         -- 74.25 MHz
+         CLKOUT1_DIVIDE       => 10,         -- o_clk @ 74.25 MHz
          CLKOUT1_PHASE        => 0.000,
          CLKOUT1_DUTY_CYCLE   => 0.500,
          CLKOUT1_USE_FINE_PS  => FALSE,
-         CLKOUT2_DIVIDE       => 2,          -- 371.25 MHz
+         CLKOUT2_DIVIDE       => 2,          -- hdmi_clk @ 371.25 MHz
          CLKOUT2_PHASE        => 0.000,
          CLKOUT2_DUTY_CYCLE   => 0.500,
          CLKOUT2_USE_FINE_PS  => FALSE
@@ -61,8 +56,8 @@ begin
          -- Output clocks
          CLKFBOUT            => clkfb_mmcm,
          CLKOUT0             => i_clk_mmcm,
-         CLKOUT1             => pixel_clk_mmcm,
-         CLKOUT2             => pixel_clk5_mmcm,
+         CLKOUT1             => o_clk_mmcm,
+         CLKOUT2             => hdmi_clk_mmcm,
          -- Input clock control
          CLKFBIN             => clkfb,
          CLKIN1              => sys_clk_i,
@@ -83,7 +78,7 @@ begin
          PSINCDEC            => '0',
          PSDONE              => open,
          -- Other control and status signals
-         LOCKED              => locked,
+         LOCKED              => locked_o,
          CLKINSTOPPED        => open,
          CLKFBSTOPPED        => open,
          PWRDWN              => '0',
@@ -107,33 +102,17 @@ begin
          O => i_clk_o
       ); -- i_bufg_i_clk
 
-   i_bufg_pixel_clk : BUFG
+   i_bufg_o_clk : BUFG
       port map (
-         I => pixel_clk_mmcm,
-         O => pixel_clk_o
-      ); -- i_bufg_pixel_clk
+         I => o_clk_mmcm,
+         O => o_clk_o
+      ); -- i_bufg_o_clk
 
-   i_bufg_pixel_clk5 : BUFG
+   i_bufg_hdmi_clk : BUFG
       port map (
-         I => pixel_clk5_mmcm,
-         O => pixel_clk5_o
-      ); -- i_bufg_pixel_clk5
-
-
-   -------------------------------------
-   -- Reset generation
-   -------------------------------------
-
-   i_xpm_cdc_sync_rst_pixel : xpm_cdc_sync_rst
-      generic map (
-         INIT_SYNC_FF => 1  -- Enable simulation init values
-      )
-      port map (
-         src_rst  => not (sys_rstn_i and locked),  -- 1-bit input: Source reset signal.
-         dest_clk => pixel_clk_o,                  -- 1-bit input: Destination clock.
-         dest_rst => pixel_rst_o                   -- 1-bit output: src_rst synchronized to the destination clock domain.
-                                                   -- This output is registered.
-      ); -- i_xpm_cdc_sync_rst_pixel
+         I => hdmi_clk_mmcm,
+         O => hdmi_clk_o
+      ); -- i_bufg_hdmi_clk
 
 end architecture synthesis;
 

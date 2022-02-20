@@ -12,7 +12,8 @@ entity hyperram_wrapper is
       sys_reset_n_i       : in    std_logic;                  -- CPU reset button (active low)
 
       avl_clk_o           : out   std_logic;
-      avl_rst_o           : out   std_logic;
+      locked_o            : out   std_logic;
+
       avl_rst_i           : in    std_logic;
       avl_burstcount_i    : in    std_logic_vector(7 downto 0);
       avl_writedata_i     : in    std_logic_vector(N_DW-1 downto 0);
@@ -56,17 +57,17 @@ architecture synthesis of hyperram_wrapper is
    signal hr_dq_out         : std_logic_vector(7 downto 0);
    signal hr_dq_oe          : std_logic;    -- Output enable for DQ
 
-   constant DEBUG_MODE                       : boolean := false;
-   attribute mark_debug                      : boolean;
-   attribute mark_debug of avm_waitrequest   : signal is DEBUG_MODE;
-   attribute mark_debug of avm_readdata      : signal is DEBUG_MODE;
-   attribute mark_debug of avm_readdatavalid : signal is DEBUG_MODE;
-   attribute mark_debug of avm_burstcount    : signal is DEBUG_MODE;
-   attribute mark_debug of avm_writedata     : signal is DEBUG_MODE;
-   attribute mark_debug of avm_address       : signal is DEBUG_MODE;
-   attribute mark_debug of avm_write         : signal is DEBUG_MODE;
-   attribute mark_debug of avm_read          : signal is DEBUG_MODE;
-   attribute mark_debug of avm_byteenable    : signal is DEBUG_MODE;
+   constant DEBUG_MODE                         : boolean := false;
+   attribute mark_debug                        : boolean;
+   attribute mark_debug of avl_write_i         : signal is DEBUG_MODE;
+   attribute mark_debug of avl_read_i          : signal is DEBUG_MODE;
+   attribute mark_debug of avl_waitrequest_o   : signal is DEBUG_MODE;
+   attribute mark_debug of avl_address_i       : signal is DEBUG_MODE;
+   attribute mark_debug of avl_burstcount_i    : signal is DEBUG_MODE;
+   attribute mark_debug of avl_writedata_i     : signal is DEBUG_MODE;
+   attribute mark_debug of avl_byteenable_i    : signal is DEBUG_MODE;
+   attribute mark_debug of avl_readdata_o      : signal is DEBUG_MODE;
+   attribute mark_debug of avl_readdatavalid_o : signal is DEBUG_MODE;
 
 begin
 
@@ -87,7 +88,7 @@ begin
          clk_x1_o     => clk_x1,
          clk_x2_o     => clk_x2,
          clk_x2_del_o => clk_x2_del,
-         rst_o        => avl_rst_o
+         locked_o     => locked_o
       ); -- i_clk_hr
 
 
