@@ -121,10 +121,11 @@ begin
                   s_avm_writedata  <= s_avm_writedata_i;
                   s_avm_byteenable <= s_avm_byteenable_i;
                   s_avm_burstcount <= std_logic_vector(to_unsigned(C_RATIO * to_integer(unsigned(s_avm_burstcount_i)), 8));
-                  s_write_pos      <= 0;
-                  s_read_pos       <= 0;
                   if s_avm_write_i = '1' then
+                     s_write_pos   <= 0;
                      state         <= WRITING_ST;
+                  else
+                     s_read_pos    <= 0;
                   end if;
                end if;
 
