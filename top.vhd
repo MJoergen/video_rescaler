@@ -29,200 +29,62 @@ end entity top;
 
 architecture synthesis of top is
 
-   constant N_DW : natural range 64 to 128 := 128;
-   constant N_AW : natural range 8 to 32 := 19;
-
-   signal i_clk               : std_logic;
-   signal o_clk               : std_logic;
-   signal avl_clk             : std_logic;
-   signal kbd_clk             : std_logic;
-   signal poly_clk            : std_logic := '0';
-   signal pal1_clk            : std_logic := '0';
-
-   signal video_pll_locked    : std_logic;
-   signal hyperram_pll_locked : std_logic;
-   signal keyboard_pll_locked : std_logic;
-   signal all_locked          : std_logic;
-
-   signal kbd_reset_n         : std_logic := '0';
-
-   signal kbd_rst             : std_logic;
-   signal avl_rst             : std_logic;
-   signal o_rst               : std_logic;
-   signal reset_na            : std_logic;
-
-   signal o_r                 : unsigned(7 downto 0);
-   signal o_g                 : unsigned(7 downto 0);
-   signal o_b                 : unsigned(7 downto 0);
-   signal o_hs                : std_logic; -- h sync
-   signal o_vs                : std_logic; -- v sync
-   signal o_de                : std_logic; -- display enable
-   signal o_vbl               : std_logic; -- v blank
-
-   signal avl_waitrequest     : std_logic;
-   signal avl_readdata        : std_logic_vector(N_DW-1 downto 0);
-   signal avl_readdatavalid   : std_logic;
-   signal avl_burstcount      : std_logic_vector(7 downto 0);
-   signal avl_writedata       : std_logic_vector(N_DW-1 downto 0);
-   signal avl_address         : std_logic_vector(N_AW-1 downto 0);
-   signal avl_write           : std_logic;
-   signal avl_read            : std_logic;
-   signal avl_byteenable      : std_logic_vector(N_DW/8-1 downto 0);
+   signal vga_clk : std_logic;
+   signal vga_r   : std_logic_vector(7 downto 0);
+   signal vga_g   : std_logic_vector(7 downto 0);
+   signal vga_b   : std_logic_vector(7 downto 0);
+   signal vga_hs  : std_logic;
+   signal vga_vs  : std_logic;
+   signal vga_de  : std_logic;
 
 begin
 
    --------------------------------------------------------
-   -- Instantiate DUT
+   -- Instantiate Core
    --------------------------------------------------------
 
-   i_sys : entity work.sys
-      generic map (
-         N_DW => N_DW,
-         N_AW => N_AW
-      )
+   i_democore : entity work.democore
       port map (
-         i_clk             => i_clk,
-         o_clk             => o_clk,
-         avl_clk           => avl_clk,
-         poly_clk          => poly_clk,
-         pal1_clk          => pal1_clk,
-         reset_na          => reset_na,
-         o_r               => o_r,
-         o_g               => o_g,
-         o_b               => o_b,
-         o_hs              => o_hs,
-         o_vs              => o_vs,
-         o_de              => o_de,
-         o_vbl             => o_vbl,
-         avl_write         => avl_write,
-         avl_read          => avl_read,
-         avl_address       => avl_address,
-         avl_writedata     => avl_writedata,
-         avl_byteenable    => avl_byteenable,
-         avl_burstcount    => avl_burstcount,
-         avl_readdata      => avl_readdata,
-         avl_readdatavalid => avl_readdatavalid,
-         avl_waitrequest   => avl_waitrequest
-      ); -- i_sys
+         sys_clk_i  => clk,       -- 100 MHz clock
+         sys_rstn_i => reset_n,   -- CPU reset button (active low)
+         vga_clk_o  => vga_clk,
+         vga_r_o    => vga_r,
+         vga_g_o    => vga_g,
+         vga_b_o    => vga_b,
+         vga_hs_o   => vga_hs,
+         vga_vs_o   => vga_vs,
+         vga_de_o   => vga_de
+      ); -- i_democore
 
 
    --------------------------------------------------------
-   -- Output HDMI generation
+   -- Instantiate MEGA65 framework
    --------------------------------------------------------
 
-   i_hdmi_wrapper : entity work.hdmi_wrapper
+   i_framework : entity work.framework
       port map (
-         clk_i         => clk,
-         reset_n_i     => reset_n,
-         --
-         i_clk_o       => i_clk,
-         o_clk_o       => o_clk,
-         locked_o      => video_pll_locked,
-         --
-         o_rst_i       => o_rst,
-         o_r_i         => o_r,
-         o_g_i         => o_g,
-         o_b_i         => o_b,
-         o_hs_i        => o_hs,
-         o_vs_i        => o_vs,
-         o_de_i        => o_de,
-         o_vbl_i       => o_vbl,
-         hdmi_data_p_o => hdmi_data_p,
-         hdmi_data_n_o => hdmi_data_n,
-         hdmi_clk_p_o  => hdmi_clk_p,
-         hdmi_clk_n_o  => hdmi_clk_n
-      ); -- i_hdmi_wrapper
-
-
-   --------------------------------------------------------
-   -- HyperRAM wrapper
-   --------------------------------------------------------
-
-   i_hyperram_wrapper : entity work.hyperram_wrapper
-      generic map (
-         N_DW => N_DW,
-         N_AW => N_AW
-      )
-      port map (
-         sys_clk_i           => clk,
-         sys_reset_n_i       => reset_n,
-         --
-         avl_clk_o           => avl_clk,
-         locked_o            => hyperram_pll_locked,
-         --
-         avl_rst_i           => avl_rst,
-         avl_burstcount_i    => avl_burstcount,
-         avl_writedata_i     => avl_writedata,
-         avl_address_i       => avl_address,
-         avl_write_i         => avl_write,
-         avl_read_i          => avl_read,
-         avl_byteenable_i    => avl_byteenable,
-         avl_waitrequest_o   => avl_waitrequest,
-         avl_readdata_o      => avl_readdata,
-         avl_readdatavalid_o => avl_readdatavalid,
-         hr_resetn_o         => hr_resetn,
-         hr_csn_o            => hr_csn,
-         hr_ck_o             => hr_ck,
-         hr_rwds_io          => hr_rwds,
-         hr_dq_io            => hr_dq
-      ); -- i_hyperram_wrapper
-
-
-   ----------------------------------
-   -- Keyboard wrapper
-   ----------------------------------
-
-   i_keyboard_wrapper : entity work.keyboard_wrapper
-      port map (
-         clk        => clk,
-         reset_n    => reset_n,
-         kbd_clk_o  => kbd_clk,
-         locked_o   => keyboard_pll_locked,
-         kbd_rst_i  => kbd_rst,
-         kb_io0     => kb_io0,
-         kb_io1     => kb_io1,
-         kb_io2     => kb_io2,
-         return_out => kbd_reset_n
-      ); -- i_keyboard_wrapper
-
-
-   ----------------------------------
-   -- Reset generation
-   ----------------------------------
-
-   all_locked <= video_pll_locked and hyperram_pll_locked and keyboard_pll_locked;
-   reset_na <= all_locked and kbd_reset_n;   -- Global reset
-
-   i_xpm_cdc_async_rst_kbd : xpm_cdc_async_rst
-      generic map (
-         RST_ACTIVE_HIGH => 1
-      )
-      port map (
-         src_arst  => not all_locked, -- input
-         dest_clk  => kbd_clk,        -- input
-         dest_arst => kbd_rst         -- output
-      ); -- i_xpm_cdc_async_rst_kbd
-
-   i_xpm_cdc_async_rst_avl : xpm_cdc_async_rst
-      generic map (
-         RST_ACTIVE_HIGH => 1
-      )
-      port map (
-         src_arst  => not reset_na, -- input
-         dest_clk  => avl_clk,      -- input
-         dest_arst => avl_rst       -- output
-      ); -- i_xpm_cdc_async_rst_avl
-
-   i_xpm_cdc_async_rst_o : xpm_cdc_async_rst
-      generic map (
-         RST_ACTIVE_HIGH => 1
-      )
-      port map (
-         src_arst  => not all_locked, -- input
-         dest_clk  => o_clk,          -- input
-         dest_arst => o_rst           -- output
-      ); -- i_xpm_cdc_async_rst_o
-
+         vga_clk_i   => vga_clk,
+         vga_r_i     => vga_r,
+         vga_g_i     => vga_g,
+         vga_b_i     => vga_b,
+         vga_hs_i    => vga_hs,
+         vga_vs_i    => vga_vs,
+         vga_de_i    => vga_de,
+         clk         => clk,
+         reset_n     => reset_n,
+         hr_resetn   => hr_resetn,
+         hr_csn      => hr_csn,
+         hr_ck       => hr_ck,
+         hr_rwds     => hr_rwds,
+         hr_dq       => hr_dq,
+         kb_io0      => kb_io0,
+         kb_io1      => kb_io1,
+         kb_io2      => kb_io2,
+         hdmi_data_p => hdmi_data_p,
+         hdmi_data_n => hdmi_data_n,
+         hdmi_clk_p  => hdmi_clk_p,
+         hdmi_clk_n  => hdmi_clk_n
+      ); -- i_framework
 
 end architecture synthesis;
 
