@@ -57,18 +57,6 @@ architecture synthesis of hyperram_wrapper is
    signal hr_dq_out         : std_logic_vector(7 downto 0);
    signal hr_dq_oe          : std_logic;    -- Output enable for DQ
 
-   constant DEBUG_MODE                         : boolean := false;
-   attribute mark_debug                        : boolean;
-   attribute mark_debug of avl_write_i         : signal is DEBUG_MODE;
-   attribute mark_debug of avl_read_i          : signal is DEBUG_MODE;
-   attribute mark_debug of avl_waitrequest_o   : signal is DEBUG_MODE;
-   attribute mark_debug of avl_address_i       : signal is DEBUG_MODE;
-   attribute mark_debug of avl_burstcount_i    : signal is DEBUG_MODE;
-   attribute mark_debug of avl_writedata_i     : signal is DEBUG_MODE;
-   attribute mark_debug of avl_byteenable_i    : signal is DEBUG_MODE;
-   attribute mark_debug of avl_readdata_o      : signal is DEBUG_MODE;
-   attribute mark_debug of avl_readdatavalid_o : signal is DEBUG_MODE;
-
 begin
 
    --------------------------------------------------------
