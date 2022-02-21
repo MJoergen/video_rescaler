@@ -4,38 +4,40 @@ use ieee.numeric_std.all;
 
 entity top is
    port (
-      clk         : in    std_logic;                  -- 100 MHz clock
-      reset_n     : in    std_logic;                  -- CPU reset button (active low)
+      clk          : in    std_logic;                  -- 100 MHz clock
+      reset_n      : in    std_logic;                  -- CPU reset button (active low)
 
       -- HyperRAM device interface
-      hr_resetn   : out   std_logic;
-      hr_csn      : out   std_logic;
-      hr_ck       : out   std_logic;
-      hr_rwds     : inout std_logic;
-      hr_dq       : inout std_logic_vector(7 downto 0);
+      hr_resetn    : out   std_logic;
+      hr_csn       : out   std_logic;
+      hr_ck        : out   std_logic;
+      hr_rwds      : inout std_logic;
+      hr_dq        : inout std_logic_vector(7 downto 0);
 
       -- MEGA65 keyboard
-      kb_io0      : out   std_logic;
-      kb_io1      : out   std_logic;
-      kb_io2      : in    std_logic;
+      kb_io0       : out   std_logic;
+      kb_io1       : out   std_logic;
+      kb_io2       : in    std_logic;
+
+      -- VGA output
+      vga_red      : out   std_logic_vector(7 downto 0);
+      vga_green    : out   std_logic_vector(7 downto 0);
+      vga_blue     : out   std_logic_vector(7 downto 0);
+      vga_hs       : out   std_logic;
+      vga_vs       : out   std_logic;
+      vdac_clk     : out   std_logic;
+      vdac_sync_n  : out   std_logic := '0';
+      vdac_blank_n : out   std_logic;
 
       -- MEGA65 Digital Video (HDMI)
-      hdmi_data_p : out   std_logic_vector(2 downto 0);
-      hdmi_data_n : out   std_logic_vector(2 downto 0);
-      hdmi_clk_p  : out   std_logic;
-      hdmi_clk_n  : out   std_logic
+      hdmi_data_p  : out   std_logic_vector(2 downto 0);
+      hdmi_data_n  : out   std_logic_vector(2 downto 0);
+      hdmi_clk_p   : out   std_logic;
+      hdmi_clk_n   : out   std_logic
    );
 end entity top;
 
 architecture synthesis of top is
-
-   signal vga_clk : std_logic;
-   signal vga_r   : std_logic_vector(7 downto 0);
-   signal vga_g   : std_logic_vector(7 downto 0);
-   signal vga_b   : std_logic_vector(7 downto 0);
-   signal vga_hs  : std_logic;
-   signal vga_vs  : std_logic;
-   signal vga_de  : std_logic;
 
 begin
 
@@ -47,13 +49,13 @@ begin
       port map (
          sys_clk_i  => clk,       -- 100 MHz clock
          sys_rstn_i => reset_n,   -- CPU reset button (active low)
-         vga_clk_o  => vga_clk,
-         vga_r_o    => vga_r,
-         vga_g_o    => vga_g,
-         vga_b_o    => vga_b,
+         vga_clk_o  => vdac_clk,
+         vga_r_o    => vga_red,
+         vga_g_o    => vga_green,
+         vga_b_o    => vga_blue,
          vga_hs_o   => vga_hs,
          vga_vs_o   => vga_vs,
-         vga_de_o   => vga_de
+         vga_de_o   => vdac_blank_n
       ); -- i_democore
 
 
@@ -63,13 +65,13 @@ begin
 
    i_framework : entity work.framework
       port map (
-         vga_clk_i   => vga_clk,
-         vga_r_i     => vga_r,
-         vga_g_i     => vga_g,
-         vga_b_i     => vga_b,
+         vga_clk_i   => vdac_clk,
+         vga_r_i     => vga_red,
+         vga_g_i     => vga_green,
+         vga_b_i     => vga_blue,
          vga_hs_i    => vga_hs,
          vga_vs_i    => vga_vs,
-         vga_de_i    => vga_de,
+         vga_de_i    => vdac_blank_n,
          clk         => clk,
          reset_n     => reset_n,
          hr_resetn   => hr_resetn,
