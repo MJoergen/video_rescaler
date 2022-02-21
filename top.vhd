@@ -218,9 +218,9 @@ begin
          RST_ACTIVE_HIGH => 1
       )
       port map (
-         src_arst  => not reset_na, -- input
-         dest_clk  => kbd_clk,      -- input
-         dest_arst => kbd_rst       -- output
+         src_arst  => not all_locked, -- input
+         dest_clk  => kbd_clk,        -- input
+         dest_arst => kbd_rst         -- output
       ); -- i_xpm_cdc_async_rst_kbd
 
    i_xpm_cdc_async_rst_avl : xpm_cdc_async_rst

@@ -985,13 +985,21 @@ ARCHITECTURE rtl OF ascal IS
   
    constant DEBUG_MODE                        : boolean := false;
    attribute mark_debug                       : boolean;
+   attribute mark_debug of reset_na           : signal is DEBUG_MODE;
    attribute mark_debug of avl_dr             : signal is DEBUG_MODE;
    attribute mark_debug of avl_dw             : signal is DEBUG_MODE;
    attribute mark_debug of avl_rad_c          : signal is DEBUG_MODE;
+   attribute mark_debug of avl_readack        : signal is DEBUG_MODE;
+   attribute mark_debug of avl_read_clr       : signal is DEBUG_MODE;
+   attribute mark_debug of avl_readdataack    : signal is DEBUG_MODE;
+   attribute mark_debug of avl_read_i         : signal is DEBUG_MODE;
    attribute mark_debug of avl_read_pulse     : signal is DEBUG_MODE;
    attribute mark_debug of avl_read_sr        : signal is DEBUG_MODE;
+   attribute mark_debug of avl_reset_na       : signal is DEBUG_MODE;
    attribute mark_debug of avl_state          : signal is DEBUG_MODE;
    attribute mark_debug of avl_wad            : signal is DEBUG_MODE;
+   attribute mark_debug of avl_write_clr      : signal is DEBUG_MODE;
+   attribute mark_debug of avl_write_i        : signal is DEBUG_MODE;
    attribute mark_debug of avl_write_pulse    : signal is DEBUG_MODE;
    attribute mark_debug of avl_write_sr       : signal is DEBUG_MODE;
    attribute mark_debug of avl_wr             : signal is DEBUG_MODE;
@@ -1556,6 +1564,8 @@ BEGIN
       avl_read_sr<='0';
       avl_readdataack<='0';
       avl_readack<='0';
+      avl_read_i<='0';
+      avl_write_i<='0';
       
     ELSIF rising_edge(avl_clk) THEN
       ----------------------------------
