@@ -58,15 +58,16 @@ architecture synthesis of framework is
    constant C_AVM_ADDRESS_SIZE : integer := 19;
    constant C_AVM_DATA_SIZE    : integer := 128;
 
-   signal avl_waitrequest     : std_logic;
-   signal avl_readdata        : std_logic_vector(C_AVM_DATA_SIZE-1 DOWNTO 0);
-   signal avl_readdatavalid   : std_logic;
-   signal avl_burstcount      : std_logic_vector(7 DOWNTO 0);
-   signal avl_writedata       : std_logic_vector(C_AVM_DATA_SIZE-1 DOWNTO 0);
-   signal avl_address         : std_logic_vector(C_AVM_ADDRESS_SIZE-1 DOWNTO 0);
    signal avl_write           : std_logic;
    signal avl_read            : std_logic;
+   signal avl_waitrequest     : std_logic;
+   signal avl_address         : std_logic_vector(C_AVM_ADDRESS_SIZE-1 DOWNTO 0);
+   signal avl_burstcount      : std_logic_vector(7 DOWNTO 0);
    signal avl_byteenable      : std_logic_vector(C_AVM_DATA_SIZE/8-1 DOWNTO 0);
+   signal avl_writedata       : std_logic_vector(C_AVM_DATA_SIZE-1 DOWNTO 0);
+   signal avl_readdata        : std_logic_vector(C_AVM_DATA_SIZE-1 DOWNTO 0);
+   signal avl_readdatavalid   : std_logic;
+
 
 begin
 
@@ -265,14 +266,14 @@ begin
          hsstart           => 1280 + 110,             -- input
          hsend             => 1280 + 110 + 40,        -- input
          hdisp             => 1280,                   -- input
-         hmin              => 320,                    -- input
-         hmax              => 959,                    -- input
+         hmin              => 160,                    -- input
+         hmax              => 1119,                   -- input
          vtotal            => 720 + 5 + 20 + 5,       -- input
          vsstart           => 720 + 5,                -- input
          vsend             => 720 + 5 + 5,            -- input
          vdisp             => 720,                    -- input
-         vmin              => 120,                    -- input
-         vmax              => 599,                    -- input
+         vmin              => 0,                      -- input
+         vmax              => 719,                    -- input
          format            => "01",                   -- input
          poly_clk          => '0',                    -- input
          poly_dw           => (others => '0'),        -- input
