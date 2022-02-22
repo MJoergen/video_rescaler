@@ -71,6 +71,19 @@ architecture synthesis of framework is
    signal avl_readdata        : std_logic_vector(C_AVM_DATA_SIZE-1 DOWNTO 0);
    signal avl_readdatavalid   : std_logic;
 
+   constant C_DEBUG_MODE                     : boolean := true;
+   attribute mark_debug                      : boolean;
+   attribute mark_debug of avl_rst           : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_write         : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_read          : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_waitrequest   : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_address       : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_burstcount    : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_byteenable    : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_writedata     : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_readdata      : signal is C_DEBUG_MODE;
+   attribute mark_debug of avl_readdatavalid : signal is C_DEBUG_MODE;
+
 
 begin
 

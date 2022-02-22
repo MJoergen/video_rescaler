@@ -982,6 +982,18 @@ ARCHITECTURE rtl OF ascal IS
     p.b:=bound(unsigned(t.b0+t.b1),15);
     RETURN p;
   END FUNCTION;
+
+   constant C_DEBUG_MODE                       : boolean := true;
+   attribute mark_debug                        : boolean;
+   attribute mark_debug of o_reset_na          : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_copy              : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_state             : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_read_pre          : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_readlev           : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_copylev           : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_hsp               : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_readack           : signal is C_DEBUG_MODE;
+   attribute mark_debug of o_readdataack       : signal is C_DEBUG_MODE;
   
 BEGIN
   
