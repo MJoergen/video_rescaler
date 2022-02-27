@@ -8,13 +8,13 @@ use xpm.vcomponents.all;
 entity framework is
    port (
       -- Core connections
-      vga_clk_i   : in  std_logic;
-      vga_r_i     : in  std_logic_vector(7 downto 0);
-      vga_g_i     : in  std_logic_vector(7 downto 0);
-      vga_b_i     : in  std_logic_vector(7 downto 0);
-      vga_hs_i    : in  std_logic; -- h sync
-      vga_vs_i    : in  std_logic; -- v sync
-      vga_de_i    : in  std_logic; -- display enable
+      vga_clk_i   : in    std_logic;
+      vga_r_i     : in    std_logic_vector(7 downto 0);
+      vga_g_i     : in    std_logic_vector(7 downto 0);
+      vga_b_i     : in    std_logic_vector(7 downto 0);
+      vga_hs_i    : in    std_logic; -- h sync
+      vga_vs_i    : in    std_logic; -- v sync
+      vga_de_i    : in    std_logic; -- display enable
 
       -- MEGA65 I/O connections
       clk         : in    std_logic;                  -- 100 MHz clock
@@ -36,6 +36,28 @@ end entity framework;
 
 architecture synthesis of framework is
 
+   -- Output video mode (1280x720 @ 60 Hz, aspect ratio 16:9)
+   constant CLK_KHZ     : integer := 74250;     -- 74.25 MHz
+   constant CEA_CTA_VIC : integer :=     4;
+   constant H_PIXELS    : integer :=  1280;     -- horizontal display width in pixels
+   constant V_PIXELS    : integer :=   720;     -- vertical display width in rows
+   constant H_FP        : integer :=   110;     -- horizontal front porch width in pixels
+   constant H_PULSE     : integer :=    40;     -- horizontal sync pulse width in pixels
+   constant H_BP        : integer :=   220;     -- horizontal back porch width in pixels
+   constant V_FP        : integer :=     5;     -- vertical front porch width in rows
+   constant V_PULSE     : integer :=     5;     -- vertical sync pulse width in rows
+   constant V_BP        : integer :=    20;     -- vertical back porch width in rows
+   constant H_MAX       : integer :=  1650;
+   constant V_MAX       : integer :=   750;
+   constant H_POL       : std_logic := '1';     -- horizontal sync pulse polarity (1 = positive, 0 = negative)
+   constant V_POL       : std_logic := '1';     -- vertical sync pulse polarity (1 = positive, 0 = negative)
+
+   -- Auto-calculate display dimensions based on an 4:3 aspect ratio
+   constant DISP_HMIN : integer := (H_PIXELS-V_PIXELS*4/3)/2;
+   constant DISP_HMAX : integer := (H_PIXELS+V_PIXELS*4/3)/2-1;
+   constant DISP_VMIN : integer := 0;
+   constant DISP_VMAX : integer := V_PIXELS-1;
+
    -- Clocks
    signal o_clk      : std_logic;
    signal hdmi_clk   : std_logic;
@@ -51,16 +73,18 @@ architecture synthesis of framework is
    signal kbd_rst    : std_logic;
    signal o_rst      : std_logic;
 
-   signal o_r     : unsigned(7 downto 0);
-   signal o_g     : unsigned(7 downto 0);
-   signal o_b     : unsigned(7 downto 0);
-   signal o_hs    : std_logic;
-   signal o_vs    : std_logic;
-   signal o_de    : std_logic;
+   -- HDMI video stream
+   signal o_r        : unsigned(7 downto 0);
+   signal o_g        : unsigned(7 downto 0);
+   signal o_b        : unsigned(7 downto 0);
+   signal o_hs       : std_logic;
+   signal o_vs       : std_logic;
+   signal o_de       : std_logic;
 
    constant C_AVM_ADDRESS_SIZE : integer := 19;
    constant C_AVM_DATA_SIZE    : integer := 128;
 
+   -- Video rescaler interface to HyperRAM
    signal avl_write           : std_logic;
    signal avl_read            : std_logic;
    signal avl_waitrequest     : std_logic;
@@ -83,7 +107,6 @@ architecture synthesis of framework is
    attribute mark_debug of avl_writedata     : signal is C_DEBUG_MODE;
    attribute mark_debug of avl_readdata      : signal is C_DEBUG_MODE;
    attribute mark_debug of avl_readdatavalid : signal is C_DEBUG_MODE;
-
 
 begin
 
@@ -145,6 +168,9 @@ begin
    --------------------------------------------------------
 
    i_hdmi_wrapper : entity work.hdmi_wrapper
+      generic map (
+         CEA_CTA_VIC => CEA_CTA_VIC
+      )
       port map (
          o_clk_i       => o_clk,
          o_rst_i       => o_rst,
@@ -231,81 +257,81 @@ begin
          N_BURST   => 256  -- 256 bytes per burst
       )
       port map (
-         i_r               => unsigned(vga_r_i),      -- input
-         i_g               => unsigned(vga_g_i),      -- input
-         i_b               => unsigned(vga_b_i),      -- input
-         i_hs              => vga_hs_i,               -- input
-         i_vs              => vga_vs_i,               -- input
-         i_fl              => '0',                    -- input
-         i_de              => vga_de_i,               -- input
-         i_ce              => '1',                    -- input
-         i_clk             => vga_clk_i,              -- input
-         o_r               => o_r,                    -- output
-         o_g               => o_g,                    -- output
-         o_b               => o_b,                    -- output
-         o_hs              => o_hs,                   -- output
-         o_vs              => o_vs,                   -- output
-         o_de              => o_de,                   -- output
-         o_vbl             => open,                   -- output
-         o_ce              => '1',                    -- input
-         o_clk             => o_clk,                  -- input
-         o_border          => X"886644",              -- input
-         o_fb_ena          => '0',                    -- input
-         o_fb_hsize        => 0,                      -- input
-         o_fb_vsize        => 0,                      -- input
-         o_fb_format       => "000100",               -- input
-         o_fb_base         => x"0000_0000",           -- input
-         o_fb_stride       => (others => '0'),        -- input
-         pal1_clk          => '0',                    -- input
-         pal1_dw           => x"000000000000",        -- input
-         pal1_dr           => open,                   -- output
-         pal1_a            => "0000000",              -- input
-         pal1_wr           => '0',                    -- input
-         pal_n             => '0',                    -- input
-         pal2_clk          => '0',                    -- input
-         pal2_dw           => x"000000",              -- input
-         pal2_dr           => open,                   -- output
-         pal2_a            => "00000000",             -- input
-         pal2_wr           => '0',                    -- input
-         o_lltune          => open,                   -- output
-         iauto             => '1',                    -- input
-         himin             => 0,                      -- input
-         himax             => 0,                      -- input
-         vimin             => 0,                      -- input
-         vimax             => 0,                      -- input
-         i_hdmax           => open,                   -- output
-         i_vdmax           => open,                   -- output
-         run               => '1',                    -- input
-         freeze            => '0',                    -- input
-         mode              => "00000",                -- input
-         htotal            => 1280 + 110 + 220 + 40,  -- input
-         hsstart           => 1280 + 110,             -- input
-         hsend             => 1280 + 110 + 40,        -- input
-         hdisp             => 1280,                   -- input
-         hmin              => 160,                    -- input
-         hmax              => 1119,                   -- input
-         vtotal            => 720 + 5 + 20 + 5,       -- input
-         vsstart           => 720 + 5,                -- input
-         vsend             => 720 + 5 + 5,            -- input
-         vdisp             => 720,                    -- input
-         vmin              => 0,                      -- input
-         vmax              => 719,                    -- input
-         format            => "01",                   -- input
-         poly_clk          => '0',                    -- input
-         poly_dw           => (others => '0'),        -- input
-         poly_a            => (others => '0'),        -- input
-         poly_wr           => '0',                    -- input
-         avl_clk           => avl_clk,                -- input
-         avl_waitrequest   => avl_waitrequest,        -- input
-         avl_readdata      => avl_readdata,           -- input
-         avl_readdatavalid => avl_readdatavalid,      -- input
-         avl_burstcount    => avl_burstcount,         -- output
-         avl_writedata     => avl_writedata,          -- output
-         avl_address       => avl_address,            -- output
-         avl_write         => avl_write,              -- output
-         avl_read          => avl_read,               -- output
-         avl_byteenable    => avl_byteenable,         -- output
-         reset_na          => locked                  -- input
+         i_r               => unsigned(vga_r_i),         -- input
+         i_g               => unsigned(vga_g_i),         -- input
+         i_b               => unsigned(vga_b_i),         -- input
+         i_hs              => vga_hs_i,                  -- input
+         i_vs              => vga_vs_i,                  -- input
+         i_fl              => '0',                       -- input
+         i_de              => vga_de_i,                  -- input
+         i_ce              => '1',                       -- input
+         i_clk             => vga_clk_i,                 -- input
+         o_r               => o_r,                       -- output
+         o_g               => o_g,                       -- output
+         o_b               => o_b,                       -- output
+         o_hs              => o_hs,                      -- output
+         o_vs              => o_vs,                      -- output
+         o_de              => o_de,                      -- output
+         o_vbl             => open,                      -- output
+         o_ce              => '1',                       -- input
+         o_clk             => o_clk,                     -- input
+         o_border          => X"886644",                 -- input
+         o_fb_ena          => '0',                       -- input
+         o_fb_hsize        => 0,                         -- input
+         o_fb_vsize        => 0,                         -- input
+         o_fb_format       => "000100",                  -- input
+         o_fb_base         => x"0000_0000",              -- input
+         o_fb_stride       => (others => '0'),           -- input
+         pal1_clk          => '0',                       -- input
+         pal1_dw           => x"000000000000",           -- input
+         pal1_dr           => open,                      -- output
+         pal1_a            => "0000000",                 -- input
+         pal1_wr           => '0',                       -- input
+         pal_n             => '0',                       -- input
+         pal2_clk          => '0',                       -- input
+         pal2_dw           => x"000000",                 -- input
+         pal2_dr           => open,                      -- output
+         pal2_a            => "00000000",                -- input
+         pal2_wr           => '0',                       -- input
+         o_lltune          => open,                      -- output
+         iauto             => '1',                       -- input
+         himin             => 0,                         -- input
+         himax             => 0,                         -- input
+         vimin             => 0,                         -- input
+         vimax             => 0,                         -- input
+         i_hdmax           => open,                      -- output
+         i_vdmax           => open,                      -- output
+         run               => '1',                       -- input
+         freeze            => '0',                       -- input
+         mode              => "00000",                   -- input
+         htotal            => H_MAX,                     -- input
+         hsstart           => H_PIXELS + H_FP,           -- input
+         hsend             => H_PIXELS + H_FP + H_PULSE, -- input
+         hdisp             => H_PIXELS,                  -- input
+         vtotal            => V_MAX,                     -- input
+         vsstart           => V_PIXELS + V_FP,           -- input
+         vsend             => V_PIXELS + V_FP + V_PULSE, -- input
+         vdisp             => V_PIXELS,                  -- input
+         hmin              => DISP_HMIN,                 -- input
+         hmax              => DISP_HMAX,                 -- input
+         vmin              => DISP_VMIN,                 -- input
+         vmax              => DISP_VMAX,                 -- input
+         format            => "01",                      -- input
+         poly_clk          => '0',                       -- input
+         poly_dw           => (others => '0'),           -- input
+         poly_a            => (others => '0'),           -- input
+         poly_wr           => '0',                       -- input
+         avl_clk           => avl_clk,                   -- input
+         avl_waitrequest   => avl_waitrequest,           -- input
+         avl_readdata      => avl_readdata,              -- input
+         avl_readdatavalid => avl_readdatavalid,         -- input
+         avl_burstcount    => avl_burstcount,            -- output
+         avl_writedata     => avl_writedata,             -- output
+         avl_address       => avl_address,               -- output
+         avl_write         => avl_write,                 -- output
+         avl_read          => avl_read,                  -- output
+         avl_byteenable    => avl_byteenable,            -- output
+         reset_na          => locked                     -- input
       ); -- i_ascal
 
 end architecture synthesis;

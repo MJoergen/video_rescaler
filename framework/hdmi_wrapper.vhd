@@ -6,6 +6,9 @@ library work;
 use work.types_pkg.all;
 
 entity hdmi_wrapper is
+   generic (
+      CEA_CTA_VIC : integer
+   );
    port (
       o_clk_i       : in  std_logic;
       o_rst_i       : in  std_logic;
@@ -34,7 +37,7 @@ begin
       port map (
          select_44100 => '0',
          dvi          => '0',
-         vic          => std_logic_vector(to_unsigned(4,8)),  -- CEA/CTA VIC 4=720p @ 60 Hz
+         vic          => std_logic_vector(to_unsigned(CEA_CTA_VIC,8)),
          aspect       => "10",                                -- 01=4:3, 10=16:9
          pix_rep      => '0',                                 -- no pixel repetition
          vs_pol       => '1',                                 -- horizontal polarity: positive

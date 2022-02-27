@@ -20,7 +20,7 @@ end entity clk;
 
 architecture synthesis of clk is
 
-   constant C_HYPERRAM_PHASE : real := 162.000;
+   constant C_HYPERRAM_PHASE : real := 180.000;
 
    signal hdmi_clkfb      : std_logic;
    signal hdmi_clkfb_mmcm : std_logic;
