@@ -131,9 +131,6 @@ begin
    -------------------------------------
 
    i_xpm_cdc_sync_rst_video : xpm_cdc_sync_rst
-      generic map (
-         RST_ACTIVE_HIGH => 1
-      )
       port map (
          src_rst  => not (sys_rstn_i and locked),  -- 1-bit input: Source reset signal.
          dest_clk => vga_clk_o,                    -- 1-bit input: Destination clock.
@@ -142,9 +139,6 @@ begin
       ); -- i_xpm_cdc_sync_rst_video
 
    i_xpm_cdc_sync_rst_audio : xpm_cdc_sync_rst
-      generic map (
-         RST_ACTIVE_HIGH => 1
-      )
       port map (
          src_rst  => not (sys_rstn_i and locked),  -- 1-bit input: Source reset signal.
          dest_clk => audio_clk_o,                  -- 1-bit input: Destination clock.
