@@ -983,7 +983,7 @@ ARCHITECTURE rtl OF ascal IS
     RETURN p;
   END FUNCTION;
 
-   constant C_DEBUG_MODE                       : boolean := true;
+   constant C_DEBUG_MODE                       : boolean := false;
    attribute mark_debug                        : boolean;
    attribute mark_debug of o_reset_na          : signal is C_DEBUG_MODE;
    attribute mark_debug of o_copy              : signal is C_DEBUG_MODE;
