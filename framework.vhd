@@ -8,29 +8,36 @@ use xpm.vcomponents.all;
 entity framework is
    port (
       -- Core connections
-      vga_clk_i   : in    std_logic;
-      vga_r_i     : in    std_logic_vector(7 downto 0);
-      vga_g_i     : in    std_logic_vector(7 downto 0);
-      vga_b_i     : in    std_logic_vector(7 downto 0);
-      vga_hs_i    : in    std_logic; -- h sync
-      vga_vs_i    : in    std_logic; -- v sync
-      vga_de_i    : in    std_logic; -- display enable
+      vga_clk_i     : in    std_logic;
+      vga_r_i       : in    std_logic_vector(7 downto 0);
+      vga_g_i       : in    std_logic_vector(7 downto 0);
+      vga_b_i       : in    std_logic_vector(7 downto 0);
+      vga_hs_i      : in    std_logic; -- h sync
+      vga_vs_i      : in    std_logic; -- v sync
+      vga_de_i      : in    std_logic; -- display enable
+
+      audio_clk_i   : in    std_logic;
+      audio_rst_i   : in    std_logic;
+      audio_left_i  : in    std_logic_vector(15 downto 0); -- signed
+      audio_right_i : in    std_logic_vector(15 downto 0); -- signed
 
       -- MEGA65 I/O connections
-      clk         : in    std_logic;                  -- 100 MHz clock
-      reset_n     : in    std_logic;                  -- CPU reset button (active low)
-      hr_resetn   : out   std_logic;
-      hr_csn      : out   std_logic;
-      hr_ck       : out   std_logic;
-      hr_rwds     : inout std_logic;
-      hr_dq       : inout std_logic_vector(7 downto 0);
-      kb_io0      : out   std_logic;
-      kb_io1      : out   std_logic;
-      kb_io2      : in    std_logic;
-      hdmi_data_p : out   std_logic_vector(2 downto 0);
-      hdmi_data_n : out   std_logic_vector(2 downto 0);
-      hdmi_clk_p  : out   std_logic;
-      hdmi_clk_n  : out   std_logic
+      clk           : in    std_logic;                  -- 100 MHz clock
+      reset_n       : in    std_logic;                  -- CPU reset button (active low)
+      pwm_l         : out   std_logic;
+      pwm_r         : out   std_logic;
+      hr_resetn     : out   std_logic;
+      hr_csn        : out   std_logic;
+      hr_ck         : out   std_logic;
+      hr_rwds       : inout std_logic;
+      hr_dq         : inout std_logic_vector(7 downto 0);
+      kb_io0        : out   std_logic;
+      kb_io1        : out   std_logic;
+      kb_io2        : in    std_logic;
+      hdmi_data_p   : out   std_logic_vector(2 downto 0);
+      hdmi_data_n   : out   std_logic_vector(2 downto 0);
+      hdmi_clk_p    : out   std_logic;
+      hdmi_clk_n    : out   std_logic
    );
 end entity framework;
 
@@ -173,14 +180,18 @@ begin
          CEA_CTA_VIC => CEA_CTA_VIC
       )
       port map (
-         o_clk_i       => o_clk,
-         o_rst_i       => o_rst,
-         o_r_i         => o_r,
-         o_g_i         => o_g,
-         o_b_i         => o_b,
-         o_hs_i        => o_hs,
-         o_vs_i        => o_vs,
-         o_de_i        => o_de,
+         video_clk_i   => o_clk,
+         video_rst_i   => o_rst,
+         video_r_i     => o_r,
+         video_g_i     => o_g,
+         video_b_i     => o_b,
+         video_hs_i    => o_hs,
+         video_vs_i    => o_vs,
+         video_de_i    => o_de,
+         audio_clk_i   => audio_clk_i,
+         audio_rst_i   => audio_rst_i,
+         audio_left_i  => audio_left_i,
+         audio_right_i => audio_right_i,
          hdmi_clk_i    => hdmi_clk,
          hdmi_data_p_o => hdmi_data_p,
          hdmi_data_n_o => hdmi_data_n,
@@ -334,6 +345,10 @@ begin
          avl_byteenable    => avl_byteenable,            -- output
          reset_na          => locked                     -- input
       ); -- i_ascal
+
+   -- Audio
+   pwm_l <= audio_left_i(15);
+   pwm_r <= audio_right_i(15);
 
 end architecture synthesis;
 

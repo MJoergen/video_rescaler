@@ -205,5 +205,6 @@ begin
          I => clk_x2_del_mmcm,
          O => clk_x2_del_o
       ); -- i_bufg_clk_x2_del
+
 end architecture synthesis;
 

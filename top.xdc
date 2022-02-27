@@ -74,6 +74,10 @@ set_property -dict {PACKAGE_PIN AA9  IOSTANDARD LVCMOS33} [get_ports vdac_clk]
 set_property -dict {PACKAGE_PIN V10  IOSTANDARD LVCMOS33} [get_ports vdac_sync_n]
 set_property -dict {PACKAGE_PIN W11  IOSTANDARD LVCMOS33} [get_ports vdac_blank_n]
 
+set_property -dict {PACKAGE_PIN L6   IOSTANDARD LVCMOS33} [get_ports pwm_l]
+set_property -dict {PACKAGE_PIN F4   IOSTANDARD LVCMOS33} [get_ports pwm_r]
+
+
 
 
 ############################################################################################################
@@ -97,7 +101,8 @@ set_property LOC SLICE_X0Y207 [get_cells -hier hr_rwds_oe_o_reg]
 set_property LOC SLICE_X1Y207 [get_cells -hier rwds_in_x2_reg]
 set_property LOC SLICE_X0Y209 [get_cells -hier hr_dq_oe_o_reg]
 
-create_generated_clock -name vga_clk    [get_pins i_democore/i_clk_vga/CLKOUT0]
+create_generated_clock -name vga_clk   -source [get_pins i_democore/i_democore_clk/i_clk_108/CLKOUT0] -divide_by 4    [get_pins i_democore/i_democore_clk/vga_counter_reg[1]/Q]
+create_generated_clock -name audio_clk -source [get_pins i_democore/i_democore_clk/i_clk_108/CLKOUT0] -divide_by 2250 [get_pins i_democore/i_democore_clk/audio_counter_reg[11]/Q]
 
 
 ########### MEGA65 timing ################
