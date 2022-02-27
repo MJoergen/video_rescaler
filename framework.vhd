@@ -36,18 +36,19 @@ end entity framework;
 
 architecture synthesis of framework is
 
-   -- Output video mode (1280x720 @ 60 Hz, aspect ratio 16:9)
+   -- Output video mode (1280x720 @ 50 Hz, aspect ratio 16:9)
+   -- CEA 861-D Format 19
    constant CLK_KHZ     : integer := 74250;     -- 74.25 MHz
-   constant CEA_CTA_VIC : integer :=     4;
+   constant CEA_CTA_VIC : integer :=    19;
    constant H_PIXELS    : integer :=  1280;     -- horizontal display width in pixels
    constant V_PIXELS    : integer :=   720;     -- vertical display width in rows
-   constant H_FP        : integer :=   110;     -- horizontal front porch width in pixels
+   constant H_FP        : integer :=   440;     -- horizontal front porch width in pixels
    constant H_PULSE     : integer :=    40;     -- horizontal sync pulse width in pixels
    constant H_BP        : integer :=   220;     -- horizontal back porch width in pixels
    constant V_FP        : integer :=     5;     -- vertical front porch width in rows
    constant V_PULSE     : integer :=     5;     -- vertical sync pulse width in rows
    constant V_BP        : integer :=    20;     -- vertical back porch width in rows
-   constant H_MAX       : integer :=  1650;
+   constant H_MAX       : integer :=  1980;
    constant V_MAX       : integer :=   750;
    constant H_POL       : std_logic := '1';     -- horizontal sync pulse polarity (1 = positive, 0 = negative)
    constant V_POL       : std_logic := '1';     -- vertical sync pulse polarity (1 = positive, 0 = negative)
