@@ -237,19 +237,19 @@ begin
             pos_x <= pos_x + vel_x;
             pos_y <= pos_y + vel_y;
 
-            if pos_x >= H_PIXELS - C_SQ_SIZE - C_BORDER and vel_x > 0 then
+            if pos_x + vel_x >= H_PIXELS - C_SQ_SIZE - C_BORDER and vel_x > 0 then
                vel_x <= -vel_x;
             end if;
 
-            if pos_x < C_BORDER and vel_x < 0 then
+            if pos_x + vel_x < C_BORDER and vel_x < 0 then
                vel_x <= -vel_x;
             end if;
 
-            if pos_y >= V_PIXELS - C_SQ_SIZE - C_BORDER and vel_y > 0 then
+            if pos_y + vel_y >= V_PIXELS - C_SQ_SIZE - C_BORDER and vel_y > 0 then
                vel_y <= -vel_y;
             end if;
 
-            if pos_y < C_BORDER and vel_y < 0 then
+            if pos_y + vel_y < C_BORDER and vel_y < 0 then
                vel_y <= -vel_y;
             end if;
          end if;
