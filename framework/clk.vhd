@@ -8,7 +8,7 @@ entity clk is
    port (
       sys_clk_i    : in  std_logic;   -- expects 100 MHz
       sys_rstn_i   : in  std_logic;   -- Asynchronous, asserted low
-      o_clk_o      : out std_logic;   -- 74.25 MHz pixelclock for 720p @ 60 Hz
+      video_clk_o  : out std_logic;   -- 74.25 MHz pixelclock for 720p @ 60 Hz
       hdmi_clk_o   : out std_logic;   -- pixelclock (74.25 MHz x 5 = 371.25 MHz) for HDMI
       clk_x1_o     : out std_logic;   -- 100 MHz
       clk_x2_o     : out std_logic;   -- 200 MHz
@@ -24,7 +24,7 @@ architecture synthesis of clk is
 
    signal hdmi_clkfb      : std_logic;
    signal hdmi_clkfb_mmcm : std_logic;
-   signal o_clk_mmcm      : std_logic;
+   signal video_clk_mmcm  : std_logic;
    signal hdmi_clk_mmcm   : std_logic;
 
    signal hr_clkfb        : std_logic;
@@ -37,9 +37,13 @@ architecture synthesis of clk is
    signal hdmi_locked     : std_logic;
    signal hr_locked       : std_logic;
 
+   signal sys_rst         : std_logic;   -- Asynchronous, asserted high
+
 begin
 
    locked_o <= hdmi_locked and hr_locked;
+
+   sys_rst <= not sys_rstn_i;
 
 
    --------------------------------------------------------
@@ -68,7 +72,7 @@ begin
       )
       port map (
          CLKFBOUT            => hdmi_clkfb_mmcm,
-         CLKOUT1             => o_clk_mmcm,
+         CLKOUT1             => video_clk_mmcm,
          CLKOUT2             => hdmi_clk_mmcm,
          CLKFBIN             => hdmi_clkfb,
          CLKIN1              => sys_clk_i,
@@ -89,7 +93,7 @@ begin
          CLKINSTOPPED        => open,
          CLKFBSTOPPED        => open,
          PWRDWN              => '0',
-         RST                 => not sys_rstn_i
+         RST                 => sys_rst
       ); -- i_clk_hdmi
 
 
@@ -151,7 +155,7 @@ begin
          CLKINSTOPPED        => open,
          CLKFBSTOPPED        => open,
          PWRDWN              => '0',
-         RST                 => not sys_rstn_i
+         RST                 => sys_rst
       ); -- i_clk_hyperram
 
    -------------------------------------
@@ -164,11 +168,11 @@ begin
          O => hdmi_clkfb
       ); -- i_bufg_hdmi_clkfb
 
-   i_bufg_o_clk : BUFG
+   i_bufg_video_clk : BUFG
       port map (
-         I => o_clk_mmcm,
-         O => o_clk_o
-      ); -- i_bufg_o_clk
+         I => video_clk_mmcm,
+         O => video_clk_o
+      ); -- i_bufg_video_clk
 
    i_bufg_hdmi_clk : BUFG
       port map (

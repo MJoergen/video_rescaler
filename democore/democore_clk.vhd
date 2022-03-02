@@ -5,14 +5,18 @@ use ieee.numeric_std.all;
 library unisim;
 use unisim.vcomponents.all;
 
+library xpm;
+use xpm.vcomponents.all;
+
 entity democore_clk is
    port (
-      sys_clk_i   : in  std_logic;
-      sys_rstn_i  : in  std_logic;
-      audio_clk_o : out std_logic;
-      audio_rst_o : out std_logic;
-      vga_clk_o   : out std_logic;
-      vga_rst_o   : out std_logic
+      sys_clk_i    : in  std_logic;
+      sys_rstn_i   : in  std_logic;
+      pll_locked_o : out std_logic;
+      audio_clk_o  : out std_logic;
+      audio_rst_o  : out std_logic;
+      vga_clk_o    : out std_logic;
+      vga_rst_o    : out std_logic
    );
 end democore_clk;
 
@@ -31,7 +35,12 @@ architecture synthesis of democore_clk is
    signal vga_counter   : std_logic_vector(1 downto 0);
    signal audio_counter : std_logic_vector(11 downto 0);
 
+   signal sys_rst         : std_logic;   -- Asynchronous, asserted high
+
 begin
+
+   pll_locked_o <= locked;
+   sys_rst <= not sys_rstn_i;
 
    -- VCO frequency range for Artix 7 speed grade -1 : 600 MHz - 1200 MHz
    -- f_VCO = f_CLKIN * CLKFBOUT_MULT_F / DIVCLK_DIVIDE
@@ -80,7 +89,7 @@ begin
          CLKINSTOPPED        => open,
          CLKFBSTOPPED        => open,
          PWRDWN              => '0',
-         RST                 => not sys_rstn_i
+         RST                 => sys_rst
       ); -- i_clk_108
 
    -------------------------------------

@@ -6,6 +6,7 @@ entity democore is
    port (
       sys_clk_i     : in  std_logic;
       sys_rstn_i    : in  std_logic;
+      pll_locked_o  : out std_logic;
       audio_clk_o   : out std_logic;
       audio_rst_o   : out std_logic;
       audio_left_o  : out std_logic_vector(15 downto 0); -- signed
@@ -26,12 +27,13 @@ begin
 
    i_democore_clk : entity work.democore_clk
       port map (
-         sys_clk_i   => sys_clk_i,
-         sys_rstn_i  => sys_rstn_i,
-         audio_clk_o => audio_clk_o,
-         audio_rst_o => audio_rst_o,
-         vga_clk_o   => vga_clk_o,
-         vga_rst_o   => open
+         sys_clk_i    => sys_clk_i,
+         sys_rstn_i   => sys_rstn_i,
+         pll_locked_o => pll_locked_o,
+         audio_clk_o  => audio_clk_o,
+         audio_rst_o  => audio_rst_o,
+         vga_clk_o    => vga_clk_o,
+         vga_rst_o    => open
       ); -- i_democore_clk
 
    i_democore_video : entity work.democore_video
