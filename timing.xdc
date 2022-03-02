@@ -31,6 +31,13 @@ set_false_path   -to [get_clocks clk_x1]  -from [get_clocks video_clk]
 set_false_path -from [get_clocks vga_clk]   -to [get_clocks video_clk]
 set_false_path   -to [get_clocks vga_clk] -from [get_clocks video_clk]
 
+# Place HyperRAM close to I/O pins
+startgroup
+create_pblock pblock_i_hyperram
+resize_pblock pblock_i_hyperram -add {SLICE_X0Y200:SLICE_X7Y224}
+add_cells_to_pblock pblock_i_hyperram [get_cells [list i_framework/i_hyperram_wrapper/i_hyperram]]
+endgroup
+
 ## MEGA65 I/O timing is ignored (considered asynchronous)
 #set_false_path -from [get_ports reset_n]
 #set_false_path   -to [get_ports hdmi_data_p[*]]
@@ -38,13 +45,6 @@ set_false_path   -to [get_clocks vga_clk] -from [get_clocks video_clk]
 #set_false_path   -to [get_ports kb_io0]
 #set_false_path   -to [get_ports kb_io1]
 #set_false_path -from [get_ports kb_io2]
-
-# Place HyperRAM close to I/O pins
-startgroup
-create_pblock pblock_i_hyperram
-resize_pblock pblock_i_hyperram -add {SLICE_X0Y200:SLICE_X7Y224}
-add_cells_to_pblock pblock_i_hyperram [get_cells [list i_framework/i_hyperram_wrapper/i_hyperram]]
-endgroup
 
 
 ############################################################################################################
